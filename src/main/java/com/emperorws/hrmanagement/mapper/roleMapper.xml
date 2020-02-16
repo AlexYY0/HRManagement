@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Role">
+    <id column="roleId" jdbcType="INTEGER" property="roleid" />
+    <result column="enName" jdbcType="VARCHAR" property="enname" />
+    <result column="zhName" jdbcType="VARCHAR" property="zhname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    roleId, enName, zhName
+  </sql>
+  <select id="getAllRoles" resultMap="BaseResultMap">
+    select * from role;
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where roleId = #{roleid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from role
+    where roleId = #{roleid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Role">
+    insert into role (roleId, enName, zhName
+      )
+    values (#{roleid,jdbcType=INTEGER}, #{enname,jdbcType=VARCHAR}, #{zhname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Role">
+    insert into role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleid != null">
+        roleId,
+      </if>
+      <if test="enname != null">
+        enName,
+      </if>
+      <if test="zhname != null">
+        zhName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleid != null">
+        #{roleid,jdbcType=INTEGER},
+      </if>
+      <if test="enname != null">
+        #{enname,jdbcType=VARCHAR},
+      </if>
+      <if test="zhname != null">
+        #{zhname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Role">
+    update role
+    <set>
+      <if test="enname != null">
+        enName = #{enname,jdbcType=VARCHAR},
+      </if>
+      <if test="zhname != null">
+        zhName = #{zhname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where roleId = #{roleid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Role">
+    update role
+    set enName = #{enname,jdbcType=VARCHAR},
+      zhName = #{zhname,jdbcType=VARCHAR}
+    where roleId = #{roleid,jdbcType=INTEGER}
+  </update>
+</mapper>

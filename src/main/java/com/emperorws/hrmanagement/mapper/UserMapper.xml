@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.User">
+    <id column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="workId" jdbcType="INTEGER" property="workid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="userface" jdbcType="VARCHAR" property="userface" />
+    <result column="userEnabled" jdbcType="BIT" property="userenabled" />
+    <result column="userRemark" jdbcType="VARCHAR" property="userremark" />
+  </resultMap>
+  <resultMap id="UserWithRoles" type="com.emperorws.hrmanagement.model.User" extends="BaseResultMap">
+    <collection property="roles" ofType="com.emperorws.hrmanagement.model.Role">
+      <id column="roleid" property="roleid"/>
+      <result column="renname" property="enname"/>
+      <result column="rzhname" property="zhname"/>
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List">
+    userId, workId, username, password, userface, userEnabled, userRemark
+  </sql>
+  <select id="getAllUsersExceptCurrentUser" resultMap="BaseResultMap">
+        select * from user where userid !=#{userid};
+  </select>
+  <select id="getAllUsers" resultMap="UserWithRoles">
+    select user.userid, user.workid, user.username, user.userface, user.userenabled,
+    user.userremark,r.roleid as roleid,r.enname as renname,r.zhname as rzhname
+    from user left join user_role ur on user.userid=ur.userid left join role r on ur.roleid=r.roleid where user.userid!=#{userid}
+    <if test="keywords!=null">
+      and user.workid=#{keywords}
+    </if>
+    order by user.userid
+  </select>
+  <select id="getUserRolesById" resultType="com.emperorws.hrmanagement.model.Role">
+    select r.* from role r,user_role ur where ur.roleid=r.roleid and ur.userid=#{userid}
+  </select>
+  <select id="loadUserByUsername" resultMap="BaseResultMap">
+    select * from user where username=#{username}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where userId = #{userid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where userId = #{userid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.User">
+    insert into user (userId, workId, username, 
+      password, userface, userEnabled, 
+      userRemark)
+    values (#{userid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{userface,jdbcType=VARCHAR}, #{userenabled,jdbcType=BIT}, 
+      #{userremark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="workid != null">
+        workId,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="userface != null">
+        userface,
+      </if>
+      <if test="userenabled != null">
+        userEnabled,
+      </if>
+      <if test="userremark != null">
+        userRemark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="workid != null">
+        #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userface != null">
+        #{userface,jdbcType=VARCHAR},
+      </if>
+      <if test="userenabled != null">
+        #{userenabled,jdbcType=BIT},
+      </if>
+      <if test="userremark != null">
+        #{userremark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.User">
+    update user
+    <set>
+      <if test="workid != null">
+        workId = #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userface != null">
+        userface = #{userface,jdbcType=VARCHAR},
+      </if>
+      <if test="userenabled != null">
+        userEnabled = #{userenabled,jdbcType=BIT},
+      </if>
+      <if test="userremark != null">
+        userRemark = #{userremark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.User">
+    update user
+    set workId = #{workid,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      userface = #{userface,jdbcType=VARCHAR},
+      userEnabled = #{userenabled,jdbcType=BIT},
+      userRemark = #{userremark,jdbcType=VARCHAR}
+    where userId = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>

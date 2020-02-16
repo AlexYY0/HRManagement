@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.DepartmentMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Department">
+    <id column="depId" jdbcType="INTEGER" property="depid" />
+    <result column="depName" jdbcType="VARCHAR" property="depname" />
+    <result column="parentId" jdbcType="INTEGER" property="parentid" />
+    <result column="depPath" jdbcType="VARCHAR" property="deppath" />
+    <result column="enabled" jdbcType="BIT" property="enabled" />
+    <result column="isParent" jdbcType="BIT" property="isparent" />
+    <result column="leaderId" jdbcType="INTEGER" property="leaderid" />
+  </resultMap>
+  <resultMap id="DepartmentWithChildren" type="com.emperorws.hrmanagement.model.Department" extends="BaseResultMap">
+    <collection property="children" ofType="com.emperorws.hrmanagement.model.Department"
+                select="com.emperorws.hrmanagement.mapper.DepartmentMapper.getAllDepartmentsByParentId" column="depid"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    depId, depName, parentId, depPath, enabled, isParent, leaderId
+  </sql>
+  <select id="getAllDepartmentsWithOutChildren" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List">
+    </include>
+    from department;
+  </select>
+  <select id="addDep" statementType="CALLABLE">
+    call addDep(#{depname,mode=IN,jdbcType=VARCHAR},#{parentid,mode=IN,jdbcType=INTEGER},#{enabled,mode=IN,jdbcType=BOOLEAN},#{leaderid,mode=IN,jdbcType=INTEGER},#{result,mode=OUT,jdbcType=INTEGER},#{depid,mode=OUT,jdbcType=INTEGER})
+  </select>
+  <select id="deleteDepById" statementType="CALLABLE">
+    call deleteDep(#{depid,mode=IN,jdbcType=INTEGER},#{result,mode=OUT,jdbcType=INTEGER})
+  </select>
+  <select id="getAllDepartmentsByParentId" resultMap="DepartmentWithChildren">
+    select * from department where parentId=#{pid};
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from department
+    where depId = #{depid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from department
+    where depId = #{depid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Department">
+    insert into department (depId, depName, parentId, 
+      depPath, enabled, isParent, 
+      leaderId)
+    values (#{depid,jdbcType=INTEGER}, #{depname,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}, 
+      #{deppath,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}, #{isparent,jdbcType=BIT}, 
+      #{leaderid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Department">
+    insert into department
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="depid != null">
+        depId,
+      </if>
+      <if test="depname != null">
+        depName,
+      </if>
+      <if test="parentid != null">
+        parentId,
+      </if>
+      <if test="deppath != null">
+        depPath,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+      <if test="isparent != null">
+        isParent,
+      </if>
+      <if test="leaderid != null">
+        leaderId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="depid != null">
+        #{depid,jdbcType=INTEGER},
+      </if>
+      <if test="depname != null">
+        #{depname,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null">
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="deppath != null">
+        #{deppath,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=BIT},
+      </if>
+      <if test="isparent != null">
+        #{isparent,jdbcType=BIT},
+      </if>
+      <if test="leaderid != null">
+        #{leaderid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Department">
+    update department
+    <set>
+      <if test="depname != null">
+        depName = #{depname,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null">
+        parentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="deppath != null">
+        depPath = #{deppath,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=BIT},
+      </if>
+      <if test="isparent != null">
+        isParent = #{isparent,jdbcType=BIT},
+      </if>
+      <if test="leaderid != null">
+        leaderId = #{leaderid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where depId = #{depid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Department">
+    update department
+    set depName = #{depname,jdbcType=VARCHAR},
+      parentId = #{parentid,jdbcType=INTEGER},
+      depPath = #{deppath,jdbcType=VARCHAR},
+      enabled = #{enabled,jdbcType=BIT},
+      isParent = #{isparent,jdbcType=BIT},
+      leaderId = #{leaderid,jdbcType=INTEGER}
+    where depId = #{depid,jdbcType=INTEGER}
+  </update>
+</mapper>

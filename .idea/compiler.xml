@@ -11,11 +11,13 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="HRManagement" target="1.8" />
+      <module name="hrmanagement-b" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="HRManagement" options="-parameters" />
+      <module name="hrmanagement-b" options="-parameters" />
     </option>
   </component>
 </project>

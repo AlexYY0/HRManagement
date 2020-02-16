@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.PermissionMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Permission">
+    <id column="pId" jdbcType="INTEGER" property="pid" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="component" jdbcType="VARCHAR" property="component" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="iconCls" jdbcType="VARCHAR" property="iconcls" />
+    <result column="parentId" jdbcType="INTEGER" property="parentid" />
+    <result column="enabled" jdbcType="BIT" property="enabled" />
+    <association property="meta" javaType="com.emperorws.hrmanagement.model.Meta">
+      <result column="keepAlive" property="keepalive" jdbcType="BIT" />
+      <result column="requireAuth" property="requireauth" jdbcType="BIT" />
+    </association>
+  </resultMap>
+  <resultMap id="Permissions2" type="com.emperorws.hrmanagement.model.Permission" extends="BaseResultMap">
+    <collection property="children" ofType="com.emperorws.hrmanagement.model.Permission">
+      <id column="pId2" property="pid" jdbcType="INTEGER" />
+      <result column="url2" property="url" jdbcType="VARCHAR" />
+      <result column="path2" property="path" jdbcType="VARCHAR" />
+      <result column="component2" property="component" jdbcType="VARCHAR" />
+      <result column="name2" property="name" jdbcType="VARCHAR" />
+      <result column="iconCls2" property="iconcls" jdbcType="VARCHAR" />
+      <result column="parentId2" property="parentid" jdbcType="INTEGER" />
+      <result column="enabled2" property="enabled" jdbcType="BIT" />
+      <association property="meta" javaType="com.emperorws.hrmanagement.model.Meta">
+        <result column="keepAlive2" property="keepalive" jdbcType="BIT" />
+        <result column="requireAuth2" property="requireauth" jdbcType="BIT" />
+      </association>
+    </collection>
+  </resultMap>
+  <resultMap id="PermissionWithRole" type="com.emperorws.hrmanagement.model.Permission" extends="BaseResultMap">
+    <collection property="roles" ofType="com.emperorws.hrmanagement.model.Role">
+      <id column="roleid" property="roleid"/>
+      <result column="renname" property="enname"/>
+      <result column="rzhname" property="zhname"/>
+    </collection>
+  </resultMap>
+  <resultMap id="PermissionWithChildren" type="com.emperorws.hrmanagement.model.Permission" extends="BaseResultMap">
+    <id column="pid1" property="pid"/>
+    <result column="name1" property="name"/>
+    <collection property="children" ofType="com.emperorws.hrmanagement.model.Permission">
+      <id column="pid2" property="pid"/>
+      <result column="name2" property="name"/>
+      <collection property="children" ofType="com.emperorws.hrmanagement.model.Permission">
+        <id column="pid3" property="pid"/>
+        <result column="name3" property="name"/>
+      </collection>
+    </collection>
+  </resultMap>
+  <select id="getPidsByRoleid" resultType="java.lang.Integer">
+    select pid from permission_role where roleid=#{roleid};
+  </select>
+  <select id="getAllPermissions" resultMap="PermissionWithChildren">
+    select p1.pid as pid1,p1.name as name1,p2.pid as pid2,p2.name as name2,p3.pid as pid3,p3.name as name3
+    from permission p1,permission p2,permission p3 where p1.pid=p2.parentId and p2.pid=p3.parentId and p3.enabled=true order by p1.pid,p2.pid,p3.pid
+  </select>
+  <select id="getAllPermissionsWithRole" resultMap="PermissionWithRole">
+    select p.*,r.roleid as roleid,r.enname as renname,r.zhname as rzhname
+    from permission p,permission_role pr,role r where p.pid=pr.pid and pr.roleid=r.roleid order by p.pid
+  </select>
+  <select id="getPermissionsByUserId" resultMap="Permissions2">
+    select distinct p1.*,p2.pid as pid2,p2.component as component2,p2.enabled as enabled2,p2.iconCls as iconCls2,p2.keepAlive as keepAlive2,p2.name as name2,p2.parentId as parentId2,p2.requireAuth as requireAuth2,p2.path as path2
+    from permission p1,permission p2,user_role ur,permission_role pr where p1.pid=p2.parentId and ur.userid=#{userid} and ur.roleid=pr.roleid and pr.pid=p2.pid and p2.enabled=true order by p1.pid,p2.pid
+  </select>
+  <sql id="Base_Column_List">
+    pId, url, path, component, name, iconCls, keepAlive, requireAuth, parentId, enabled
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from permission
+    where pId = #{pid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from permission
+    where pId = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Permission">
+    insert into permission (pId, url, path, 
+      component, name, iconCls, 
+      keepAlive, requireAuth, parentId, 
+      enabled)
+    values (#{pid,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{component,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{iconcls,jdbcType=VARCHAR}, 
+      #{keepalive,jdbcType=BIT}, #{requireauth,jdbcType=BIT}, #{parentid,jdbcType=INTEGER}, 
+      #{enabled,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Permission">
+    insert into permission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        pId,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="component != null">
+        component,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="iconcls != null">
+        iconCls,
+      </if>
+      <if test="keepalive != null">
+        keepAlive,
+      </if>
+      <if test="requireauth != null">
+        requireAuth,
+      </if>
+      <if test="parentid != null">
+        parentId,
+      </if>
+      <if test="enabled != null">
+        enabled,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null">
+        #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="iconcls != null">
+        #{iconcls,jdbcType=VARCHAR},
+      </if>
+      <if test="keepalive != null">
+        #{keepalive,jdbcType=BIT},
+      </if>
+      <if test="requireauth != null">
+        #{requireauth,jdbcType=BIT},
+      </if>
+      <if test="parentid != null">
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Permission">
+    update permission
+    <set>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null">
+        component = #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="iconcls != null">
+        iconCls = #{iconcls,jdbcType=VARCHAR},
+      </if>
+      <if test="keepalive != null">
+        keepAlive = #{keepalive,jdbcType=BIT},
+      </if>
+      <if test="requireauth != null">
+        requireAuth = #{requireauth,jdbcType=BIT},
+      </if>
+      <if test="parentid != null">
+        parentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=BIT},
+      </if>
+    </set>
+    where pId = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Permission">
+    update permission
+    set url = #{url,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      component = #{component,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      iconCls = #{iconcls,jdbcType=VARCHAR},
+      keepAlive = #{keepalive,jdbcType=BIT},
+      requireAuth = #{requireauth,jdbcType=BIT},
+      parentId = #{parentid,jdbcType=INTEGER},
+      enabled = #{enabled,jdbcType=BIT}
+    where pId = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>
