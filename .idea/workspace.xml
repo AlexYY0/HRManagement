@@ -1,49 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d7ed7b95-185d-4665-89c6-d634e82e681a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/CustomFilterInvocationSecurityMetadataSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/CustomUrlDecisionManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/config/SystemConfigController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/organization/DepartmentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/entity/Department.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/DepartmentMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/DepartmentMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/PermissionMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/PermissionMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/PermissionRoleMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/PermissionRoleMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/RoleMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserRoleMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserRoleMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/roleMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Department.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Meta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Permission.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/PermissionRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/RespBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/RespPageBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/UserRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/DepartmentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/PermissionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/UserUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="d7ed7b95-185d-4665-89c6-d634e82e681a" name="Default Changelist" comment="HRManagement部门管理开发完成">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HRManagement.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/HrManagementApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/HrManagementApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/emperorws/hrmanagement/HrManagementApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/emperorws/hrmanagement/HrManagementApplication.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,7 +190,7 @@
       <workItem from="1581754118277" duration="4870000" />
       <workItem from="1581763116684" duration="170000" />
       <workItem from="1581763322428" duration="1115000" />
-      <workItem from="1581781611495" duration="15721000" />
+      <workItem from="1581781611495" duration="16311000" />
     </task>
     <task id="LOCAL-00001" summary="IDEA创建SpringBoort项目的模板，方便大家。">
       <created>1580544967197</created>
@@ -240,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1580544967197</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="HRManagement部门管理开发完成">
+      <created>1581841746810</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1581841746811</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,7 +215,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="IDEA创建SpringBoort项目的模板，方便大家。" />
-    <option name="LAST_COMMIT_MESSAGE" value="IDEA创建SpringBoort项目的模板，方便大家。" />
+    <MESSAGE value="HRManagement部门管理开发完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="HRManagement部门管理开发完成" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="71" key="#Notifications" timestamp="1580541613160">
@@ -272,18 +239,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="167" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1536.824@0.0.1536.824" timestamp="1581520961020" />
-    <state x="257" y="6" key="CommitChangelistDialog2" timestamp="1581841744282">
+    <state x="257" y="6" key="CommitChangelistDialog2" timestamp="1581841958837">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="257" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1581841744282" />
-    <state x="549" y="153" key="FileChooserDialogImpl" timestamp="1581841647382">
+    <state x="257" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1581841958837" />
+    <state x="549" y="153" key="FileChooserDialogImpl" timestamp="1581842175787">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1581841647382" />
-    <state x="619" y="303" key="Github.ShareDialog" timestamp="1580545040073">
+    <state x="549" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1581842175787" />
+    <state x="619" y="303" key="Github.ShareDialog" timestamp="1581841892801">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="619" y="303" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1580545040073" />
+    <state x="619" y="303" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1581841892801" />
     <state width="1537" height="270" key="GridCell.Tab.0.bottom" timestamp="1581841209053">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
