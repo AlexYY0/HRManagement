@@ -24,6 +24,8 @@ public class Department implements Serializable {
 
     private Integer result;
 
+    private String leadername;
+
     public Department() {
     }
 
@@ -118,5 +120,13 @@ public class Department implements Serializable {
 
     public void setChildren(List<Department> children) {
         this.children = children;
+    }
+
+    public String getLeadername() {
+        return leadername;
+    }
+
+    public void setLeadername(String leadername) {
+        this.leadername = leadername == null ? null : leadername.trim();
     }
 }

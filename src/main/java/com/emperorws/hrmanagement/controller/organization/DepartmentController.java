@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: EmperorWS
@@ -18,13 +19,31 @@ import java.util.List;
 public class DepartmentController {
     @Autowired
     DepartmentService departmentService;
+
     @GetMapping("/")
     public List<Department> getAllDepartments() {
         return departmentService.getAllDepartments();
     }
+
+    @GetMapping("/employee")
+    public List<Map<String,Object>> getWorkidAndEmpname(){
+        return departmentService.getWorkidAndEmpname();
+    }
+
+    @PutMapping("/update")
+    public RespBean updateDep(@RequestBody Department dep){
+        Integer reslut=departmentService.updateDep(dep);
+        dep.setLeadername(departmentService.getLeadernameByLeaderid(dep.getLeaderid()));
+        if ( reslut== 1) {
+            return RespBean.ok("更新成功!",dep);
+        }
+        return RespBean.error("更新失败!");
+    }
+
     @PostMapping("/")
     public RespBean addDep(@RequestBody Department dep) {
         departmentService.addDep(dep);
+        dep.setLeadername(departmentService.getLeadernameByLeaderid(dep.getLeaderid()));
         if (dep.getResult() == 1) {
             return RespBean.ok("添加成功", dep);
         }

@@ -3,6 +3,7 @@ package com.emperorws.hrmanagement.mapper;
 import com.emperorws.hrmanagement.model.Department;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DepartmentMapper {
     int deleteByPrimaryKey(Integer depid);
@@ -24,4 +25,8 @@ public interface DepartmentMapper {
     void deleteDepById(Department dep);
 
     List<Department> getAllDepartmentsWithOutChildren();
+
+    String getLeadernameByLeaderid(Integer leaderid);
+
+    List<Map<String,Object>> getWorkidAndEmpname();
 }

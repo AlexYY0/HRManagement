@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: EmperorWS
@@ -18,6 +19,18 @@ public class DepartmentService {
     DepartmentMapper departmentMapper;
     public List<Department> getAllDepartments() {
         return departmentMapper.getAllDepartmentsByParentId(-1);
+    }
+
+    public String getLeadernameByLeaderid(Integer leaderid){
+        return departmentMapper.getLeadernameByLeaderid(leaderid);
+    }
+
+    public List<Map<String,Object>> getWorkidAndEmpname(){
+        return departmentMapper.getWorkidAndEmpname();
+    }
+
+    public Integer updateDep(Department dep){
+        return departmentMapper.updateByPrimaryKeySelective(dep);
     }
 
     public void addDep(Department dep) {

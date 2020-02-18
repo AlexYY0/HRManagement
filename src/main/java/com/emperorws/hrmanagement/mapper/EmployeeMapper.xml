@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Employee">
+    <id column="workId" jdbcType="INTEGER" property="workid" />
+    <result column="empName" jdbcType="VARCHAR" property="empname" />
+    <result column="gender" jdbcType="CHAR" property="gender" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="idCard" jdbcType="CHAR" property="idcard" />
+    <result column="marital" jdbcType="CHAR" property="marital" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="nativePlace" jdbcType="VARCHAR" property="nativeplace" />
+    <result column="politic" jdbcType="VARCHAR" property="politic" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="cellphone" jdbcType="VARCHAR" property="cellphone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="depId" jdbcType="INTEGER" property="depid" />
+    <result column="workState" jdbcType="CHAR" property="workstate" />
+    <result column="school" jdbcType="VARCHAR" property="school" />
+    <result column="specialty" jdbcType="VARCHAR" property="specialty" />
+    <result column="hDegree" jdbcType="CHAR" property="hdegree" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    workId, empName, gender, birthday, idCard, marital, nation, nativePlace, politic, 
+    email, cellphone, address, depId, workState, school, specialty, hDegree
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee
+    where workId = #{workid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee
+    where workId = #{workid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Employee">
+    insert into employee (workId, empName, gender, 
+      birthday, idCard, marital, nation, 
+      nativePlace, politic, email, 
+      cellphone, address, depId, 
+      workState, school, specialty, 
+      hDegree)
+    values (#{workid,jdbcType=INTEGER}, #{empname,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, 
+      #{birthday,jdbcType=DATE}, #{idcard,jdbcType=CHAR}, #{marital,jdbcType=CHAR}, #{nation,jdbcType=VARCHAR}, 
+      #{nativeplace,jdbcType=VARCHAR}, #{politic,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{cellphone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{depid,jdbcType=INTEGER}, 
+      #{workstate,jdbcType=CHAR}, #{school,jdbcType=VARCHAR}, #{specialty,jdbcType=VARCHAR}, 
+      #{hdegree,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Employee">
+    insert into employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="workid != null">
+        workId,
+      </if>
+      <if test="empname != null">
+        empName,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="idcard != null">
+        idCard,
+      </if>
+      <if test="marital != null">
+        marital,
+      </if>
+      <if test="nation != null">
+        nation,
+      </if>
+      <if test="nativeplace != null">
+        nativePlace,
+      </if>
+      <if test="politic != null">
+        politic,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="cellphone != null">
+        cellphone,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="depid != null">
+        depId,
+      </if>
+      <if test="workstate != null">
+        workState,
+      </if>
+      <if test="school != null">
+        school,
+      </if>
+      <if test="specialty != null">
+        specialty,
+      </if>
+      <if test="hdegree != null">
+        hDegree,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="workid != null">
+        #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="empname != null">
+        #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=CHAR},
+      </if>
+      <if test="marital != null">
+        #{marital,jdbcType=CHAR},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplace != null">
+        #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="politic != null">
+        #{politic,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null">
+        #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="depid != null">
+        #{depid,jdbcType=INTEGER},
+      </if>
+      <if test="workstate != null">
+        #{workstate,jdbcType=CHAR},
+      </if>
+      <if test="school != null">
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null">
+        #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="hdegree != null">
+        #{hdegree,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Employee">
+    update employee
+    <set>
+      <if test="empname != null">
+        empName = #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="idcard != null">
+        idCard = #{idcard,jdbcType=CHAR},
+      </if>
+      <if test="marital != null">
+        marital = #{marital,jdbcType=CHAR},
+      </if>
+      <if test="nation != null">
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplace != null">
+        nativePlace = #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="politic != null">
+        politic = #{politic,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null">
+        cellphone = #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="depid != null">
+        depId = #{depid,jdbcType=INTEGER},
+      </if>
+      <if test="workstate != null">
+        workState = #{workstate,jdbcType=CHAR},
+      </if>
+      <if test="school != null">
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="specialty != null">
+        specialty = #{specialty,jdbcType=VARCHAR},
+      </if>
+      <if test="hdegree != null">
+        hDegree = #{hdegree,jdbcType=CHAR},
+      </if>
+    </set>
+    where workId = #{workid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Employee">
+    update employee
+    set empName = #{empname,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      idCard = #{idcard,jdbcType=CHAR},
+      marital = #{marital,jdbcType=CHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      nativePlace = #{nativeplace,jdbcType=VARCHAR},
+      politic = #{politic,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      cellphone = #{cellphone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      depId = #{depid,jdbcType=INTEGER},
+      workState = #{workstate,jdbcType=CHAR},
+      school = #{school,jdbcType=VARCHAR},
+      specialty = #{specialty,jdbcType=VARCHAR},
+      hDegree = #{hdegree,jdbcType=CHAR}
+    where workId = #{workid,jdbcType=INTEGER}
+  </update>
+</mapper>

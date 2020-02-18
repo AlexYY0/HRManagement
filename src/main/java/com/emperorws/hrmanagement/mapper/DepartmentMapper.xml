@@ -9,6 +9,8 @@
     <result column="enabled" jdbcType="BIT" property="enabled" />
     <result column="isParent" jdbcType="BIT" property="isparent" />
     <result column="leaderId" jdbcType="INTEGER" property="leaderid" />
+    <association property="leadername" column="leaderid" javaType="java.lang.String"
+                 select="getLeadernameByLeaderid" />
   </resultMap>
   <resultMap id="DepartmentWithChildren" type="com.emperorws.hrmanagement.model.Department" extends="BaseResultMap">
     <collection property="children" ofType="com.emperorws.hrmanagement.model.Department"
@@ -17,6 +19,12 @@
   <sql id="Base_Column_List">
     depId, depName, parentId, depPath, enabled, isParent, leaderId
   </sql>
+  <select id="getWorkidAndEmpname" resultType="java.util.HashMap">
+    select workId AS workid,empName AS value from employee;
+  </select>
+  <select id="getLeadernameByLeaderid" resultType="java.lang.String" parameterType="java.lang.Integer">
+    select empName from employee where workId=#{leaderid};
+  </select>
   <select id="getAllDepartmentsWithOutChildren" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List">
