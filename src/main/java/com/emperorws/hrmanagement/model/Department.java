@@ -29,10 +29,9 @@ public class Department implements Serializable {
     public Department() {
     }
 
-    public Department(String depname,Integer leaderid) {
+    public Department(String depname) {
 
         this.depname = depname;
-        this.leaderid=leaderid;
     }
 
     @Override

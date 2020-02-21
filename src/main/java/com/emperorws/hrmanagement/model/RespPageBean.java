@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * @Author: EmperorWS
  * @Date: 2020/2/14 17:28
- * @Description: HttpResponse
+ * @Description: 响应数据，存储部分与全部数据
  **/
 public class RespPageBean {
     private Long total;

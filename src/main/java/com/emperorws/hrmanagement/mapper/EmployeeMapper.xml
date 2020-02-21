@@ -20,10 +20,72 @@
     <result column="specialty" jdbcType="VARCHAR" property="specialty" />
     <result column="hDegree" jdbcType="CHAR" property="hdegree" />
   </resultMap>
+  <resultMap id="AllEmployeeInfo" type="com.emperorws.hrmanagement.model.Employee" extends="BaseResultMap">
+    <association property="department" javaType="com.emperorws.hrmanagement.model.Department">
+      <id column="depid" property="depid"/>
+      <result column="depname" property="depname"/>
+    </association>
+  </resultMap>
   <sql id="Base_Column_List">
     workId, empName, gender, birthday, idCard, marital, nation, nativePlace, politic, 
     email, cellphone, address, depId, workState, school, specialty, hDegree
   </sql>
+  <select id="maxWorkID" resultType="java.lang.Integer">
+    select max(workId) from employee
+  </select>
+  <select id="getEmployeeById" resultMap="AllEmployeeInfo">
+        select e.*,d.depId as depid,d.depname as depname
+        from employee e,department d
+        where e.depId=d.depId and e.workId=#{workId}
+  </select>
+  <select id="getEmployeeByPage" resultMap="AllEmployeeInfo">
+    select e.*,d.depId as depid,d.depname as depname
+    from employee e,department d
+    where e.depId=d.depId
+    <if test="emp!=null">
+      <if test="emp.empname !=null and emp.empname!=''">
+        and e.empName like concat('%',#{emp.empname},'%')
+      </if>
+      <if test="emp.depid !=null and emp.depid!=''">
+        and e.depId =#{emp.depid}
+      </if>
+    </if>
+    <if test="politic !=null and politic!=''">
+      and e.politic=#{politic}
+    </if>
+    <if test="nation !=null and nation!=''">
+      and e.nation=#{nation}
+    </if>
+    <if test="workstate !=null and workstate!=''">
+      and e.workstate=#{workstate}
+    </if>
+    order by e.workid
+    <if test="page !=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(*) from employee e
+    <where>
+      <if test="emp!=null">
+        <if test="emp.empname !=null and emp.empname!=''">
+          and e.empName like concat('%',#{emp.empname},'%')
+        </if>
+        <if test="emp.depid !=null">
+          and e.depId =#{emp.depid}
+        </if>
+        <if test="politic !=null and politic!=''">
+          and e.politic=#{politic}
+        </if>
+        <if test="nation !=null and nation!=''">
+          and e.nation=#{nation}
+        </if>
+        <if test="workstate !=null and workstate!=''">
+          and e.workstate=#{workstate}
+        </if>
+      </if>
+    </where>
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -34,6 +96,30 @@
     delete from employee
     where workId = #{workid,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteEmps" parameterType="java.util.List">
+    delete from employee
+    where employee.workId in
+    <foreach collection="emps" item="emp" separator="," open="(" close=")">
+      #{emp.workid,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+  <insert id="addEmps" parameterType="com.emperorws.hrmanagement.model.Employee">
+    insert into employee (workId, empName, gender,
+    birthday, idCard, marital, nation,
+    nativePlace, politic, email,
+    cellphone, address, depId,
+    workState, school, specialty,
+    hDegree)
+    values
+    <foreach collection="list" item="emp" separator="," close=";">
+      (#{emp.workid,jdbcType=INTEGER}, #{emp.empname,jdbcType=VARCHAR}, #{emp.gender,jdbcType=CHAR},
+      #{emp.birthday,jdbcType=DATE}, #{emp.idcard,jdbcType=CHAR}, #{emp.marital,jdbcType=CHAR}, #{emp.nation,jdbcType=VARCHAR},
+      #{emp.nativeplace,jdbcType=VARCHAR}, #{emp.politic,jdbcType=VARCHAR}, #{emp.email,jdbcType=VARCHAR},
+      #{emp.cellphone,jdbcType=VARCHAR}, #{emp.address,jdbcType=VARCHAR}, #{emp.depid,jdbcType=INTEGER},
+      #{emp.workstate,jdbcType=CHAR}, #{emp.school,jdbcType=VARCHAR}, #{emp.specialty,jdbcType=VARCHAR},
+      #{emp.hdegree,jdbcType=CHAR})
+    </foreach>
+  </insert>
   <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Employee">
     insert into employee (workId, empName, gender, 
       birthday, idCard, marital, nation, 

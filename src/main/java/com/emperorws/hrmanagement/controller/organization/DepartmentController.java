@@ -15,7 +15,7 @@ import java.util.Map;
  * @Description: 返回部门数据json
  **/
 @RestController
-@RequestMapping("/organization/department")
+@RequestMapping("/organization/management")
 public class DepartmentController {
     @Autowired
     DepartmentService departmentService;

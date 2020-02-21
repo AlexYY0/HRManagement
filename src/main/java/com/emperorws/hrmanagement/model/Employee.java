@@ -1,5 +1,7 @@
 package com.emperorws.hrmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Employee {
@@ -9,6 +11,7 @@ public class Employee {
 
     private String gender;
 
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date birthday;
 
     private String idcard;
@@ -36,6 +39,8 @@ public class Employee {
     private String specialty;
 
     private String hdegree;
+
+    private Department department;
 
     public Integer getWorkid() {
         return workid;
@@ -171,5 +176,37 @@ public class Employee {
 
     public void setHdegree(String hdegree) {
         this.hdegree = hdegree == null ? null : hdegree.trim();
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "workid=" + workid +
+                ", empname='" + empname + '\'' +
+                ", gender='" + gender + '\'' +
+                ", birthday=" + birthday +
+                ", idcard='" + idcard + '\'' +
+                ", marital='" + marital + '\'' +
+                ", nation=" + nation + '\'' +
+                ", nativeplace='" + nativeplace + '\'' +
+                ", politic=" + politic + '\'' +
+                ", email='" + email + '\'' +
+                ", cellphone='" + cellphone + '\'' +
+                ", address='" + address + '\'' +
+                ", depid=" + depid +
+                ", workstate='" + workstate + '\'' +
+                ", school='" + school + '\'' +
+                ", specialty='" + specialty + '\'' +
+                ", hdegree='" + hdegree + '\'' +
+                ", department=" + department +
+                '}';
     }
 }
