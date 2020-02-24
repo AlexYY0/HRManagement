@@ -42,6 +42,14 @@ public class Employee {
 
     private Department department;
 
+    public Employee(){
+    }
+
+    public Employee(Integer workid,Integer depid){
+        this.workid=workid;
+        this.depid=depid;
+    }
+
     public Integer getWorkid() {
         return workid;
     }

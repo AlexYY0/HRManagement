@@ -22,7 +22,7 @@ import java.util.List;
  * @Description: 员工管理控制层
  **/
 @RestController
-@RequestMapping("/employee/basic")
+@RequestMapping("/employee/basic/info")
 public class EmpBasicController {
     @Autowired
     EmployeeService employeeService;

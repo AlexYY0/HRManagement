@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.ContractinfoMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Contractinfo">
+    <id column="contId" jdbcType="INTEGER" property="contid" />
+    <result column="workId" jdbcType="INTEGER" property="workid" />
+    <result column="beginContract" jdbcType="DATE" property="begincontract" />
+    <result column="endContract" jdbcType="DATE" property="endcontract" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="signData" jdbcType="DATE" property="signdata" />
+  </resultMap>
+  <resultMap id="AllContractinfoInfo" type="com.emperorws.hrmanagement.model.Contractinfo" extends="BaseResultMap">
+    <association property="employee" javaType="com.emperorws.hrmanagement.model.Employee">
+      <id column="workid" property="workid"/>
+      <result column="empname" property="empname"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    contId, workId, beginContract, endContract, content, signData
+  </sql>
+  <select id="getContractinfoByPage" resultMap="AllContractinfoInfo">
+    select c.*,e.workId as workid,e.empName as empname
+    from contractInfo c,employee e
+    where c.workId=e.workId
+    <if test="con!=null">
+      <if test="con.workid !=null and con.workid!=''">
+        and c.workId=#{con.workid}
+      </if>
+    </if>
+    <if test="signdata !=null">
+      and c.signData between #{signdata[0]} and #{signdata[1]}
+    </if>
+    order by c.contId
+    <if test="page !=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(*) from contractInfo c
+    <where>
+      <if test="con!=null">
+        <if test="con.workid !=null and con.workid!=''">
+          and c.workId=#{con.workid}
+        </if>
+      </if>
+      <if test="signdata !=null">
+        and c.signData between #{signdata[0]} and #{signdata[1]}
+      </if>
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from contractinfo
+    where contId = #{contid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from contractinfo
+    where contId = #{contid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Contractinfo">
+    insert into contractinfo (contId, workId, beginContract, 
+      endContract, content, signData
+      )
+    values (#{contid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{begincontract,jdbcType=DATE}, 
+      #{endcontract,jdbcType=DATE}, #{content,jdbcType=VARCHAR}, #{signdata,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Contractinfo">
+    insert into contractinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="contid != null">
+        contId,
+      </if>
+      <if test="workid != null">
+        workId,
+      </if>
+      <if test="begincontract != null">
+        beginContract,
+      </if>
+      <if test="endcontract != null">
+        endContract,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="signdata != null">
+        signData,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="contid != null">
+        #{contid,jdbcType=INTEGER},
+      </if>
+      <if test="workid != null">
+        #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="begincontract != null">
+        #{begincontract,jdbcType=DATE},
+      </if>
+      <if test="endcontract != null">
+        #{endcontract,jdbcType=DATE},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="signdata != null">
+        #{signdata,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Contractinfo">
+    update contractinfo
+    <set>
+      <if test="workid != null">
+        workId = #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="begincontract != null">
+        beginContract = #{begincontract,jdbcType=DATE},
+      </if>
+      <if test="endcontract != null">
+        endContract = #{endcontract,jdbcType=DATE},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="signdata != null">
+        signData = #{signdata,jdbcType=DATE},
+      </if>
+    </set>
+    where contId = #{contid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Contractinfo">
+    update contractinfo
+    set workId = #{workid,jdbcType=INTEGER},
+      beginContract = #{begincontract,jdbcType=DATE},
+      endContract = #{endcontract,jdbcType=DATE},
+      content = #{content,jdbcType=VARCHAR},
+      signData = #{signdata,jdbcType=DATE}
+    where contId = #{contid,jdbcType=INTEGER}
+  </update>
+</mapper>

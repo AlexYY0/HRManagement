@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.EmployeechangeMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Employeechange">
+    <id column="empcId" jdbcType="INTEGER" property="empcid" />
+    <result column="workId" jdbcType="INTEGER" property="workid" />
+    <result column="afterDepId" jdbcType="INTEGER" property="afterdepid" />
+    <result column="empChanData" jdbcType="DATE" property="empchandata" />
+    <result column="empChanRemark" jdbcType="VARCHAR" property="empchanremark" />
+  </resultMap>
+  <resultMap id="AllEmployeechangeInfo" type="com.emperorws.hrmanagement.model.Employeechange" extends="BaseResultMap">
+    <association property="employee" javaType="com.emperorws.hrmanagement.model.Employee">
+      <id column="workid" property="workid"/>
+      <result column="empname" property="empname"/>
+    </association>
+    <association property="department" javaType="com.emperorws.hrmanagement.model.Department">
+      <id column="depid" property="depid"/>
+      <result column="depname" property="depname"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    empcId, workId, afterDepId, empChanData, empChanRemark
+  </sql>
+  <select id="getEmployeechangeByPage" resultMap="AllEmployeechangeInfo">
+    select ec.*,d.depId as depid,d.depName as depname,e.workId as workid,e.empName as empname
+    from employeeChange ec,employee e,department d
+    where ec.afterDepId=d.depId and ec.workId=e.workId
+    <if test="empc!=null">
+      <if test="empc.workid !=null and empc.workid!=''">
+        and ec.workId=#{empc.workid}
+      </if>
+    </if>
+    <if test="empchandata !=null">
+      and ec.empChanData between #{empchandata[0]} and #{empchandata[1]}
+    </if>
+    order by ec.empcid
+    <if test="page !=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(*) from employeeChange ec
+    <where>
+      <if test="empc!=null">
+        <if test="empc.workid !=null and empc.workid!=''">
+          and ec.workId=#{empc.workid}
+        </if>
+      </if>
+      <if test="empchandata !=null">
+        and ec.empChanData between #{empchandata[0]} and #{empchandata[1]}
+      </if>
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employeechange
+    where empcId = #{empcid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employeechange
+    where empcId = #{empcid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Employeechange">
+    insert into employeechange (empcId, workId, afterDepId, 
+      empChanData, empChanRemark)
+    values (#{empcid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{afterdepid,jdbcType=INTEGER}, 
+      #{empchandata,jdbcType=DATE}, #{empchanremark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Employeechange">
+    insert into employeechange
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="empcid != null">
+        empcId,
+      </if>
+      <if test="workid != null">
+        workId,
+      </if>
+      <if test="afterdepid != null">
+        afterDepId,
+      </if>
+      <if test="empchandata != null">
+        empChanData,
+      </if>
+      <if test="empchanremark != null">
+        empChanRemark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="empcid != null">
+        #{empcid,jdbcType=INTEGER},
+      </if>
+      <if test="workid != null">
+        #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="afterdepid != null">
+        #{afterdepid,jdbcType=INTEGER},
+      </if>
+      <if test="empchandata != null">
+        #{empchandata,jdbcType=DATE},
+      </if>
+      <if test="empchanremark != null">
+        #{empchanremark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Employeechange">
+    update employeechange
+    <set>
+      <if test="workid != null">
+        workId = #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="afterdepid != null">
+        afterDepId = #{afterdepid,jdbcType=INTEGER},
+      </if>
+      <if test="empchandata != null">
+        empChanData = #{empchandata,jdbcType=DATE},
+      </if>
+      <if test="empchanremark != null">
+        empChanRemark = #{empchanremark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where empcId = #{empcid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Employeechange">
+    update employeechange
+    set workId = #{workid,jdbcType=INTEGER},
+      afterDepId = #{afterdepid,jdbcType=INTEGER},
+      empChanData = #{empchandata,jdbcType=DATE},
+      empChanRemark = #{empchanremark,jdbcType=VARCHAR}
+    where empcId = #{empcid,jdbcType=INTEGER}
+  </update>
+</mapper>

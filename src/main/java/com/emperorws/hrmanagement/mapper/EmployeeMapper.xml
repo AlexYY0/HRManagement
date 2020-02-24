@@ -36,7 +36,7 @@
   <select id="getEmployeeById" resultMap="AllEmployeeInfo">
         select e.*,d.depId as depid,d.depname as depname
         from employee e,department d
-        where e.depId=d.depId and e.workId=#{workId}
+        where e.depId=d.depId and e.workId=#{workid}
   </select>
   <select id="getEmployeeByPage" resultMap="AllEmployeeInfo">
     select e.*,d.depId as depid,d.depname as depname
