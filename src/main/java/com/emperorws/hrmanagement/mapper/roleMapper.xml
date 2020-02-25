@@ -10,7 +10,14 @@
     roleId, enName, zhName
   </sql>
   <select id="getAllRoles" resultMap="BaseResultMap">
-    select * from role;
+    select * from role
+    order by roleId
+    <if test="page !=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(*) from role r
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

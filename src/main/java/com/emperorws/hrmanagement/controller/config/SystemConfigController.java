@@ -20,7 +20,7 @@ public class SystemConfigController {
     @Autowired
     PermissionService permissionService;
     @GetMapping("/permission")
-    public List<Permission> getMenusByHrId() {
+    public List<Permission> getPermissionsByUserId() {
         return permissionService.getPermissionsByUserId();
     }
 }

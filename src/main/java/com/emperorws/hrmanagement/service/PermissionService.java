@@ -38,8 +38,8 @@ public class PermissionService {
         return permissionMapper.getAllPermissions();
     }
 
-    public List<Integer> getPidsByRoleid(Integer rid) {
-        return permissionMapper.getPidsByRoleid(rid);
+    public List<Integer> getPidsByRoleid(Integer roleid) {
+        return permissionMapper.getPidsByRoleid(roleid);
     }
 
     @Transactional
