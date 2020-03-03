@@ -7,10 +7,14 @@
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="userface" jdbcType="VARCHAR" property="userface" />
-    <result column="userEnabled" jdbcType="BIT" property="userenabled" />
+    <result column="enabled" jdbcType="BIT" property="enabled" />
     <result column="userRemark" jdbcType="VARCHAR" property="userremark" />
   </resultMap>
   <resultMap id="UserWithRoles" type="com.emperorws.hrmanagement.model.User" extends="BaseResultMap">
+    <collection property="employee" ofType="com.emperorws.hrmanagement.model.Employee">
+      <id column="workid" property="workid" />
+      <result column="empname" property="empname"/>
+    </collection>
     <collection property="roles" ofType="com.emperorws.hrmanagement.model.Role">
       <id column="roleid" property="roleid"/>
       <result column="renname" property="enname"/>
@@ -18,25 +22,43 @@
     </collection>
   </resultMap>
   <sql id="Base_Column_List">
-    userId, workId, username, password, userface, userEnabled, userRemark
+    userId, workId, username, password, userface, enabled, userRemark
   </sql>
   <select id="getAllUsersExceptCurrentUser" resultMap="BaseResultMap">
-        select * from user where userid !=#{userid};
+    select * from user where userid !=#{userid};
   </select>
-  <select id="getAllUsers" resultMap="UserWithRoles">
-    select user.userid, user.workid, user.username, user.userface, user.userenabled,
-    user.userremark,r.roleid as roleid,r.enname as renname,r.zhname as rzhname
-    from user left join user_role ur on user.userid=ur.userid left join role r on ur.roleid=r.roleid where user.userid!=#{userid}
-    <if test="keywords!=null">
-      and user.workid=#{keywords}
+  <select id="getAllUsersByPage" resultMap="UserWithRoles">
+    select user.userid, user.workid, user.username, user.userface, user.enabled,
+    user.userremark,r.roleid as roleid,r.enname as renname,r.zhname as rzhname,e.empName as empname
+    from employee e left join user on e.workId=user.workId left join user_role ur on user.userid=ur.userid left join role r on ur.roleid=r.roleid where user.userid!=#{userid}
+    <if test="emp!=null">
+      <if test="emp.empname !=null and emp.empname!=''">
+        and e.empName like concat('%',#{emp.empname},'%')
+      </if>
     </if>
     order by user.userid
+    <if test="page !=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(*) from user
+    <where>
+        <if test="emp!=null">
+            <if test="emp.empname !=null and emp.empname!=''">
+                and e.empName like concat('%',#{emp.empname},'%')
+            </if>
+        </if>
+    </where>
   </select>
   <select id="getUserRolesById" resultType="com.emperorws.hrmanagement.model.Role">
     select r.* from role r,user_role ur where ur.roleid=r.roleid and ur.userid=#{userid}
   </select>
   <select id="loadUserByUsername" resultMap="BaseResultMap">
     select * from user where username=#{username}
+  </select>
+  <select id="getUserByWorkid" resultMap="BaseResultMap">
+    select * from user where workId=#{workid}
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -50,10 +72,10 @@
   </delete>
   <insert id="insert" parameterType="com.emperorws.hrmanagement.model.User">
     insert into user (userId, workId, username, 
-      password, userface, userEnabled, 
+      password, userface, enabled,
       userRemark)
     values (#{userid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{userface,jdbcType=VARCHAR}, #{userenabled,jdbcType=BIT}, 
+      #{password,jdbcType=VARCHAR}, #{userface,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT},
       #{userremark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.User">
@@ -74,8 +96,8 @@
       <if test="userface != null">
         userface,
       </if>
-      <if test="userenabled != null">
-        userEnabled,
+      <if test="enabled != null">
+        enabled,
       </if>
       <if test="userremark != null">
         userRemark,
@@ -97,8 +119,8 @@
       <if test="userface != null">
         #{userface,jdbcType=VARCHAR},
       </if>
-      <if test="userenabled != null">
-        #{userenabled,jdbcType=BIT},
+      <if test="enabled != null">
+        #{enabled,jdbcType=BIT},
       </if>
       <if test="userremark != null">
         #{userremark,jdbcType=VARCHAR},
@@ -120,8 +142,8 @@
       <if test="userface != null">
         userface = #{userface,jdbcType=VARCHAR},
       </if>
-      <if test="userenabled != null">
-        userEnabled = #{userenabled,jdbcType=BIT},
+      <if test="enabled != null">
+        enabled = #{enabled,jdbcType=BIT},
       </if>
       <if test="userremark != null">
         userRemark = #{userremark,jdbcType=VARCHAR},
@@ -135,7 +157,7 @@
       username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       userface = #{userface,jdbcType=VARCHAR},
-      userEnabled = #{userenabled,jdbcType=BIT},
+      enabled = #{enabled,jdbcType=BIT},
       userRemark = #{userremark,jdbcType=VARCHAR}
     where userId = #{userid,jdbcType=INTEGER}
   </update>

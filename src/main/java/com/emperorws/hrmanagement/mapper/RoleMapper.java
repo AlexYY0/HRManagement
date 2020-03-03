@@ -18,7 +18,9 @@ public interface RoleMapper {
 
     int updateByPrimaryKey(Role record);
 
-    List<Role> getAllRoles(@Param("page") Integer page, @Param("size") Integer size);
+    List<Role> getAllRoles();
+
+    List<Role> getAllRolesByPage(@Param("page") Integer page, @Param("size") Integer size);
 
     Long getTotal();
 }

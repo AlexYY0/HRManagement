@@ -20,11 +20,13 @@ public class User implements UserDetails {
 
     private String userface;
 
-    private Boolean userenabled;
+    private Boolean enabled;
 
     private String userremark;
 
     private List<Role> roles;
+
+    private Employee employee;
 
     public Integer getUserid() {
         return userid;
@@ -66,8 +68,8 @@ public class User implements UserDetails {
         this.userface = userface == null ? null : userface.trim();
     }
 
-    public void setUserenabled(Boolean userenabled) {
-        this.userenabled = userenabled;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getUserremark() {
@@ -84,6 +86,14 @@ public class User implements UserDetails {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     @Override
@@ -103,7 +113,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return userenabled;
+        return enabled;
     }
 
     @Override

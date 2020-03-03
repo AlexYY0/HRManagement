@@ -58,8 +58,8 @@
     from permission p1,permission p2,permission p3 where p1.pid=p2.parentId and p2.pid=p3.parentId and p3.enabled=true order by p1.pid,p2.pid,p3.pid
   </select>
   <select id="getAllPermissionsWithRole" resultMap="PermissionWithRole">
-    select p.*,r.roleid as roleid,r.enname as renname,r.zhname as rzhname
-    from permission p,permission_role pr,role r where p.pid=pr.pid and pr.roleid=r.roleid order by p.pid
+    SELECT p.*,r.roleid AS roleid,r.enname AS renname,r.zhname AS rzhname
+    FROM permission p,permission_role pr,role r WHERE p.pid=pr.pid AND pr.roleid=r.roleid ORDER BY p.pid
   </select>
   <select id="getPermissionsByUserId" resultMap="Permissions2">
     select distinct p1.*,p2.pid as pid2,p2.component as component2,p2.enabled as enabled2,p2.iconCls as iconCls2,p2.keepAlive as keepAlive2,p2.name as name2,p2.parentId as parentId2,p2.requireAuth as requireAuth2,p2.path as path2

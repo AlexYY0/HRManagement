@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.TreatmentMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Treatment">
+    <id column="tretId" jdbcType="INTEGER" property="tretid" />
+    <result column="tretName" jdbcType="VARCHAR" property="tretname" />
+    <result column="tretPercent" jdbcType="DOUBLE" property="tretpercent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    tretId, tretName, tretPercent
+  </sql>
+  <select id="getAllTreatment" resultMap="BaseResultMap">
+    select * from treatment
+    order by treatment.tretId
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from treatment
+    where tretId = #{tretid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from treatment
+    where tretId = #{tretid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteTreatments" parameterType="java.util.List">
+    delete from treatment
+    where treatment.tretId in
+    <foreach collection="trets" item="tret" separator="," open="(" close=")">
+      #{tret.tretid,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Treatment">
+    insert into treatment (tretId, tretName, tretPercent
+      )
+    values (#{tretid,jdbcType=INTEGER}, #{tretname,jdbcType=VARCHAR}, #{tretpercent,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Treatment">
+    insert into treatment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tretid != null">
+        tretId,
+      </if>
+      <if test="tretname != null">
+        tretName,
+      </if>
+      <if test="tretpercent != null">
+        tretPercent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tretid != null">
+        #{tretid,jdbcType=INTEGER},
+      </if>
+      <if test="tretname != null">
+        #{tretname,jdbcType=VARCHAR},
+      </if>
+      <if test="tretpercent != null">
+        #{tretpercent,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Treatment">
+    update treatment
+    <set>
+      <if test="tretname != null">
+        tretName = #{tretname,jdbcType=VARCHAR},
+      </if>
+      <if test="tretpercent != null">
+        tretPercent = #{tretpercent,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where tretId = #{tretid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Treatment">
+    update treatment
+    set tretName = #{tretname,jdbcType=VARCHAR},
+      tretPercent = #{tretpercent,jdbcType=DOUBLE}
+    where tretId = #{tretid,jdbcType=INTEGER}
+  </update>
+</mapper>

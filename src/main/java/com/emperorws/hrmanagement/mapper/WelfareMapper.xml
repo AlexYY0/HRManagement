@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.WelfareMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Welfare">
+    <id column="welId" jdbcType="INTEGER" property="welid" />
+    <result column="welName" jdbcType="VARCHAR" property="welname" />
+    <result column="traffic" jdbcType="DOUBLE" property="traffic" />
+    <result column="catering" jdbcType="DOUBLE" property="catering" />
+    <result column="communication" jdbcType="DOUBLE" property="communication" />
+    <result column="bonus" jdbcType="DOUBLE" property="bonus" />
+    <result column="other" jdbcType="DOUBLE" property="other" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    welId, welName, traffic, catering, communication, bonus, other
+  </sql>
+  <select id="getAllWelfareByPage" resultMap="BaseResultMap">
+    select * from welfare
+    <where>
+      <if test="wel!=null">
+        <if test="wel.welname !=null and wel.welname!=''">
+          and welfare.welName like concat('%',#{wel.welname},'%')
+        </if>
+      </if>
+    </where>
+    order by welfare.welId
+    <if test="page!=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(*) from welfare
+    <where>
+      <if test="wel!=null">
+        <if test="wel.welname !=null and wel.welname!=''">
+            and welfare.welName like concat('%',#{wel.welname},'%')
+        </if>
+      </if>
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from welfare
+    where welId = #{welid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from welfare
+    where welId = #{welid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteWelfares" parameterType="java.util.List">
+    delete from welfare
+    where welfare.welId in
+    <foreach collection="wels" item="wel" separator="," open="(" close=")">
+      #{wel.welid,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Welfare">
+    insert into welfare (welId, welName, traffic, 
+      catering, communication, bonus, 
+      other)
+    values (#{welid,jdbcType=INTEGER}, #{welname,jdbcType=VARCHAR}, #{traffic,jdbcType=DOUBLE}, 
+      #{catering,jdbcType=DOUBLE}, #{communication,jdbcType=DOUBLE}, #{bonus,jdbcType=DOUBLE}, 
+      #{other,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Welfare">
+    insert into welfare
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="welid != null">
+        welId,
+      </if>
+      <if test="welname != null">
+        welName,
+      </if>
+      <if test="traffic != null">
+        traffic,
+      </if>
+      <if test="catering != null">
+        catering,
+      </if>
+      <if test="communication != null">
+        communication,
+      </if>
+      <if test="bonus != null">
+        bonus,
+      </if>
+      <if test="other != null">
+        other,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="welid != null">
+        #{welid,jdbcType=INTEGER},
+      </if>
+      <if test="welname != null">
+        #{welname,jdbcType=VARCHAR},
+      </if>
+      <if test="traffic != null">
+        #{traffic,jdbcType=DOUBLE},
+      </if>
+      <if test="catering != null">
+        #{catering,jdbcType=DOUBLE},
+      </if>
+      <if test="communication != null">
+        #{communication,jdbcType=DOUBLE},
+      </if>
+      <if test="bonus != null">
+        #{bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="other != null">
+        #{other,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Welfare">
+    update welfare
+    <set>
+      <if test="welname != null">
+        welName = #{welname,jdbcType=VARCHAR},
+      </if>
+      <if test="traffic != null">
+        traffic = #{traffic,jdbcType=DOUBLE},
+      </if>
+      <if test="catering != null">
+        catering = #{catering,jdbcType=DOUBLE},
+      </if>
+      <if test="communication != null">
+        communication = #{communication,jdbcType=DOUBLE},
+      </if>
+      <if test="bonus != null">
+        bonus = #{bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="other != null">
+        other = #{other,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where welId = #{welid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Welfare">
+    update welfare
+    set welName = #{welname,jdbcType=VARCHAR},
+      traffic = #{traffic,jdbcType=DOUBLE},
+      catering = #{catering,jdbcType=DOUBLE},
+      communication = #{communication,jdbcType=DOUBLE},
+      bonus = #{bonus,jdbcType=DOUBLE},
+      other = #{other,jdbcType=DOUBLE}
+    where welId = #{welid,jdbcType=INTEGER}
+  </update>
+</mapper>

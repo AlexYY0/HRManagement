@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.SalaryadjustmentMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Salaryadjustment">
+    <id column="saId" jdbcType="INTEGER" property="said" />
+    <result column="workId" jdbcType="INTEGER" property="workid" />
+    <result column="saData" jdbcType="TIMESTAMP" property="sadata" />
+    <result column="saRemark" jdbcType="VARCHAR" property="saremark" />
+  </resultMap>
+  <resultMap id="AllSalaryadjustmentInfo" type="com.emperorws.hrmanagement.model.Salaryadjustment" extends="BaseResultMap">
+    <association property="employee" javaType="com.emperorws.hrmanagement.model.Employee">
+      <id column="workid" property="workid"/>
+      <result column="empname" property="empname"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    saId, workId, saData, saRemark
+  </sql>
+  <select id="getSalaryadjustmentByPage" resultMap="AllSalaryadjustmentInfo">
+    select sa.*,e.workId as workid,e.empName as empname
+    from salaryAdjustment sa,employee e
+    where sa.workId=e.workId
+    <if test="sa!=null">
+      <if test="sa.workid !=null and sa.workid!=''">
+        and sa.workId=#{sa.workid}
+      </if>
+    </if>
+    <if test="sadata !=null">
+      and sa.saData between #{sadata[0]} and #{sadata[1]}
+    </if>
+    order by sa.saId
+    <if test="page !=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(*) from salaryAdjustment sa
+    <where>
+      <if test="sa!=null">
+        <if test="sa.workid !=null and sa.workid!=''">
+          and sa.workId=#{sa.workid}
+        </if>
+      </if>
+      <if test="sadata !=null">
+        and sa.sadata between #{sadata[0]} and #{sadata[1]}
+      </if>
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from salaryadjustment
+    where saId = #{said,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from salaryadjustment
+    where saId = #{said,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Salaryadjustment">
+    insert into salaryadjustment (saId, workId, saData, 
+      saRemark)
+    values (#{said,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{sadata,jdbcType=TIMESTAMP}, 
+      #{saremark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Salaryadjustment">
+    insert into salaryadjustment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="said != null">
+        saId,
+      </if>
+      <if test="workid != null">
+        workId,
+      </if>
+      <if test="sadata != null">
+        saData,
+      </if>
+      <if test="saremark != null">
+        saRemark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="said != null">
+        #{said,jdbcType=INTEGER},
+      </if>
+      <if test="workid != null">
+        #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="sadata != null">
+        #{sadata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saremark != null">
+        #{saremark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Salaryadjustment">
+    update salaryadjustment
+    <set>
+      <if test="workid != null">
+        workId = #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="sadata != null">
+        saData = #{sadata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saremark != null">
+        saRemark = #{saremark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where saId = #{said,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Salaryadjustment">
+    update salaryadjustment
+    set workId = #{workid,jdbcType=INTEGER},
+      saData = #{sadata,jdbcType=TIMESTAMP},
+      saRemark = #{saremark,jdbcType=VARCHAR}
+    where saId = #{said,jdbcType=INTEGER}
+  </update>
+</mapper>

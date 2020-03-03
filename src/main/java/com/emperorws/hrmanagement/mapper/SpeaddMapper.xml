@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.SpeaddMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Speadd">
+    <id column="sadId" jdbcType="INTEGER" property="sadid" />
+    <result column="sadName" jdbcType="VARCHAR" property="sadname" />
+    <result column="sadMoney" jdbcType="DOUBLE" property="sadmoney" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sadId, sadName, sadMoney
+  </sql>
+  <select id="getAllSpeaddByPage" resultMap="BaseResultMap">
+    select * from specialAdditionalDeduction
+    <where>
+      <if test="sad!=null">
+        <if test="sad.sadname !=null and sad.sadname!=''">
+          and specialAdditionalDeduction.sadName like concat('%',#{sad.sadname},'%')
+        </if>
+      </if>
+    </where>
+    order by specialAdditionalDeduction.sadId
+    <if test="page!=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(*) from specialAdditionalDeduction
+    <where>
+      <if test="sad!=null">
+        <if test="sad.sadname !=null and sad.sadname!=''">
+          and specialAdditionalDeduction.sadName like concat('%',#{sad.sadname},'%')
+        </if>
+      </if>
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from specialadditionaldeduction
+    where sadId = #{sadid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from specialadditionaldeduction
+    where sadId = #{sadid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteSpeadds" parameterType="java.util.List">
+    delete from specialadditionaldeduction
+    where specialadditionaldeduction.sadId in
+    <foreach collection="sads" item="sad" separator="," open="(" close=")">
+      #{sad.sadid,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Speadd">
+    insert into specialadditionaldeduction (sadId, sadName, sadMoney
+      )
+    values (#{sadid,jdbcType=INTEGER}, #{sadname,jdbcType=VARCHAR}, #{sadmoney,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Speadd">
+    insert into specialadditionaldeduction
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sadid != null">
+        sadId,
+      </if>
+      <if test="sadname != null">
+        sadName,
+      </if>
+      <if test="sadmoney != null">
+        sadMoney,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sadid != null">
+        #{sadid,jdbcType=INTEGER},
+      </if>
+      <if test="sadname != null">
+        #{sadname,jdbcType=VARCHAR},
+      </if>
+      <if test="sadmoney != null">
+        #{sadmoney,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Speadd">
+    update specialadditionaldeduction
+    <set>
+      <if test="sadname != null">
+        sadName = #{sadname,jdbcType=VARCHAR},
+      </if>
+      <if test="sadmoney != null">
+        sadMoney = #{sadmoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where sadId = #{sadid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Speadd">
+    update specialadditionaldeduction
+    set sadName = #{sadname,jdbcType=VARCHAR},
+      sadMoney = #{sadmoney,jdbcType=DOUBLE}
+    where sadId = #{sadid,jdbcType=INTEGER}
+  </update>
+</mapper>

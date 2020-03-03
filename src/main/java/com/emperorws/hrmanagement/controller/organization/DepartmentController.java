@@ -50,10 +50,10 @@ public class DepartmentController {
         return RespBean.error("添加失败");
     }
 
-    @DeleteMapping("/{id}")
-    public RespBean deleteDepById(@PathVariable Integer id) {
+    @DeleteMapping("/{depid}")
+    public RespBean deleteDepById(@PathVariable Integer depid) {
         Department dep = new Department();
-        dep.setDepid(id);
+        dep.setDepid(depid);
         departmentService.deleteDepById(dep);
         if (dep.getResult() == -2) {
             return RespBean.error("该部门下有子部门，删除失败");

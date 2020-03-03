@@ -10,6 +10,9 @@
     roleId, enName, zhName
   </sql>
   <select id="getAllRoles" resultMap="BaseResultMap">
+    select * from role;
+  </select>
+  <select id="getAllRolesByPage" resultMap="BaseResultMap">
     select * from role
     order by roleId
     <if test="page !=null and size!=null">

@@ -3,7 +3,6 @@ package com.emperorws.hrmanagement.mapper;
 import com.emperorws.hrmanagement.model.Employee;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.Date;
 import java.util.List;
 
 public interface EmployeeMapper {

@@ -2,9 +2,10 @@ package com.emperorws.hrmanagement.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Employeechange {
+public class Employeechange implements Serializable {
     private Integer empcid;
 
     private Integer workid;
@@ -61,7 +62,7 @@ public class Employeechange {
     }
 
     public Department getDepartment() {
-        return department;
+        return this.department;
     }
 
     public void setDepartment(Department department) {
@@ -69,7 +70,7 @@ public class Employeechange {
     }
 
     public Employee getEmployee() {
-        return employee;
+        return this.employee;
     }
 
     public void setEmployee(Employee employee) {

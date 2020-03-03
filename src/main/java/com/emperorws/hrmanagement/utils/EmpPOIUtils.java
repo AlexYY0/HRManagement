@@ -21,9 +21,9 @@ import java.util.List;
 /**
  * @Author: EmperorWS
  * @Date: 2020/2/18 15:51
- * @Description: 导入导出工具类
+ * @Description: 员工信息导入导出工具类
  **/
-public class POIUtils {
+public class EmpPOIUtils {
 
     public static ResponseEntity<byte[]> employee2Excel(List<Employee> list) {
         //1. 创建一个 Excel 文档
@@ -75,13 +75,6 @@ public class POIUtils {
         sheet.setColumnWidth(15, 12 * 256);
         sheet.setColumnWidth(16, 8 * 256);
         sheet.setColumnWidth(17, 20 * 256);
-        sheet.setColumnWidth(18, 20 * 256);
-        sheet.setColumnWidth(19, 15 * 256);
-        sheet.setColumnWidth(20, 8 * 256);
-        sheet.setColumnWidth(21, 25 * 256);
-        sheet.setColumnWidth(22, 14 * 256);
-        sheet.setColumnWidth(23, 15 * 256);
-        sheet.setColumnWidth(24, 15 * 256);
         //6. 创建标题行
         HSSFRow r0 = sheet.createRow(0);
         HSSFCell c0 = r0.createCell(0);

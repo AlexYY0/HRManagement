@@ -17,11 +17,16 @@ import java.util.List;
 public class RoleService {
     @Autowired
     RoleMapper roleMapper;
-    public RespPageBean getAllRoles(Integer page, Integer size) {
+
+    public List<Role> getAllRoles() {
+        return roleMapper.getAllRoles();
+    }
+
+    public RespPageBean getAllRolesByPage(Integer page, Integer size) {
         if (page != null && size != null) {
             page = (page - 1) * size;
         }
-        List<Role> data=roleMapper.getAllRoles(page, size);
+        List<Role> data=roleMapper.getAllRolesByPage(page, size);
         Long total=roleMapper.getTotal();
         RespPageBean bean = new RespPageBean();
         bean.setData(data);

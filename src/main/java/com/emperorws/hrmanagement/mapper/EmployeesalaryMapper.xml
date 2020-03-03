@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.EmployeesalaryMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Employeesalary">
+    <id column="esId" jdbcType="INTEGER" property="esid" />
+    <result column="workId" jdbcType="INTEGER" property="workid" />
+    <result column="basicSalary" jdbcType="DOUBLE" property="basicsalary" />
+    <result column="endowment" jdbcType="BIT" property="endowment" />
+    <result column="medical" jdbcType="BIT" property="medical" />
+    <result column="unemployment" jdbcType="BIT" property="unemployment" />
+    <result column="injury" jdbcType="BIT" property="injury" />
+    <result column="maternity" jdbcType="BIT" property="maternity" />
+    <result column="addMedical" jdbcType="BIT" property="addmedical" />
+    <result column="housing" jdbcType="BIT" property="housing" />
+    <result column="enterpriseP" jdbcType="BIT" property="enterprisep" />
+    <result column="welId" jdbcType="INTEGER" property="welid" />
+    <result column="childEdu" jdbcType="INTEGER" property="childedu" />
+    <result column="conEdu" jdbcType="INTEGER" property="conedu" />
+    <result column="serMedical" jdbcType="INTEGER" property="sermedical" />
+    <result column="housingLoan" jdbcType="INTEGER" property="housingloan" />
+    <result column="rental" jdbcType="INTEGER" property="rental" />
+    <result column="supportOld" jdbcType="INTEGER" property="supportold" />
+  </resultMap>
+  <resultMap id="AllEmployeesalaryInfo" type="com.emperorws.hrmanagement.model.Employeesalary" extends="BaseResultMap">
+    <association property="employee" javaType="com.emperorws.hrmanagement.model.Employee">
+      <id column="workid" property="workid"/>
+      <result column="empname" property="empname"/>
+    </association>
+    <association property="department" javaType="com.emperorws.hrmanagement.model.Department">
+      <id column="depid" property="depid"/>
+      <result column="depname" property="depname"/>
+    </association>
+    <association property="welfare" javaType="com.emperorws.hrmanagement.model.Welfare">
+      <id column="welid" property="welid"/>
+      <result column="welname" property="welname"/>
+    </association>
+    <association property="speadd1" javaType="com.emperorws.hrmanagement.model.Speadd">
+      <id column="sadid1" property="sadid"/>
+      <result column="sadname1" property="sadname"/>
+    </association>
+    <association property="speadd2" javaType="com.emperorws.hrmanagement.model.Speadd">
+      <id column="sadid2" property="sadid"/>
+      <result column="sadname2" property="sadname"/>
+    </association>
+    <association property="speadd3" javaType="com.emperorws.hrmanagement.model.Speadd">
+      <id column="sadid3" property="sadid"/>
+      <result column="sadname3" property="sadname"/>
+    </association>
+    <association property="speadd4" javaType="com.emperorws.hrmanagement.model.Speadd">
+      <id column="sadid4" property="sadid"/>
+      <result column="sadname4" property="sadname"/>
+    </association>
+    <association property="speadd5" javaType="com.emperorws.hrmanagement.model.Speadd">
+      <id column="sadid5" property="sadid"/>
+      <result column="sadname5" property="sadname"/>
+    </association>
+    <association property="speadd6" javaType="com.emperorws.hrmanagement.model.Speadd">
+      <id column="sadid6" property="sadid"/>
+      <result column="sadname6" property="sadname"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    esId, workId, basicSalary, endowment, medical, unemployment, injury, maternity, addMedical, 
+    housing, enterpriseP, welId, childEdu, conEdu, serMedical, housingLoan, rental, supportOld
+  </sql>
+  <select id="getEmpSalByWorkid" resultMap="BaseResultMap">
+    select * from employeeSalary where workId=#{workid}
+  </select>
+  <select id="getEmployeesalaryByPage" resultMap="AllEmployeesalaryInfo">
+    SELECT e.*,d.depName as depname,emp.empName as empname,w.welName as welname,s1.`sadName` as sadname1,s2.`sadName` as sadname2,s3.`sadName` as sadname3,s4.`sadName` as sadname4,s5.`sadName` as sadname5,s6.`sadName` as sadname6
+    FROM employee emp,department d,employeeSalary e,welfare w,specialAdditionalDeduction s1,specialAdditionalDeduction s2,specialAdditionalDeduction s3,specialAdditionalDeduction s4,specialAdditionalDeduction s5,specialAdditionalDeduction s6
+    WHERE e.welId=w.welId
+    AND e.childEdu=s1.`sadId`
+    AND e.conEdu=s2.`sadId`
+    AND e.serMedical=s3.`sadId`
+    AND e.housingLoan=s4.`sadId`
+    AND e.rental=s5.`sadId`
+    AND e.supportOld=s6.`sadId`
+    AND emp.workId=e.workId
+    AND emp.depId=d.depId
+    <if test="emp!=null">
+      <if test="emp.empname !=null and emp.empname!=''">
+        and emp.empName like concat('%',#{emp.empname},'%')
+      </if>
+      <if test="emp.depid !=null and emp.depid!=''">
+        and emp.depId =#{emp.depid}
+      </if>
+    </if>
+    order by e.workid
+    <if test="page !=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(*) from employeeSalary e,employee emp,department d
+    <where>
+      emp.workId=e.workId AND emp.depId=d.depId
+      <if test="emp!=null">
+        <if test="emp.empname !=null and emp.empname!=''">
+          and emp.empName like concat('%',#{emp.empname},'%')
+        </if>
+        <if test="emp.depid !=null">
+          and emp.depId =#{emp.depid}
+        </if>
+      </if>
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employeesalary
+    where esId = #{esid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employeesalary
+    where esId = #{esid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteEmpSals" parameterType="java.util.List">
+    delete from employeesalary
+    where employeesalary.esId in
+    <foreach collection="empsals" item="empsal" separator="," open="(" close=")">
+      #{empsal.esid,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+  <insert id="addEmpSals" parameterType="com.emperorws.hrmanagement.model.Employeesalary">
+    insert into employeesalary (workId, basicSalary,
+      endowment, medical, unemployment,
+      injury, maternity, addMedical,
+      housing, enterpriseP, welId,
+      childEdu, conEdu, serMedical,
+      housingLoan, rental, supportOld
+      ) values
+    <foreach collection="list" item="empsal" separator="," close=";">
+      (#{empsal.workid,jdbcType=INTEGER}, #{empsal.basicsalary,jdbcType=DOUBLE},
+      #{empsal.endowment,jdbcType=BIT}, #{empsal.medical,jdbcType=BIT}, #{empsal.unemployment,jdbcType=BIT},
+      #{empsal.injury,jdbcType=BIT}, #{empsal.maternity,jdbcType=BIT}, #{empsal.addmedical,jdbcType=BIT},
+      #{empsal.housing,jdbcType=BIT}, #{empsal.enterprisep,jdbcType=BIT}, #{empsal.welid,jdbcType=INTEGER},
+      #{empsal.childedu,jdbcType=INTEGER}, #{empsal.conedu,jdbcType=INTEGER}, #{empsal.sermedical,jdbcType=INTEGER},
+      #{empsal.housingloan,jdbcType=INTEGER}, #{empsal.rental,jdbcType=INTEGER}, #{empsal.supportold,jdbcType=INTEGER}
+      )
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Employeesalary">
+    insert into employeesalary (esId, workId, basicSalary, 
+      endowment, medical, unemployment, 
+      injury, maternity, addMedical, 
+      housing, enterpriseP, welId, 
+      childEdu, conEdu, serMedical, 
+      housingLoan, rental, supportOld
+      )
+    values (#{esid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{basicsalary,jdbcType=DOUBLE}, 
+      #{endowment,jdbcType=BIT}, #{medical,jdbcType=BIT}, #{unemployment,jdbcType=BIT}, 
+      #{injury,jdbcType=BIT}, #{maternity,jdbcType=BIT}, #{addmedical,jdbcType=BIT}, 
+      #{housing,jdbcType=BIT}, #{enterprisep,jdbcType=BIT}, #{welid,jdbcType=INTEGER}, 
+      #{childedu,jdbcType=INTEGER}, #{conedu,jdbcType=INTEGER}, #{sermedical,jdbcType=INTEGER}, 
+      #{housingloan,jdbcType=INTEGER}, #{rental,jdbcType=INTEGER}, #{supportold,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Employeesalary">
+    insert into employeesalary
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="esid != null">
+        esId,
+      </if>
+      <if test="workid != null">
+        workId,
+      </if>
+      <if test="basicsalary != null">
+        basicSalary,
+      </if>
+      <if test="endowment != null">
+        endowment,
+      </if>
+      <if test="medical != null">
+        medical,
+      </if>
+      <if test="unemployment != null">
+        unemployment,
+      </if>
+      <if test="injury != null">
+        injury,
+      </if>
+      <if test="maternity != null">
+        maternity,
+      </if>
+      <if test="addmedical != null">
+        addMedical,
+      </if>
+      <if test="housing != null">
+        housing,
+      </if>
+      <if test="enterprisep != null">
+        enterpriseP,
+      </if>
+      <if test="welid != null">
+        welId,
+      </if>
+      <if test="childedu != null">
+        childEdu,
+      </if>
+      <if test="conedu != null">
+        conEdu,
+      </if>
+      <if test="sermedical != null">
+        serMedical,
+      </if>
+      <if test="housingloan != null">
+        housingLoan,
+      </if>
+      <if test="rental != null">
+        rental,
+      </if>
+      <if test="supportold != null">
+        supportOld,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="esid != null">
+        #{esid,jdbcType=INTEGER},
+      </if>
+      <if test="workid != null">
+        #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="basicsalary != null">
+        #{basicsalary,jdbcType=DOUBLE},
+      </if>
+      <if test="endowment != null">
+        #{endowment,jdbcType=BIT},
+      </if>
+      <if test="medical != null">
+        #{medical,jdbcType=BIT},
+      </if>
+      <if test="unemployment != null">
+        #{unemployment,jdbcType=BIT},
+      </if>
+      <if test="injury != null">
+        #{injury,jdbcType=BIT},
+      </if>
+      <if test="maternity != null">
+        #{maternity,jdbcType=BIT},
+      </if>
+      <if test="addmedical != null">
+        #{addmedical,jdbcType=BIT},
+      </if>
+      <if test="housing != null">
+        #{housing,jdbcType=BIT},
+      </if>
+      <if test="enterprisep != null">
+        #{enterprisep,jdbcType=BIT},
+      </if>
+      <if test="welid != null">
+        #{welid,jdbcType=INTEGER},
+      </if>
+      <if test="childedu != null">
+        #{childedu,jdbcType=INTEGER},
+      </if>
+      <if test="conedu != null">
+        #{conedu,jdbcType=INTEGER},
+      </if>
+      <if test="sermedical != null">
+        #{sermedical,jdbcType=INTEGER},
+      </if>
+      <if test="housingloan != null">
+        #{housingloan,jdbcType=INTEGER},
+      </if>
+      <if test="rental != null">
+        #{rental,jdbcType=INTEGER},
+      </if>
+      <if test="supportold != null">
+        #{supportold,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Employeesalary">
+    update employeesalary
+    <set>
+      <if test="workid != null">
+        workId = #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="basicsalary != null">
+        basicSalary = #{basicsalary,jdbcType=DOUBLE},
+      </if>
+      <if test="endowment != null">
+        endowment = #{endowment,jdbcType=BIT},
+      </if>
+      <if test="medical != null">
+        medical = #{medical,jdbcType=BIT},
+      </if>
+      <if test="unemployment != null">
+        unemployment = #{unemployment,jdbcType=BIT},
+      </if>
+      <if test="injury != null">
+        injury = #{injury,jdbcType=BIT},
+      </if>
+      <if test="maternity != null">
+        maternity = #{maternity,jdbcType=BIT},
+      </if>
+      <if test="addmedical != null">
+        addMedical = #{addmedical,jdbcType=BIT},
+      </if>
+      <if test="housing != null">
+        housing = #{housing,jdbcType=BIT},
+      </if>
+      <if test="enterprisep != null">
+        enterpriseP = #{enterprisep,jdbcType=BIT},
+      </if>
+      <if test="welid != null">
+        welId = #{welid,jdbcType=INTEGER},
+      </if>
+      <if test="childedu != null">
+        childEdu = #{childedu,jdbcType=INTEGER},
+      </if>
+      <if test="conedu != null">
+        conEdu = #{conedu,jdbcType=INTEGER},
+      </if>
+      <if test="sermedical != null">
+        serMedical = #{sermedical,jdbcType=INTEGER},
+      </if>
+      <if test="housingloan != null">
+        housingLoan = #{housingloan,jdbcType=INTEGER},
+      </if>
+      <if test="rental != null">
+        rental = #{rental,jdbcType=INTEGER},
+      </if>
+      <if test="supportold != null">
+        supportOld = #{supportold,jdbcType=INTEGER},
+      </if>
+    </set>
+    where esId = #{esid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Employeesalary">
+    update employeesalary
+    set workId = #{workid,jdbcType=INTEGER},
+      basicSalary = #{basicsalary,jdbcType=DOUBLE},
+      endowment = #{endowment,jdbcType=BIT},
+      medical = #{medical,jdbcType=BIT},
+      unemployment = #{unemployment,jdbcType=BIT},
+      injury = #{injury,jdbcType=BIT},
+      maternity = #{maternity,jdbcType=BIT},
+      addMedical = #{addmedical,jdbcType=BIT},
+      housing = #{housing,jdbcType=BIT},
+      enterpriseP = #{enterprisep,jdbcType=BIT},
+      welId = #{welid,jdbcType=INTEGER},
+      childEdu = #{childedu,jdbcType=INTEGER},
+      conEdu = #{conedu,jdbcType=INTEGER},
+      serMedical = #{sermedical,jdbcType=INTEGER},
+      housingLoan = #{housingloan,jdbcType=INTEGER},
+      rental = #{rental,jdbcType=INTEGER},
+      supportOld = #{supportold,jdbcType=INTEGER}
+    where esId = #{esid,jdbcType=INTEGER}
+  </update>
+</mapper>

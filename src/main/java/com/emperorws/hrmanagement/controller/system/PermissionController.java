@@ -25,8 +25,8 @@ public class PermissionController {
     PermissionService permissionService;
 
     @GetMapping("/")
-    public RespPageBean getAllRoles(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size) {
-        return roleService.getAllRoles(page, size);
+    public RespPageBean getAllRolesByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size) {
+        return roleService.getAllRolesByPage(page, size);
     }
 
     @GetMapping("/permissions")

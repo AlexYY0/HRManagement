@@ -2,9 +2,10 @@ package com.emperorws.hrmanagement.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Contractinfo {
+public class Contractinfo implements Serializable {
     private Integer contid;
 
     private Integer workid;

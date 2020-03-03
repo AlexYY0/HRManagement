@@ -6,7 +6,7 @@ import com.emperorws.hrmanagement.model.RespBean;
 import com.emperorws.hrmanagement.model.RespPageBean;
 import com.emperorws.hrmanagement.service.DepartmentService;
 import com.emperorws.hrmanagement.service.EmployeeService;
-import com.emperorws.hrmanagement.utils.POIUtils;
+import com.emperorws.hrmanagement.utils.EmpPOIUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,9 +41,9 @@ public class EmpBasicController {
         return RespBean.error("添加失败!");
     }
 
-    @DeleteMapping("/{id}")
-    public RespBean deleteEmpByEid(@PathVariable Integer id) {
-        if (employeeService.deleteEmpByEid(id) == 1) {
+    @DeleteMapping("/{workid}")
+    public RespBean deleteEmpByEid(@PathVariable Integer workid) {
+        if (employeeService.deleteEmpByEid(workid) == 1) {
             return RespBean.ok("删除成功!");
         }
         return RespBean.error("删除失败!");
@@ -79,7 +79,7 @@ public class EmpBasicController {
 
     @PostMapping("/import")
     public RespBean importData(MultipartFile file) throws IOException {
-        List<Employee> list = POIUtils.excel2Employee(file, departmentService.getAllDepartmentsWithOutChildren());
+        List<Employee> list = EmpPOIUtils.excel2Employee(file, departmentService.getAllDepartmentsWithOutChildren());
         if (employeeService.addEmps(list) == list.size()) {
             return RespBean.ok("上传成功");
         }
@@ -89,6 +89,6 @@ public class EmpBasicController {
     @PostMapping("/export")
     public ResponseEntity<byte[]> exportData(@RequestBody List<Employee> list) {
         //List<Employee> list = (List<Employee>) employeeService.getEmployeeByPage(null, null, null,null,null,null).getData();
-        return POIUtils.employee2Excel(list);
+        return EmpPOIUtils.employee2Excel(list);
     }
 }

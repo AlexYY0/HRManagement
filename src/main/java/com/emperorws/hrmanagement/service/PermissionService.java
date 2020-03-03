@@ -6,6 +6,7 @@ import com.emperorws.hrmanagement.model.Permission;
 import com.emperorws.hrmanagement.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ public class PermissionService {
     PermissionMapper permissionMapper;
     @Autowired
     PermissionRoleMapper permissionRoleMapper;
+
     public List<Permission> getPermissionsByUserId() {
         return permissionMapper.getPermissionsByUserId(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserid());
     }

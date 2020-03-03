@@ -1,17 +1,11 @@
 package com.emperorws.hrmanagement.mapper;
 
-import com.emperorws.hrmanagement.model.Employee;
 import com.emperorws.hrmanagement.model.Employeechange;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
 
-/**
- * @Author: EmperorWS
- * @Date: 2020/2/21 15:53
- * @Description:
- **/
 public interface EmployeechangeMapper {
     int deleteByPrimaryKey(Integer empcid);
 

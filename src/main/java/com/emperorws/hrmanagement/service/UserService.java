@@ -2,12 +2,15 @@ package com.emperorws.hrmanagement.service;
 
 import com.emperorws.hrmanagement.mapper.UserMapper;
 import com.emperorws.hrmanagement.mapper.UserRoleMapper;
+import com.emperorws.hrmanagement.model.Employee;
+import com.emperorws.hrmanagement.model.RespPageBean;
 import com.emperorws.hrmanagement.model.User;
 import com.emperorws.hrmanagement.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,8 +38,16 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public List<User> getAllUsers(String keywords) {
-        return userMapper.getAllUsers(UserUtils.getCurrentUser().getUserid(),keywords);
+    public RespPageBean getAllUsersByPage(Integer page, Integer size, Employee employee) {
+        if (page != null && size != null) {
+            page = (page - 1) * size;
+        }
+        List<User> data = userMapper.getAllUsersByPage(UserUtils.getCurrentUser().getUserid(), page, size, employee);
+        Long total = userMapper.getTotal(employee)-1;
+        RespPageBean bean = new RespPageBean();
+        bean.setData(data);
+        bean.setTotal(total);
+        return bean;
     }
 
     public Integer updateUser(User user) {
@@ -46,6 +57,9 @@ public class UserService implements UserDetailsService {
     @Transactional
     public boolean updateUserRole(Integer userid, Integer[] roleids) {
         userRoleMapper.deleteByUserid(userid);
+        if (roleids == null || roleids.length == 0) {
+            return true;
+        }
         return userRoleMapper.addRole(userid, roleids) == roleids.length;
     }
 
@@ -55,5 +69,31 @@ public class UserService implements UserDetailsService {
 
     public List<User> getAllUsersExceptCurrentUser() {
         return userMapper.getAllUsersExceptCurrentUser(UserUtils.getCurrentUser().getUserid());
+    }
+
+    public Boolean getUserByUsername(String username){
+        User result = userMapper.loadUserByUsername(username);
+        if(result==null)
+            return false;
+        return true;
+    }
+
+    public Boolean getUserByWorkid(Integer workid){
+        User result = userMapper.getUserByWorkid(workid);
+        if(result==null)
+            return false;
+        return true;
+    }
+
+    public Integer addUser(User user){
+        String username=user.getUsername();
+        String password=user.getPassword();
+        if (userMapper.loadUserByUsername(username) != null) {
+            return -1;
+        }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encode = encoder.encode(password);
+        user.setPassword(encode);
+        return userMapper.insert(user);
     }
 }

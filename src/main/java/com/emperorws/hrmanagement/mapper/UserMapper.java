@@ -1,5 +1,6 @@
 package com.emperorws.hrmanagement.mapper;
 
+import com.emperorws.hrmanagement.model.Employee;
 import com.emperorws.hrmanagement.model.Role;
 import com.emperorws.hrmanagement.model.User;
 import org.apache.ibatis.annotations.Param;
@@ -23,7 +24,11 @@ public interface UserMapper {
 
     List<Role> getUserRolesById(Integer userid);
 
-    List<User> getAllUsers(@Param("userid") Integer userid, @Param("keywords") String keywords);
+    List<User> getAllUsersByPage(@Param("userid") Integer userid, @Param("page") Integer page, @Param("size") Integer size, @Param("emp") Employee employee);
+
+    Long getTotal(@Param("emp") Employee employee);
+
+    User getUserByWorkid(Integer workid);
 
     List<User> getAllUsersExceptCurrentUser(Integer userid);
 }

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.TaxrateMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Taxrate">
+    <id column="trId" jdbcType="INTEGER" property="trid" />
+    <result column="trMin" jdbcType="DOUBLE" property="trmin" />
+    <result column="trMax" jdbcType="DOUBLE" property="trmax" />
+    <result column="trPercent" jdbcType="DOUBLE" property="trpercent" />
+    <result column="quiDeduction" jdbcType="DOUBLE" property="quideduction" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    trId, trMin, trMax, trPercent, quiDeduction
+  </sql>
+  <select id="getAllTaxrate" resultMap="BaseResultMap">
+    select * from taxRate
+    order by taxRate.trId;
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from taxrate
+    where trId = #{trid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from taxrate
+    where trId = #{trid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteTaxrates" parameterType="java.util.List">
+    delete from taxRate
+    where taxRate.trId in
+    <foreach collection="trs" item="tr" separator="," open="(" close=")">
+      #{tr.trid,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Taxrate">
+    insert into taxrate (trId, trMin, trMax, 
+      trPercent, quiDeduction)
+    values (#{trid,jdbcType=INTEGER}, #{trmin,jdbcType=DOUBLE}, #{trmax,jdbcType=DOUBLE}, 
+      #{trpercent,jdbcType=DOUBLE}, #{quideduction,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Taxrate">
+    insert into taxrate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="trid != null">
+        trId,
+      </if>
+      <if test="trmin != null">
+        trMin,
+      </if>
+      <if test="trmax != null">
+        trMax,
+      </if>
+      <if test="trpercent != null">
+        trPercent,
+      </if>
+      <if test="quideduction != null">
+        quiDeduction,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="trid != null">
+        #{trid,jdbcType=INTEGER},
+      </if>
+      <if test="trmin != null">
+        #{trmin,jdbcType=DOUBLE},
+      </if>
+      <if test="trmax != null">
+        #{trmax,jdbcType=DOUBLE},
+      </if>
+      <if test="trpercent != null">
+        #{trpercent,jdbcType=DOUBLE},
+      </if>
+      <if test="quideduction != null">
+        #{quideduction,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Taxrate">
+    update taxrate
+    <set>
+      <if test="trmin != null">
+        trMin = #{trmin,jdbcType=DOUBLE},
+      </if>
+      <if test="trmax != null">
+        trMax = #{trmax,jdbcType=DOUBLE},
+      </if>
+      <if test="trpercent != null">
+        trPercent = #{trpercent,jdbcType=DOUBLE},
+      </if>
+      <if test="quideduction != null">
+        quiDeduction = #{quideduction,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where trId = #{trid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Taxrate">
+    update taxrate
+    set trMin = #{trmin,jdbcType=DOUBLE},
+      trMax = #{trmax,jdbcType=DOUBLE},
+      trPercent = #{trpercent,jdbcType=DOUBLE},
+      quiDeduction = #{quideduction,jdbcType=DOUBLE}
+    where trId = #{trid,jdbcType=INTEGER}
+  </update>
+</mapper>
