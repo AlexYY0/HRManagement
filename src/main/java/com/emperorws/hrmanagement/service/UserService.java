@@ -71,11 +71,33 @@ public class UserService implements UserDetailsService {
         return userMapper.getAllUsersExceptCurrentUser(UserUtils.getCurrentUser().getUserid());
     }
 
+    public boolean updateUserPassword(String oldpassword, String password, Integer userid){
+        User user = userMapper.selectByPrimaryKey(userid);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if (encoder.matches(oldpassword, user.getPassword())) {
+            String encodePassword = encoder.encode(password);
+            Integer result = userMapper.updateUserPassword(userid, encodePassword);
+            if (result == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Boolean getUserByUsername(String username){
         User result = userMapper.loadUserByUsername(username);
         if(result==null)
             return false;
         return true;
+    }
+
+    public Boolean getUserByPassword(String password,Integer userid){
+        User user = userMapper.selectByPrimaryKey(userid);
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if (encoder.matches(password, user.getPassword()))
+            return true;
+        else
+            return false;
     }
 
     public Boolean getUserByWorkid(Integer workid){

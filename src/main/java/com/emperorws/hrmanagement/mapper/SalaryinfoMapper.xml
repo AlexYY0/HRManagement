@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.SalaryinfoMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Salaryinfo">
+    <id column="siId" jdbcType="INTEGER" property="siid" />
+    <result column="workId" jdbcType="INTEGER" property="workid" />
+    <result column="basicSalary" jdbcType="DOUBLE" property="basicsalary" />
+    <result column="absenteeism" jdbcType="DOUBLE" property="absenteeism" />
+    <result column="overtime" jdbcType="DOUBLE" property="overtime" />
+    <result column="busiTrip" jdbcType="DOUBLE" property="busitrip" />
+    <result column="endowment" jdbcType="DOUBLE" property="endowment" />
+    <result column="medical" jdbcType="DOUBLE" property="medical" />
+    <result column="unemployment" jdbcType="DOUBLE" property="unemployment" />
+    <result column="injury" jdbcType="DOUBLE" property="injury" />
+    <result column="maternity" jdbcType="DOUBLE" property="maternity" />
+    <result column="addMedical" jdbcType="DOUBLE" property="addmedical" />
+    <result column="housing" jdbcType="DOUBLE" property="housing" />
+    <result column="enterpriseP" jdbcType="DOUBLE" property="enterprisep" />
+    <result column="childEdu" jdbcType="DOUBLE" property="childedu" />
+    <result column="conEdu" jdbcType="DOUBLE" property="conedu" />
+    <result column="serMedical" jdbcType="DOUBLE" property="sermedical" />
+    <result column="housingLoan" jdbcType="DOUBLE" property="housingloan" />
+    <result column="rental" jdbcType="DOUBLE" property="rental" />
+    <result column="supportOld" jdbcType="DOUBLE" property="supportold" />
+    <result column="traffic" jdbcType="DOUBLE" property="traffic" />
+    <result column="catering" jdbcType="DOUBLE" property="catering" />
+    <result column="communication" jdbcType="DOUBLE" property="communication" />
+    <result column="other" jdbcType="DOUBLE" property="other" />
+    <result column="bonus" jdbcType="DOUBLE" property="bonus" />
+    <result column="sums" jdbcType="DOUBLE" property="sums" />
+    <result column="payoffData" jdbcType="TIMESTAMP" property="payoffdata" />
+  </resultMap>
+  <resultMap id="AllSalaryInfo" type="com.emperorws.hrmanagement.model.Salaryinfo" extends="BaseResultMap">
+    <association property="employee" javaType="com.emperorws.hrmanagement.model.Employee">
+      <id column="workid" property="workid"/>
+      <result column="empname" property="empname"/>
+    </association>
+    <association property="department" javaType="com.emperorws.hrmanagement.model.Department">
+      <id column="depid" property="depid"/>
+      <result column="depname" property="depname"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    siId, workId, basicSalary, absenteeism, overtime, busiTrip, endowment, medical, unemployment, 
+    injury, maternity, addMedical, housing, enterpriseP, childEdu, conEdu, serMedical, 
+    housingLoan, rental, supportOld, traffic, catering, communication, other, bonus, 
+    sums, payoffData
+  </sql>
+  <select id="getSalaryinfoByPage" resultMap="AllSalaryInfo">
+    select s.*,d.depName as depname,emp.empName as empname
+    from employee emp,department d,salaryInfo s
+    where emp.workId=s.workId and emp.depId=d.depId
+    <if test="emp!=null">
+      <if test="emp.empname !=null and emp.empname!=''">
+        and emp.empName like concat('%',#{emp.empname},'%')
+      </if>
+      <if test="emp.depid !=null and emp.depid!=''">
+        and emp.depId =#{emp.depid}
+      </if>
+    </if>
+    <if test="payoffdata !=null">
+      and s.payoffData between #{payoffdata[0]} and #{payoffdata[1]}
+    </if>
+    order by s.workId
+    <if test="page !=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(*) from salaryInfo s,employee emp,department d
+    <where>
+      emp.workId=s.workId AND emp.depId=d.depId
+      <if test="emp!=null">
+        <if test="emp.empname !=null and emp.empname!=''">
+          and emp.empName like concat('%',#{emp.empname},'%')
+        </if>
+        <if test="emp.depid !=null">
+          and emp.depId =#{emp.depid}
+        </if>
+      </if>
+      <if test="payoffdata !=null">
+        and s.payoffData between #{payoffdata[0]} and #{payoffdata[1]}
+      </if>
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from salaryinfo
+    where siId = #{siid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from salaryinfo
+    where siId = #{siid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Salaryinfo">
+    insert into salaryinfo (siId, workId, basicSalary, 
+      absenteeism, overtime, busiTrip, 
+      endowment, medical, unemployment, 
+      injury, maternity, addMedical, 
+      housing, enterpriseP, childEdu, 
+      conEdu, serMedical, housingLoan, 
+      rental, supportOld, traffic, 
+      catering, communication, other, 
+      bonus, sums, payoffData
+      )
+    values (#{siid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{basicsalary,jdbcType=DOUBLE}, 
+      #{absenteeism,jdbcType=DOUBLE}, #{overtime,jdbcType=DOUBLE}, #{busitrip,jdbcType=DOUBLE}, 
+      #{endowment,jdbcType=DOUBLE}, #{medical,jdbcType=DOUBLE}, #{unemployment,jdbcType=DOUBLE}, 
+      #{injury,jdbcType=DOUBLE}, #{maternity,jdbcType=DOUBLE}, #{addmedical,jdbcType=DOUBLE}, 
+      #{housing,jdbcType=DOUBLE}, #{enterprisep,jdbcType=DOUBLE}, #{childedu,jdbcType=DOUBLE}, 
+      #{conedu,jdbcType=DOUBLE}, #{sermedical,jdbcType=DOUBLE}, #{housingloan,jdbcType=DOUBLE}, 
+      #{rental,jdbcType=DOUBLE}, #{supportold,jdbcType=DOUBLE}, #{traffic,jdbcType=DOUBLE}, 
+      #{catering,jdbcType=DOUBLE}, #{communication,jdbcType=DOUBLE}, #{other,jdbcType=DOUBLE}, 
+      #{bonus,jdbcType=DOUBLE}, #{sums,jdbcType=DOUBLE}, #{payoffdata,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Salaryinfo">
+    insert into salaryinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="siid != null">
+        siId,
+      </if>
+      <if test="workid != null">
+        workId,
+      </if>
+      <if test="basicsalary != null">
+        basicSalary,
+      </if>
+      <if test="absenteeism != null">
+        absenteeism,
+      </if>
+      <if test="overtime != null">
+        overtime,
+      </if>
+      <if test="busitrip != null">
+        busiTrip,
+      </if>
+      <if test="endowment != null">
+        endowment,
+      </if>
+      <if test="medical != null">
+        medical,
+      </if>
+      <if test="unemployment != null">
+        unemployment,
+      </if>
+      <if test="injury != null">
+        injury,
+      </if>
+      <if test="maternity != null">
+        maternity,
+      </if>
+      <if test="addmedical != null">
+        addMedical,
+      </if>
+      <if test="housing != null">
+        housing,
+      </if>
+      <if test="enterprisep != null">
+        enterpriseP,
+      </if>
+      <if test="childedu != null">
+        childEdu,
+      </if>
+      <if test="conedu != null">
+        conEdu,
+      </if>
+      <if test="sermedical != null">
+        serMedical,
+      </if>
+      <if test="housingloan != null">
+        housingLoan,
+      </if>
+      <if test="rental != null">
+        rental,
+      </if>
+      <if test="supportold != null">
+        supportOld,
+      </if>
+      <if test="traffic != null">
+        traffic,
+      </if>
+      <if test="catering != null">
+        catering,
+      </if>
+      <if test="communication != null">
+        communication,
+      </if>
+      <if test="other != null">
+        other,
+      </if>
+      <if test="bonus != null">
+        bonus,
+      </if>
+      <if test="sums != null">
+        sums,
+      </if>
+      <if test="payoffdata != null">
+        payoffData,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="siid != null">
+        #{siid,jdbcType=INTEGER},
+      </if>
+      <if test="workid != null">
+        #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="basicsalary != null">
+        #{basicsalary,jdbcType=DOUBLE},
+      </if>
+      <if test="absenteeism != null">
+        #{absenteeism,jdbcType=DOUBLE},
+      </if>
+      <if test="overtime != null">
+        #{overtime,jdbcType=DOUBLE},
+      </if>
+      <if test="busitrip != null">
+        #{busitrip,jdbcType=DOUBLE},
+      </if>
+      <if test="endowment != null">
+        #{endowment,jdbcType=DOUBLE},
+      </if>
+      <if test="medical != null">
+        #{medical,jdbcType=DOUBLE},
+      </if>
+      <if test="unemployment != null">
+        #{unemployment,jdbcType=DOUBLE},
+      </if>
+      <if test="injury != null">
+        #{injury,jdbcType=DOUBLE},
+      </if>
+      <if test="maternity != null">
+        #{maternity,jdbcType=DOUBLE},
+      </if>
+      <if test="addmedical != null">
+        #{addmedical,jdbcType=DOUBLE},
+      </if>
+      <if test="housing != null">
+        #{housing,jdbcType=DOUBLE},
+      </if>
+      <if test="enterprisep != null">
+        #{enterprisep,jdbcType=DOUBLE},
+      </if>
+      <if test="childedu != null">
+        #{childedu,jdbcType=DOUBLE},
+      </if>
+      <if test="conedu != null">
+        #{conedu,jdbcType=DOUBLE},
+      </if>
+      <if test="sermedical != null">
+        #{sermedical,jdbcType=DOUBLE},
+      </if>
+      <if test="housingloan != null">
+        #{housingloan,jdbcType=DOUBLE},
+      </if>
+      <if test="rental != null">
+        #{rental,jdbcType=DOUBLE},
+      </if>
+      <if test="supportold != null">
+        #{supportold,jdbcType=DOUBLE},
+      </if>
+      <if test="traffic != null">
+        #{traffic,jdbcType=DOUBLE},
+      </if>
+      <if test="catering != null">
+        #{catering,jdbcType=DOUBLE},
+      </if>
+      <if test="communication != null">
+        #{communication,jdbcType=DOUBLE},
+      </if>
+      <if test="other != null">
+        #{other,jdbcType=DOUBLE},
+      </if>
+      <if test="bonus != null">
+        #{bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="sums != null">
+        #{sums,jdbcType=DOUBLE},
+      </if>
+      <if test="payoffdata != null">
+        #{payoffdata,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Salaryinfo">
+    update salaryinfo
+    <set>
+      <if test="workid != null">
+        workId = #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="basicsalary != null">
+        basicSalary = #{basicsalary,jdbcType=DOUBLE},
+      </if>
+      <if test="absenteeism != null">
+        absenteeism = #{absenteeism,jdbcType=DOUBLE},
+      </if>
+      <if test="overtime != null">
+        overtime = #{overtime,jdbcType=DOUBLE},
+      </if>
+      <if test="busitrip != null">
+        busiTrip = #{busitrip,jdbcType=DOUBLE},
+      </if>
+      <if test="endowment != null">
+        endowment = #{endowment,jdbcType=DOUBLE},
+      </if>
+      <if test="medical != null">
+        medical = #{medical,jdbcType=DOUBLE},
+      </if>
+      <if test="unemployment != null">
+        unemployment = #{unemployment,jdbcType=DOUBLE},
+      </if>
+      <if test="injury != null">
+        injury = #{injury,jdbcType=DOUBLE},
+      </if>
+      <if test="maternity != null">
+        maternity = #{maternity,jdbcType=DOUBLE},
+      </if>
+      <if test="addmedical != null">
+        addMedical = #{addmedical,jdbcType=DOUBLE},
+      </if>
+      <if test="housing != null">
+        housing = #{housing,jdbcType=DOUBLE},
+      </if>
+      <if test="enterprisep != null">
+        enterpriseP = #{enterprisep,jdbcType=DOUBLE},
+      </if>
+      <if test="childedu != null">
+        childEdu = #{childedu,jdbcType=DOUBLE},
+      </if>
+      <if test="conedu != null">
+        conEdu = #{conedu,jdbcType=DOUBLE},
+      </if>
+      <if test="sermedical != null">
+        serMedical = #{sermedical,jdbcType=DOUBLE},
+      </if>
+      <if test="housingloan != null">
+        housingLoan = #{housingloan,jdbcType=DOUBLE},
+      </if>
+      <if test="rental != null">
+        rental = #{rental,jdbcType=DOUBLE},
+      </if>
+      <if test="supportold != null">
+        supportOld = #{supportold,jdbcType=DOUBLE},
+      </if>
+      <if test="traffic != null">
+        traffic = #{traffic,jdbcType=DOUBLE},
+      </if>
+      <if test="catering != null">
+        catering = #{catering,jdbcType=DOUBLE},
+      </if>
+      <if test="communication != null">
+        communication = #{communication,jdbcType=DOUBLE},
+      </if>
+      <if test="other != null">
+        other = #{other,jdbcType=DOUBLE},
+      </if>
+      <if test="bonus != null">
+        bonus = #{bonus,jdbcType=DOUBLE},
+      </if>
+      <if test="sums != null">
+        sums = #{sums,jdbcType=DOUBLE},
+      </if>
+      <if test="payoffdata != null">
+        payoffData = #{payoffdata,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where siId = #{siid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Salaryinfo">
+    update salaryinfo
+    set workId = #{workid,jdbcType=INTEGER},
+      basicSalary = #{basicsalary,jdbcType=DOUBLE},
+      absenteeism = #{absenteeism,jdbcType=DOUBLE},
+      overtime = #{overtime,jdbcType=DOUBLE},
+      busiTrip = #{busitrip,jdbcType=DOUBLE},
+      endowment = #{endowment,jdbcType=DOUBLE},
+      medical = #{medical,jdbcType=DOUBLE},
+      unemployment = #{unemployment,jdbcType=DOUBLE},
+      injury = #{injury,jdbcType=DOUBLE},
+      maternity = #{maternity,jdbcType=DOUBLE},
+      addMedical = #{addmedical,jdbcType=DOUBLE},
+      housing = #{housing,jdbcType=DOUBLE},
+      enterpriseP = #{enterprisep,jdbcType=DOUBLE},
+      childEdu = #{childedu,jdbcType=DOUBLE},
+      conEdu = #{conedu,jdbcType=DOUBLE},
+      serMedical = #{sermedical,jdbcType=DOUBLE},
+      housingLoan = #{housingloan,jdbcType=DOUBLE},
+      rental = #{rental,jdbcType=DOUBLE},
+      supportOld = #{supportold,jdbcType=DOUBLE},
+      traffic = #{traffic,jdbcType=DOUBLE},
+      catering = #{catering,jdbcType=DOUBLE},
+      communication = #{communication,jdbcType=DOUBLE},
+      other = #{other,jdbcType=DOUBLE},
+      bonus = #{bonus,jdbcType=DOUBLE},
+      sums = #{sums,jdbcType=DOUBLE},
+      payoffData = #{payoffdata,jdbcType=TIMESTAMP}
+    where siId = #{siid,jdbcType=INTEGER}
+  </update>
+</mapper>

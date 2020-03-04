@@ -151,6 +151,9 @@
     </set>
     where userId = #{userid,jdbcType=INTEGER}
   </update>
+  <update id="updateUserPassword">
+        update user set password = #{encodePassword} where userId=#{userid};
+    </update>
   <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.User">
     update user
     set workId = #{workid,jdbcType=INTEGER},

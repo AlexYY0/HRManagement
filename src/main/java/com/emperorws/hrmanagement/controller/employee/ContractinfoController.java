@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * @Author: EmperorWS
  * @Date: 2020/2/22 16:22
- * @Description:
+ * @Description: 员工合同管理控制层
  **/
 @RestController
 @RequestMapping("/employee/basic/contractinfo")
@@ -32,15 +32,5 @@ public class ContractinfoController {
             return RespBean.ok("添加成功!");
         }
         return RespBean.error("添加失败!");
-    }
-
-    @GetMapping("/token")
-    public String getToken(){
-        String accessKey = "HHpVv8wj2T-IGv8JrjZFArdSUy6QGMxuo10k7Hnd";
-        String secretKey = "qoAkFOku7m6wouAwum45Ef-SiCTrOarj5QTgZQ3y";
-        String bucket = "emperorws";
-        Auth auth = Auth.create(accessKey, secretKey);
-        String upToken = auth.uploadToken(bucket);
-        return upToken;
     }
 }

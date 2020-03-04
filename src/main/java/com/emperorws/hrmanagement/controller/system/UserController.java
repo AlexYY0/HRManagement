@@ -55,11 +55,6 @@ public class UserController {
         return RespBean.error("删除失败!");
     }
 
-    @GetMapping("/find/{username}")
-    public Boolean getUserByUsername(@PathVariable String username){
-        return userService.getUserByUsername(username);
-    }
-
     @GetMapping("/find")
     public Boolean getUserByWorkid(Integer workid){
         return userService.getUserByWorkid(workid);

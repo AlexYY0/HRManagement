@@ -2,61 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7ed7b95-185d-4665-89c6-d634e82e681a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/EmployeesalaryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/SalaryadjustmentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/SpeaddController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/TaxrateController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/TreatmentController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/WelfareController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/system/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeesalaryMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeesalaryMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SalaryadjustmentMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SalaryadjustmentMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SpeaddMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SpeaddMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/TaxrateMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/TaxrateMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/TreatmentMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/TreatmentMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/WelfareMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/WelfareMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Employeesalary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Salaryadjustment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Speadd.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Taxrate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Treatment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Welfare.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/EmployeesalaryService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/SalaryadjustmentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/SpeaddService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/TaxrateService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/TreatmentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/WelfareService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/EmpSalPOIUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/VerificationCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/VerificationCodeFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/UserInfoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/SalaryinfoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SalaryinfoMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SalaryinfoMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Salaryinfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/SalaryinfoService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/SalInfoPOIUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/employee/EmpBasicController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/employee/EmpBasicController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/organization/DepartmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/organization/DepartmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/system/PermissionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/system/PermissionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeeMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeechangeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeechangeMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/PermissionMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/PermissionMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/RoleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/RoleMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/employee/ContractinfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/employee/ContractinfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/system/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/system/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeesalaryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeesalaryMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/roleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/roleMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Contractinfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Contractinfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Employeechange.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Employeechange.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/EmployeeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/PermissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/PermissionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/RoleService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/POIUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/EmpPOIUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +95,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="MyBatisLogPluginindexNum" value="97" />
+    <property name="MyBatisLogPluginindexNum" value="95" />
     <property name="MyBatisLogPluginparameters" value="Parameters:" />
     <property name="MyBatisLogPluginpreparing" value="Preparing:" />
     <property name="MyBatisLogPluginrunning" value="true" />
@@ -286,7 +250,8 @@
       <workItem from="1583124536007" duration="15245000" />
       <workItem from="1583202659147" duration="2381000" />
       <workItem from="1583205080283" duration="924000" />
-      <workItem from="1583206044892" duration="4880000" />
+      <workItem from="1583206044892" duration="15764000" />
+      <workItem from="1583291209061" duration="11236000" />
     </task>
     <task id="LOCAL-00001" summary="IDEA创建SpringBoort项目的模板，方便大家。">
       <created>1580544967197</created>
@@ -344,7 +309,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582617226217</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="HRManagement薪资四个表和员工基础薪资配置开发完成。">
+      <created>1583223090537</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1583223090537</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -358,7 +330,8 @@
     <MESSAGE value="HRManagement员工基础信息管理开发完成，批量导入导出开发完成。" />
     <MESSAGE value="HRManagement员工基础信息管理开发完成，包括人事调动，合同管理。" />
     <MESSAGE value="HRManagement系统角色-权限管理开发完成。" />
-    <option name="LAST_COMMIT_MESSAGE" value="HRManagement系统角色-权限管理开发完成。" />
+    <MESSAGE value="HRManagement薪资四个表和员工基础薪资配置开发完成。" />
+    <option name="LAST_COMMIT_MESSAGE" value="HRManagement薪资四个表和员工基础薪资配置开发完成。" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="71" key="#Notifications" timestamp="1580541613160">
@@ -369,6 +342,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1581584879555" />
+    <state x="574" y="121" key="#com.intellij.ide.util.MemberChooser" timestamp="1583310634300">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="121" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1583310634300" />
     <state x="499" y="187" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1581829712408">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -381,10 +358,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="167" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1536.824@0.0.1536.824" timestamp="1581520961020" />
-    <state x="257" y="6" key="CommitChangelistDialog2" timestamp="1582617224795">
+    <state x="257" y="6" key="CommitChangelistDialog2" timestamp="1583223088678">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="257" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1582617224795" />
+    <state x="257" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583223088678" />
     <state x="549" y="153" key="FileChooserDialogImpl" timestamp="1582943284744">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -393,54 +370,54 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="619" y="303" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1581842240335" />
-    <state width="1537" height="156" key="GridCell.Tab.0.bottom" timestamp="1583222992853">
+    <state width="1537" height="155" key="GridCell.Tab.0.bottom" timestamp="1583316341162">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="156" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1583222992853" />
-    <state width="1537" height="156" key="GridCell.Tab.0.center" timestamp="1583222992853">
+    <state width="1537" height="155" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1583316341162" />
+    <state width="1537" height="155" key="GridCell.Tab.0.center" timestamp="1583316341162">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="156" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1583222992853" />
-    <state width="1537" height="156" key="GridCell.Tab.0.left" timestamp="1583222992853">
+    <state width="1537" height="155" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1583316341162" />
+    <state width="1537" height="155" key="GridCell.Tab.0.left" timestamp="1583316341162">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="156" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1583222992853" />
-    <state width="1537" height="156" key="GridCell.Tab.0.right" timestamp="1583222992853">
+    <state width="1537" height="155" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1583316341162" />
+    <state width="1537" height="155" key="GridCell.Tab.0.right" timestamp="1583316341162">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="156" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1583222992853" />
-    <state width="1537" height="156" key="GridCell.Tab.1.bottom" timestamp="1583222992853">
+    <state width="1537" height="155" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1583316341162" />
+    <state width="1537" height="155" key="GridCell.Tab.1.bottom" timestamp="1583316341162">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="156" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1583222992853" />
-    <state width="1537" height="156" key="GridCell.Tab.1.center" timestamp="1583222992853">
+    <state width="1537" height="155" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1583316341162" />
+    <state width="1537" height="155" key="GridCell.Tab.1.center" timestamp="1583316341162">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="156" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1583222992853" />
-    <state width="1537" height="156" key="GridCell.Tab.1.left" timestamp="1583222992853">
+    <state width="1537" height="155" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1583316341162" />
+    <state width="1537" height="155" key="GridCell.Tab.1.left" timestamp="1583316341162">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="156" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1583222992853" />
-    <state width="1537" height="156" key="GridCell.Tab.1.right" timestamp="1583222992853">
+    <state width="1537" height="155" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1583316341162" />
+    <state width="1537" height="155" key="GridCell.Tab.1.right" timestamp="1583316341162">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="156" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1583222992853" />
-    <state width="1537" height="215" key="GridCell.Tab.2.bottom" timestamp="1583204799284">
+    <state width="1537" height="155" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1583316341162" />
+    <state width="1537" height="215" key="GridCell.Tab.2.bottom" timestamp="1583304171524">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="215" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1583204799284" />
-    <state width="1537" height="215" key="GridCell.Tab.2.center" timestamp="1583204799284">
+    <state width="1537" height="215" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1583304171524" />
+    <state width="1537" height="215" key="GridCell.Tab.2.center" timestamp="1583304171524">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="215" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1583204799284" />
-    <state width="1537" height="215" key="GridCell.Tab.2.left" timestamp="1583204799284">
+    <state width="1537" height="215" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1583304171524" />
+    <state width="1537" height="215" key="GridCell.Tab.2.left" timestamp="1583304171524">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="215" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1583204799284" />
-    <state width="1537" height="215" key="GridCell.Tab.2.right" timestamp="1583204799284">
+    <state width="1537" height="215" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1583304171524" />
+    <state width="1537" height="215" key="GridCell.Tab.2.right" timestamp="1583304171524">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="215" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1583204799284" />
+    <state width="1537" height="215" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1583304171524" />
     <state width="212" height="477" key="HiddenNamespacesPopup" timestamp="1581580951992">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -453,10 +430,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1583205047092" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1582617230280">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1583223093678">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1582617230280" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1583223093678" />
     <state x="449" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1583205102964">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -469,10 +446,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="188" y="49" key="com.intellij.javaee.MapExternalResourceDialog/0.0.1536.824@0.0.1536.824" timestamp="1581584940399" />
-    <state x="447" y="145" width="658" height="534" key="find.popup" timestamp="1582961807552">
+    <state x="447" y="145" width="658" height="534" key="find.popup" timestamp="1583297879551">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="447" y="145" width="658" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1582961807552" />
+    <state x="447" y="145" width="658" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1583297879551" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

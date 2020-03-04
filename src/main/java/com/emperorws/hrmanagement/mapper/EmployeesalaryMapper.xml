@@ -33,6 +33,11 @@
     <association property="welfare" javaType="com.emperorws.hrmanagement.model.Welfare">
       <id column="welid" property="welid"/>
       <result column="welname" property="welname"/>
+      <result column="traffic" property="traffic"/>
+      <result column="catering" property="catering"/>
+      <result column="communication" property="communication"/>
+      <result column="bonus" property="bonus"/>
+      <result column="other" property="other"/>
     </association>
     <association property="speadd1" javaType="com.emperorws.hrmanagement.model.Speadd">
       <id column="sadid1" property="sadid"/>
@@ -67,7 +72,8 @@
     select * from employeeSalary where workId=#{workid}
   </select>
   <select id="getEmployeesalaryByPage" resultMap="AllEmployeesalaryInfo">
-    SELECT e.*,d.depName as depname,emp.empName as empname,w.welName as welname,s1.`sadName` as sadname1,s2.`sadName` as sadname2,s3.`sadName` as sadname3,s4.`sadName` as sadname4,s5.`sadName` as sadname5,s6.`sadName` as sadname6
+    SELECT e.*,d.depName as depname,emp.empName as empname,w.welName as welname,w.traffic as traffic,w.catering as catering,w.communication as communication,w.bonus as bonus,w.other as other,
+    s1.`sadName` as sadname1,s2.`sadName` as sadname2,s3.`sadName` as sadname3,s4.`sadName` as sadname4,s5.`sadName` as sadname5,s6.`sadName` as sadname6
     FROM employee emp,department d,employeeSalary e,welfare w,specialAdditionalDeduction s1,specialAdditionalDeduction s2,specialAdditionalDeduction s3,specialAdditionalDeduction s4,specialAdditionalDeduction s5,specialAdditionalDeduction s6
     WHERE e.welId=w.welId
     AND e.childEdu=s1.`sadId`
