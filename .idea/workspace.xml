@@ -2,25 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d7ed7b95-185d-4665-89c6-d634e82e681a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/VerificationCode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/VerificationCodeFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/UserInfoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/SalaryinfoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SalaryinfoMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SalaryinfoMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Salaryinfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/SalaryinfoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/SalInfoPOIUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/employee/ContractinfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/employee/ContractinfoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/system/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/system/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeesalaryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeesalaryMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,7 +233,7 @@
       <workItem from="1583202659147" duration="2381000" />
       <workItem from="1583205080283" duration="924000" />
       <workItem from="1583206044892" duration="15764000" />
-      <workItem from="1583291209061" duration="11236000" />
+      <workItem from="1583291209061" duration="11549000" />
     </task>
     <task id="LOCAL-00001" summary="IDEA创建SpringBoort项目的模板，方便大家。">
       <created>1580544967197</created>
@@ -316,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583223090537</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="HRManagement登录验证码，个人资料信息修改开发完成。">
+      <created>1583316415838</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1583316415838</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -331,7 +320,8 @@
     <MESSAGE value="HRManagement员工基础信息管理开发完成，包括人事调动，合同管理。" />
     <MESSAGE value="HRManagement系统角色-权限管理开发完成。" />
     <MESSAGE value="HRManagement薪资四个表和员工基础薪资配置开发完成。" />
-    <option name="LAST_COMMIT_MESSAGE" value="HRManagement薪资四个表和员工基础薪资配置开发完成。" />
+    <MESSAGE value="HRManagement登录验证码，个人资料信息修改开发完成。" />
+    <option name="LAST_COMMIT_MESSAGE" value="HRManagement登录验证码，个人资料信息修改开发完成。" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="71" key="#Notifications" timestamp="1580541613160">
@@ -358,10 +348,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="167" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1536.824@0.0.1536.824" timestamp="1581520961020" />
-    <state x="257" y="6" key="CommitChangelistDialog2" timestamp="1583223088678">
+    <state x="257" y="6" key="CommitChangelistDialog2" timestamp="1583316414432">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="257" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583223088678" />
+    <state x="257" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583316414432" />
     <state x="549" y="153" key="FileChooserDialogImpl" timestamp="1582943284744">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
