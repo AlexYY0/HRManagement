@@ -58,7 +58,7 @@ public class Salaryinfo implements Serializable {
 
     private Double sums;
 
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "Asia/Shanghai")
     private Date payoffdata;
 
     private Employee employee;

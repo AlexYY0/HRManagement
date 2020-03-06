@@ -10,7 +10,7 @@ public class Salaryadjustment implements Serializable {
 
     private Integer workid;
 
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "Asia/Shanghai")
     private Date sadata;
 
     private String saremark;

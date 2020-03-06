@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.AppattMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Appatt">
+    <id column="aatId" jdbcType="INTEGER" property="aatid" />
+    <result column="workId" jdbcType="INTEGER" property="workid" />
+    <result column="category" jdbcType="CHAR" property="category" />
+    <result column="reason" jdbcType="VARCHAR" property="reason" />
+    <result column="appBeginData" jdbcType="TIMESTAMP" property="appbegindata" />
+    <result column="appEndData" jdbcType="TIMESTAMP" property="appenddata" />
+    <result column="total" jdbcType="INTEGER" property="total" />
+    <result column="appData" jdbcType="TIMESTAMP" property="appdata" />
+    <result column="isSubmit" jdbcType="BIT" property="issubmit" />
+    <result column="isApprove" jdbcType="BIT" property="isapprove" />
+  </resultMap>
+  <resultMap id="AllAppattInfo" type="com.emperorws.hrmanagement.model.Appatt" extends="BaseResultMap">
+    <association property="employee" javaType="com.emperorws.hrmanagement.model.Employee">
+      <id column="workid" property="workid"/>
+      <result column="empname" property="empname"/>
+    </association>
+    <association property="department" javaType="com.emperorws.hrmanagement.model.Department">
+      <id column="depid" property="depid"/>
+      <result column="depname" property="depname"/>
+      <result column="leadername" property="leadername"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    aatId, workId, category, reason, appBeginData, appEndData, total, appData, isSubmit, 
+    isApprove
+  </sql>
+  <select id="checkManaApp" resultType="java.lang.Long">
+    select COUNT(DISTINCT e.`workId`)
+    from employee e,department d,department d2
+    where e.workId=#{workid} and e.depId=d.depId and
+    if((d.`leaderId`=e.`workId`),
+        (if((d.`depId`=1),
+            (d.leaderId=#{leaderid}),
+            (d2.`depId`=d.`parentId` and d2.leaderId=#{leaderid})
+            )
+        ),
+        (d.leaderId=#{leaderid})
+    )
+  </select>
+  <select id="getAppattByWorkidAndPage" resultMap="AllAppattInfo">
+    select DISTINCT a.*,e.empName as empname,d.depName as depname,e2.empName as leadername
+    from applyAttendanceTransaction a,employee e,employee e2,department d,department d2
+    where a.workId=e.workId and e.depId=d.depId and a.isSubmit=#{issubmit} and a.workId=#{workid} and
+    IF((d.`leaderId`=e.`workId`),
+        (IF((d.`depId`=1),
+            (d.`leaderId`=e2.`workId`),
+            (d2.`depId`=d.`parentId` AND d2.`leaderId`=e2.`workId`)
+            )
+        ),
+        (d.`leaderId`=e2.`workId`)
+    )
+    <choose>
+      <when test="isapprove!=null">
+        and a.isApprove is not NULL
+      </when>
+      <otherwise>
+        and a.isApprove is NULL
+      </otherwise>
+    </choose>
+    order by a.aatId
+    <if test="page !=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(*) from applyAttendanceTransaction a
+    where a.isSubmit=#{issubmit} and a.workId=#{workid}
+    <choose>
+      <when test="isapprove!=null">
+        and a.isApprove is not NULL
+      </when>
+      <otherwise>
+        and a.isApprove is NULL
+      </otherwise>
+    </choose>
+  </select>
+  <select id="getManaAppByWorkidAndPage" resultMap="AllAppattInfo">
+    select DISTINCT a.*,e.empName as empname,d.depName as depname,e2.empName as leadername
+    from applyAttendanceTransaction a,employee e,employee e2,department d,department d2
+    where a.workId=e.workId and e.depId=d.depId and a.isSubmit=1 and
+    if((d.`leaderId`=e.`workId`),
+        (if((d.`depId`=1),
+            (d.`leaderId`=e2.`workId` and d.leaderId=#{workid}),
+            (d2.`depId`=d.`parentId` AND d2.`leaderId`=e2.`workId` and d2.leaderId=#{workid})
+            )
+        ),
+        (d.`leaderId`=e2.`workId` and d.leaderId=#{workid})
+    )
+    <choose>
+      <when test="isapprove!=null">
+        and a.isApprove is not NULL
+      </when>
+      <otherwise>
+        and a.isApprove is NULL
+      </otherwise>
+    </choose>
+    order by a.aatId
+    <if test="page !=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getManaAppTotal" resultType="java.lang.Long">
+    select COUNT(DISTINCT  a.aatId)
+    from applyAttendanceTransaction a,employee e,department d,department d2
+    where a.workId=e.workId and e.depId=d.depId and a.isSubmit=1 and
+    if((d.`leaderId`=e.`workId`),
+        (if((d.`depId`=1),
+            (d.leaderId=#{workid}),
+            (d2.`depId`=d.`parentId` and d2.leaderId=#{workid})
+            )
+        ),
+        (d.leaderId=#{workid})
+    )
+    <choose>
+      <when test="isapprove!=null">
+        and a.isApprove is not NULL
+      </when>
+      <otherwise>
+        and a.isApprove is NULL
+      </otherwise>
+    </choose>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from applyattendancetransaction
+    where aatId = #{aatid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from applyattendancetransaction
+    where aatId = #{aatid,jdbcType=INTEGER}
+    <if test="workid!=null">
+      and workId=#{workid}
+    </if>
+  </delete>
+  <delete id="deleteAppatts" parameterType="java.util.List">
+    delete from applyAttendanceTransaction
+    where
+    <if test="workid!=null">
+      workId=#{workid}
+    </if>
+    and applyAttendanceTransaction.aatId in
+    <foreach collection="appatts" item="appatt" separator="," open="(" close=")">
+      #{appatt.aatid,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Appatt">
+    insert into applyattendancetransaction (aatId, workId, category, 
+      reason, appBeginData, appEndData, 
+      total, appData, isSubmit, 
+      isApprove)
+    values (#{aatid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{category,jdbcType=CHAR}, 
+      #{reason,jdbcType=VARCHAR}, #{appbegindata,jdbcType=TIMESTAMP}, #{appenddata,jdbcType=TIMESTAMP}, 
+      #{total,jdbcType=INTEGER}, #{appdata,jdbcType=TIMESTAMP}, #{issubmit,jdbcType=BIT}, 
+      #{isapprove,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Appatt">
+    insert into applyattendancetransaction
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aatid != null">
+        aatId,
+      </if>
+      <if test="workid != null">
+        workId,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="appbegindata != null">
+        appBeginData,
+      </if>
+      <if test="appenddata != null">
+        appEndData,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="appdata != null">
+        appData,
+      </if>
+      <if test="issubmit != null">
+        isSubmit,
+      </if>
+      <if test="isapprove != null">
+        isApprove,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aatid != null">
+        #{aatid,jdbcType=INTEGER},
+      </if>
+      <if test="workid != null">
+        #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=CHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="appbegindata != null">
+        #{appbegindata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appenddata != null">
+        #{appenddata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=INTEGER},
+      </if>
+      <if test="appdata != null">
+        #{appdata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="issubmit != null">
+        #{issubmit,jdbcType=BIT},
+      </if>
+      <if test="isapprove != null">
+        #{isapprove,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Appatt">
+    update applyattendancetransaction
+    <set>
+      <if test="workid != null">
+        workId = #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=CHAR},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="appbegindata != null">
+        appBeginData = #{appbegindata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appenddata != null">
+        appEndData = #{appenddata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=INTEGER},
+      </if>
+      <if test="appdata != null">
+        appData = #{appdata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="issubmit != null">
+        isSubmit = #{issubmit,jdbcType=BIT},
+      </if>
+      <if test="isapprove != null">
+        isApprove = #{isapprove,jdbcType=BIT},
+      </if>
+    </set>
+    where aatId = #{aatid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Appatt">
+    update applyattendancetransaction
+    set workId = #{workid,jdbcType=INTEGER},
+      category = #{category,jdbcType=CHAR},
+      reason = #{reason,jdbcType=VARCHAR},
+      appBeginData = #{appbegindata,jdbcType=TIMESTAMP},
+      appEndData = #{appenddata,jdbcType=TIMESTAMP},
+      total = #{total,jdbcType=INTEGER},
+      appData = #{appdata,jdbcType=TIMESTAMP},
+      isSubmit = #{issubmit,jdbcType=BIT},
+      isApprove = #{isapprove,jdbcType=BIT}
+    where aatId = #{aatid,jdbcType=INTEGER}
+  </update>
+</mapper>

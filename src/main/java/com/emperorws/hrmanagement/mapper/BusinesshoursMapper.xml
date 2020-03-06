@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.BusinesshoursMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Businesshours">
+    <id column="busiHoursId" jdbcType="INTEGER" property="busihoursid" />
+    <result column="busiHoursName" jdbcType="VARCHAR" property="busihoursname" />
+    <result column="beginTime" jdbcType="TIME" property="begintime" />
+    <result column="endTime" jdbcType="TIME" property="endtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    busiHoursId, busiHoursName, beginTime, endTime
+  </sql>
+  <select id="getAllBusinesshours" resultMap="BaseResultMap">
+    select * from businessHours
+    order by businessHours.busiHoursId
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from businesshours
+    where busiHoursId = #{busihoursid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from businesshours
+    where busiHoursId = #{busihoursid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteBusinesshours" parameterType="java.util.List">
+    delete from businessHours
+    where businessHours.busiHoursId in
+    <foreach collection="bhs" item="bh" separator="," open="(" close=")">
+      #{bh.busihoursid,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Businesshours">
+    insert into businesshours (busiHoursId, busiHoursName, beginTime, 
+      endTime)
+    values (#{busihoursid,jdbcType=INTEGER}, #{busihoursname,jdbcType=VARCHAR}, #{begintime,jdbcType=TIME}, 
+      #{endtime,jdbcType=TIME})
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Businesshours">
+    insert into businesshours
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="busihoursid != null">
+        busiHoursId,
+      </if>
+      <if test="busihoursname != null">
+        busiHoursName,
+      </if>
+      <if test="begintime != null">
+        beginTime,
+      </if>
+      <if test="endtime != null">
+        endTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="busihoursid != null">
+        #{busihoursid,jdbcType=INTEGER},
+      </if>
+      <if test="busihoursname != null">
+        #{busihoursname,jdbcType=VARCHAR},
+      </if>
+      <if test="begintime != null">
+        #{begintime,jdbcType=TIME},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIME},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Businesshours">
+    update businesshours
+    <set>
+      <if test="busihoursname != null">
+        busiHoursName = #{busihoursname,jdbcType=VARCHAR},
+      </if>
+      <if test="begintime != null">
+        beginTime = #{begintime,jdbcType=TIME},
+      </if>
+      <if test="endtime != null">
+        endTime = #{endtime,jdbcType=TIME},
+      </if>
+    </set>
+    where busiHoursId = #{busihoursid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Businesshours">
+    update businesshours
+    set busiHoursName = #{busihoursname,jdbcType=VARCHAR},
+      beginTime = #{begintime,jdbcType=TIME},
+      endTime = #{endtime,jdbcType=TIME}
+    where busiHoursId = #{busihoursid,jdbcType=INTEGER}
+  </update>
+</mapper>

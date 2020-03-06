@@ -29,7 +29,7 @@ public class UserInfoController {
     }
 
     @PutMapping("/info")
-    public RespBean updateHr(@RequestBody User user, Authentication authentication) {
+    public RespBean updateUser(@RequestBody User user, Authentication authentication) {
         if (userService.updateUser(user) == 1) {
             SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user, authentication.getCredentials(), authentication.getAuthorities()));
             return RespBean.ok("更新成功!");
@@ -38,11 +38,11 @@ public class UserInfoController {
     }
 
     @PutMapping("/password")
-    public RespBean updateUserPassword(@RequestBody Map<String, Object> info) {
+    public RespBean updateUserPassword(@RequestBody Map<String, Object> info,Authentication authentication) {
         String oldpassword = (String) info.get("oldpassword");
         String password = (String) info.get("password");
-        Integer userid = (Integer) info.get("userid");
-        if (userService.updateUserPassword(oldpassword, password, userid)) {
+        User user = (User) authentication.getPrincipal();
+        if (userService.updateUserPassword(oldpassword, password, user.getUserid())) {
             return RespBean.ok("更新成功!");
         }
         return RespBean.error("更新失败!");
