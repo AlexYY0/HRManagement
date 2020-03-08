@@ -1,8 +1,10 @@
 package com.emperorws.hrmanagement.mapper;
 
 import com.emperorws.hrmanagement.model.Appatt;
+import com.emperorws.hrmanagement.model.Employee;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface AppattMapper {
@@ -29,4 +31,8 @@ public interface AppattMapper {
     Long getManaAppTotal(@Param("workid") Integer workid, @Param("isapprove") Boolean isapprove);
 
     Long checkManaApp(@Param("workid") Integer workid,@Param("leaderid") Integer leaderid);
+
+    List<Appatt> getTransactioninfoByPage(@Param("page") Integer page, @Param("size") Integer size, @Param("emp") Employee employee, Date[] appdata);
+
+    Long getTransactioninfoTotal(@Param("emp") Employee employee, Date[] appdata);
 }

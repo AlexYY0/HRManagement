@@ -34,8 +34,9 @@ public class EmpBasicController {
     }
 
     @PostMapping("/")
-    public RespBean addEmp(@RequestBody Employee employee) {
-        if (employeeService.addEmp(employee) == 1) {
+    public RespBean addEmpAndUser(@RequestBody Employee employee) {
+        employeeService.addEmpAndUser(employee);
+        if ( employee.getResult() + employee.getResult2() == 2) {
             return RespBean.ok("添加成功!");
         }
         return RespBean.error("添加失败!");
@@ -80,7 +81,7 @@ public class EmpBasicController {
     @PostMapping("/import")
     public RespBean importData(MultipartFile file) throws IOException {
         List<Employee> list = EmpPOIUtils.excel2Employee(file, departmentService.getAllDepartmentsWithOutChildren());
-        if (employeeService.addEmps(list) == list.size()) {
+        if (employeeService.addEmpAndUsers(list) == list.size()*2) {
             return RespBean.ok("上传成功");
         }
         return RespBean.error("上传失败");
@@ -88,7 +89,6 @@ public class EmpBasicController {
 
     @PostMapping("/export")
     public ResponseEntity<byte[]> exportData(@RequestBody List<Employee> list) {
-        //List<Employee> list = (List<Employee>) employeeService.getEmployeeByPage(null, null, null,null,null,null).getData();
         return EmpPOIUtils.employee2Excel(list);
     }
 }

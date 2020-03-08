@@ -3,10 +3,14 @@ package com.emperorws.hrmanagement.service;
 import com.emperorws.hrmanagement.mapper.EmployeeMapper;
 import com.emperorws.hrmanagement.model.Employee;
 import com.emperorws.hrmanagement.model.RespPageBean;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +24,7 @@ import java.util.List;
 public class EmployeeService {
     @Autowired
     EmployeeMapper employeeMapper;
-    @Autowired
-    RabbitTemplate rabbitTemplate;
+
     public final static Logger logger = LoggerFactory.getLogger(EmployeeService.class);
 
     public RespPageBean getEmployeeByPage(Integer page, Integer size, Employee employee,String politic,String nation,String workstate) {
@@ -36,14 +39,8 @@ public class EmployeeService {
         return bean;
     }
 
-    public Integer addEmp(Employee employee) {
-        int result = employeeMapper.insertSelective(employee);
-        if (result == 1) {
-            Employee emp = employeeMapper.getEmployeeById(employee.getWorkid());
-            logger.info(emp.toString());
-            //rabbitTemplate.convertAndSend("javaboy.mail.welcome", emp);
-        }
-        return result;
+    public void addEmpAndUser(Employee employee){
+        employeeMapper.addEmpAndUser(employee);
     }
 
     public Integer maxWorkID() {
@@ -62,7 +59,13 @@ public class EmployeeService {
         return employeeMapper.updateByPrimaryKeySelective(employee);
     }
 
-    public Integer addEmps(List<Employee> list) {
-        return employeeMapper.addEmps(list);
+    public Integer addEmpAndUsers(List<Employee> list){
+        Integer lastresult=0;
+        for(int i=0;i<list.size();i++){
+            Employee emp=list.get(i);
+            employeeMapper.addEmpAndUser(emp);
+            lastresult=lastresult+(emp.getResult()+emp.getResult2());
+        }
+        return lastresult;
     }
 }

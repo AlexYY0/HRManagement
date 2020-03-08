@@ -41,6 +41,10 @@ public class Employee implements Serializable {
 
     private String hdegree;
 
+    private Integer result;
+
+    private Integer result2;
+
     private Department department;
 
     public Employee(){
@@ -185,6 +189,22 @@ public class Employee implements Serializable {
 
     public void setHdegree(String hdegree) {
         this.hdegree = hdegree == null ? null : hdegree.trim();
+    }
+
+    public Integer getResult() {
+        return this.result;
+    }
+
+    public void setResult(Integer result) {
+        this.result = result;
+    }
+
+    public Integer getResult2() {
+        return this.result2;
+    }
+
+    public void setResult2(Integer result2) {
+        this.result2 = result2;
     }
 
     public Department getDepartment() {

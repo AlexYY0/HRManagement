@@ -86,6 +86,14 @@
       </if>
     </where>
   </select>
+  <select id="addEmpAndUser" statementType="CALLABLE">
+    call addEmpAndUser(#{workid,mode=IN,jdbcType=INTEGER}, #{empname,mode=IN,jdbcType=VARCHAR}, #{gender,mode=IN,jdbcType=CHAR},
+      #{birthday,mode=IN,jdbcType=DATE}, #{idcard,mode=IN,jdbcType=CHAR}, #{marital,mode=IN,jdbcType=CHAR}, #{nation,mode=IN,jdbcType=VARCHAR},
+      #{nativeplace,mode=IN,jdbcType=VARCHAR}, #{politic,mode=IN,jdbcType=VARCHAR}, #{email,mode=IN,jdbcType=VARCHAR},
+      #{cellphone,mode=IN,jdbcType=VARCHAR}, #{address,mode=IN,jdbcType=VARCHAR}, #{depid,mode=IN,jdbcType=INTEGER},
+      #{workstate,mode=IN,jdbcType=CHAR}, #{school,mode=IN,jdbcType=VARCHAR}, #{specialty,mode=IN,jdbcType=VARCHAR},
+      #{hdegree,mode=IN,jdbcType=CHAR},#{result,mode=OUT,jdbcType=INTEGER},#{result2,mode=OUT,jdbcType=INTEGER})
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -103,23 +111,6 @@
       #{emp.workid,jdbcType=INTEGER}
     </foreach>
   </delete>
-  <insert id="addEmps" parameterType="com.emperorws.hrmanagement.model.Employee">
-    insert into employee (workId, empName, gender,
-    birthday, idCard, marital, nation,
-    nativePlace, politic, email,
-    cellphone, address, depId,
-    workState, school, specialty,
-    hDegree)
-    values
-    <foreach collection="list" item="emp" separator="," close=";">
-      (#{emp.workid,jdbcType=INTEGER}, #{emp.empname,jdbcType=VARCHAR}, #{emp.gender,jdbcType=CHAR},
-      #{emp.birthday,jdbcType=DATE}, #{emp.idcard,jdbcType=CHAR}, #{emp.marital,jdbcType=CHAR}, #{emp.nation,jdbcType=VARCHAR},
-      #{emp.nativeplace,jdbcType=VARCHAR}, #{emp.politic,jdbcType=VARCHAR}, #{emp.email,jdbcType=VARCHAR},
-      #{emp.cellphone,jdbcType=VARCHAR}, #{emp.address,jdbcType=VARCHAR}, #{emp.depid,jdbcType=INTEGER},
-      #{emp.workstate,jdbcType=CHAR}, #{emp.school,jdbcType=VARCHAR}, #{emp.specialty,jdbcType=VARCHAR},
-      #{emp.hdegree,jdbcType=CHAR})
-    </foreach>
-  </insert>
   <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Employee">
     insert into employee (workId, empName, gender, 
       birthday, idCard, marital, nation, 

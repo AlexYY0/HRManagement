@@ -24,9 +24,9 @@ public interface EmployeeMapper {
 
     Integer maxWorkID();
 
-    Integer addEmps(@Param("list") List<Employee> list);
-
     Integer deleteEmps(@Param("emps") List<Employee> emps);
 
     Employee getEmployeeById(Integer workid);
+
+    void addEmpAndUser(Employee record);
 }

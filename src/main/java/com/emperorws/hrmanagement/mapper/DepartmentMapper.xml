@@ -20,7 +20,7 @@
     depId, depName, parentId, depPath, enabled, isParent, leaderId
   </sql>
   <select id="getWorkidAndEmpname" resultType="java.util.HashMap">
-    select workId AS workid,empName AS value from employee;
+    select workId AS workid,empName AS label from employee;
   </select>
   <select id="getLeadernameByLeaderid" resultType="java.lang.String" parameterType="java.lang.Integer">
     select empName from employee where workId=#{leaderid};

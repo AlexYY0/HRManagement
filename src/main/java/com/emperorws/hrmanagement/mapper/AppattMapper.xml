@@ -41,6 +41,51 @@
         (d.leaderId=#{leaderid})
     )
   </select>
+  <select id="getTransactioninfoByPage" resultMap="AllAppattInfo">
+    select DISTINCT a.*,e.empName as empname,d.depName as depname,e2.empName as leadername
+    from applyAttendanceTransaction a,employee e,employee e2,department d,department d2
+    where a.workId=e.workId and e.depId=d.depId and
+    IF((d.`leaderId`=e.`workId`),
+        (IF((d.`depId`=1),
+            (d.`leaderId`=e2.`workId`),
+            (d2.`depId`=d.`parentId` AND d2.`leaderId`=e2.`workId`)
+            )
+        ),
+        (d.`leaderId`=e2.`workId`)
+    )
+    <if test="emp!=null">
+      <if test="emp.empname !=null and emp.empname!=''">
+        and e.empName like concat('%',#{emp.empname},'%')
+      </if>
+      <if test="emp.depid !=null and emp.depid!=''">
+        and e.depId =#{emp.depid}
+      </if>
+    </if>
+    <if test="appdata !=null">
+      and a.appData between #{appdata[0]} and #{appdata[1]}
+    </if>
+    order by a.workid
+    <if test="page !=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTransactioninfoTotal" resultType="java.lang.Long">
+    select count(*) from applyAttendanceTransaction a,employee e
+    <where>
+      a.workId=e.workId
+      <if test="emp!=null">
+        <if test="emp.empname !=null and emp.empname!=''">
+          and e.empName like concat('%',#{emp.empname},'%')
+        </if>
+        <if test="emp.depid !=null">
+          and e.depId =#{emp.depid}
+        </if>
+      </if>
+      <if test="appdata !=null">
+        and a.appData between #{appdata[0]} and #{appdata[1]}
+      </if>
+    </where>
+  </select>
   <select id="getAppattByWorkidAndPage" resultMap="AllAppattInfo">
     select DISTINCT a.*,e.empName as empname,d.depName as depname,e2.empName as leadername
     from applyAttendanceTransaction a,employee e,employee e2,department d,department d2

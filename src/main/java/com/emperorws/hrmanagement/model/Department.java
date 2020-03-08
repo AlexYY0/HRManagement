@@ -50,7 +50,7 @@ public class Department implements Serializable {
     }
 
     public Integer getDepid() {
-        return depid;
+        return this.depid;
     }
 
     public void setDepid(Integer depid) {
@@ -58,7 +58,7 @@ public class Department implements Serializable {
     }
 
     public String getDepname() {
-        return depname;
+        return this.depname;
     }
 
     public void setDepname(String depname) {
@@ -66,7 +66,7 @@ public class Department implements Serializable {
     }
 
     public Integer getParentid() {
-        return parentid;
+        return this.parentid;
     }
 
     public void setParentid(Integer parentid) {
@@ -74,7 +74,7 @@ public class Department implements Serializable {
     }
 
     public String getDeppath() {
-        return deppath;
+        return this.deppath;
     }
 
     public void setDeppath(String deppath) {
@@ -82,7 +82,7 @@ public class Department implements Serializable {
     }
 
     public Boolean getEnabled() {
-        return enabled;
+        return this.enabled;
     }
 
     public void setEnabled(Boolean enabled) {
@@ -90,15 +90,15 @@ public class Department implements Serializable {
     }
 
     public Boolean getParent() {
-        return isparent;
+        return this.isparent;
     }
 
     public void setParent(Boolean parent) {
-        isparent = parent;
+        this.isparent = parent;
     }
 
     public Integer getLeaderid() {
-        return leaderid;
+        return this.leaderid;
     }
 
     public void setLeaderid(Integer leaderid) {
@@ -106,7 +106,7 @@ public class Department implements Serializable {
     }
 
     public Integer getResult() {
-        return result;
+        return this.result;
     }
 
     public void setResult(Integer result) {
@@ -114,7 +114,7 @@ public class Department implements Serializable {
     }
 
     public List<Department> getChildren() {
-        return children;
+        return this.children;
     }
 
     public void setChildren(List<Department> children) {
@@ -122,7 +122,7 @@ public class Department implements Serializable {
     }
 
     public String getLeadername() {
-        return leadername;
+        return this.leadername;
     }
 
     public void setLeadername(String leadername) {
