@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Salaryadjustment">
     <id column="saId" jdbcType="INTEGER" property="said" />
     <result column="workId" jdbcType="INTEGER" property="workid" />
-    <result column="saData" jdbcType="TIMESTAMP" property="sadata" />
+    <result column="saDate" jdbcType="TIMESTAMP" property="sadate" />
     <result column="saRemark" jdbcType="VARCHAR" property="saremark" />
   </resultMap>
   <resultMap id="AllSalaryadjustmentInfo" type="com.emperorws.hrmanagement.model.Salaryadjustment" extends="BaseResultMap">
@@ -14,7 +14,7 @@
     </association>
   </resultMap>
   <sql id="Base_Column_List">
-    saId, workId, saData, saRemark
+    saId, workId, saDate, saRemark
   </sql>
   <select id="getSalaryadjustmentByPage" resultMap="AllSalaryadjustmentInfo">
     select sa.*,e.workId as workid,e.empName as empname
@@ -25,8 +25,8 @@
         and sa.workId=#{sa.workid}
       </if>
     </if>
-    <if test="sadata !=null">
-      and sa.saData between #{sadata[0]} and #{sadata[1]}
+    <if test="sadate !=null">
+      and sa.saDate between #{sadate[0]} and #{sadate[1]}
     </if>
     order by sa.saId
     <if test="page !=null and size!=null">
@@ -41,8 +41,8 @@
           and sa.workId=#{sa.workid}
         </if>
       </if>
-      <if test="sadata !=null">
-        and sa.sadata between #{sadata[0]} and #{sadata[1]}
+      <if test="sadate !=null">
+        and sa.sadate between #{sadate[0]} and #{sadate[1]}
       </if>
     </where>
   </select>
@@ -57,9 +57,9 @@
     where saId = #{said,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Salaryadjustment">
-    insert into salaryadjustment (saId, workId, saData, 
+    insert into salaryadjustment (saId, workId, saDate,
       saRemark)
-    values (#{said,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{sadata,jdbcType=TIMESTAMP}, 
+    values (#{said,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{sadate,jdbcType=TIMESTAMP},
       #{saremark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Salaryadjustment">
@@ -71,8 +71,8 @@
       <if test="workid != null">
         workId,
       </if>
-      <if test="sadata != null">
-        saData,
+      <if test="sadate != null">
+        saDate,
       </if>
       <if test="saremark != null">
         saRemark,
@@ -85,8 +85,8 @@
       <if test="workid != null">
         #{workid,jdbcType=INTEGER},
       </if>
-      <if test="sadata != null">
-        #{sadata,jdbcType=TIMESTAMP},
+      <if test="sadate != null">
+        #{sadate,jdbcType=TIMESTAMP},
       </if>
       <if test="saremark != null">
         #{saremark,jdbcType=VARCHAR},
@@ -99,8 +99,8 @@
       <if test="workid != null">
         workId = #{workid,jdbcType=INTEGER},
       </if>
-      <if test="sadata != null">
-        saData = #{sadata,jdbcType=TIMESTAMP},
+      <if test="sadate != null">
+        saDate = #{sadate,jdbcType=TIMESTAMP},
       </if>
       <if test="saremark != null">
         saRemark = #{saremark,jdbcType=VARCHAR},
@@ -111,7 +111,7 @@
   <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Salaryadjustment">
     update salaryadjustment
     set workId = #{workid,jdbcType=INTEGER},
-      saData = #{sadata,jdbcType=TIMESTAMP},
+      saDate = #{sadate,jdbcType=TIMESTAMP},
       saRemark = #{saremark,jdbcType=VARCHAR}
     where saId = #{said,jdbcType=INTEGER}
   </update>

@@ -1,5 +1,6 @@
 package com.emperorws.hrmanagement.controller.salary;
 
+import com.emperorws.hrmanagement.logger.SystemControllerLog;
 import com.emperorws.hrmanagement.model.RespBean;
 import com.emperorws.hrmanagement.model.RespPageBean;
 import com.emperorws.hrmanagement.model.Welfare;
@@ -21,6 +22,7 @@ public class WelfareController {
     WelfareService welfareService;
 
     @GetMapping("/")
+    @SystemControllerLog(description="获取所有的福利信息")
     public RespPageBean getAllWelfare(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, Welfare welfare){
         if(page==-1&&size==-1) {
             return welfareService.getAllWelfareByPage(null, null, welfare);
@@ -29,6 +31,7 @@ public class WelfareController {
     }
 
     @DeleteMapping("/{welid}")
+    @SystemControllerLog(description="删除旧的福利信息")
     public RespBean deleteWelfareById(@PathVariable Integer welid){
         if (welfareService.deleteWelfareById(welid) == 1) {
             return RespBean.ok("删除成功!");
@@ -37,6 +40,7 @@ public class WelfareController {
     }
 
     @PostMapping("/")
+    @SystemControllerLog(description="添加新的福利信息")
     public RespBean addWelfare(@RequestBody Welfare welfare){
         if (welfareService.addWelfare(welfare) == 1) {
             return RespBean.ok("添加成功!");
@@ -45,6 +49,7 @@ public class WelfareController {
     }
 
     @PutMapping("/")
+    @SystemControllerLog(description="修改福利信息")
     public RespBean updateWelfare(@RequestBody Welfare welfare){
         if (welfareService.updateWelfare(welfare) == 1) {
             return RespBean.ok("更新成功!");
@@ -53,6 +58,7 @@ public class WelfareController {
     }
 
     @PostMapping("/deletewels")
+    @SystemControllerLog(description="批量删除旧的福利信息")
     public RespBean deleteWelfares(@RequestBody List<Welfare> welfares){
         if(welfareService.deleteWelfares(welfares)==welfares.size()){
             return RespBean.ok("删除成功!");

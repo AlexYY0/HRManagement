@@ -1,6 +1,6 @@
 package com.emperorws.hrmanagement.controller.employee;
 
-import com.emperorws.hrmanagement.model.Employee;
+import com.emperorws.hrmanagement.logger.SystemControllerLog;
 import com.emperorws.hrmanagement.model.Employeechange;
 import com.emperorws.hrmanagement.model.RespBean;
 import com.emperorws.hrmanagement.model.RespPageBean;
@@ -22,11 +22,13 @@ public class EmployeechangeController {
     EmployeechangeService employeechangeService;
 
     @GetMapping("/")
-    public RespPageBean getEmployeechangeByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, Employeechange employeechange, Date[] empchandata){
-        return employeechangeService.getEmployeechangeByPage(page,size,employeechange,empchandata);
+    @SystemControllerLog(description="获取员工的人事调动信息")
+    public RespPageBean getEmployeechangeByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, Employeechange employeechange, Date[] empchandate){
+        return employeechangeService.getEmployeechangeByPage(page,size,employeechange,empchandate);
     }
 
     @PostMapping("/")
+    @SystemControllerLog(description="添加员工的人事调动信息")
     public RespBean addEmpChange(@RequestBody Employeechange employeechange) {
         if (employeechangeService.addEmpChange(employeechange) == 2) {
             return RespBean.ok("添加成功!");

@@ -5,7 +5,9 @@ import org.apache.poi.hpsf.DocumentSummaryInformation;
 import org.apache.poi.hpsf.SummaryInformation;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -47,6 +49,8 @@ public class SalInfoPOIUtils {
         HSSFCellStyle headerStyle = workbook.createCellStyle();
         headerStyle.setFillForegroundColor(IndexedColors.YELLOW.index);
         headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        headerStyle.setAlignment(HorizontalAlignment.CENTER);
+        headerStyle.setVerticalAlignment(VerticalAlignment.CENTER);
         HSSFCellStyle dateCellStyle = workbook.createCellStyle();
         dateCellStyle.setDataFormat(HSSFDataFormat.getBuiltinFormat("m/d/yy"));
         HSSFCellStyle intCellStyle = workbook.createCellStyle();
@@ -208,7 +212,7 @@ public class SalInfoPOIUtils {
             row.createCell(27).setCellValue(salaryinfo.getSums());
             HSSFCell cell28 = row.createCell(28);
             cell28.setCellStyle(dateCellStyle);
-            cell28.setCellValue(salaryinfo.getPayoffdata());
+            cell28.setCellValue(salaryinfo.getPayoffdate());
         }
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         HttpHeaders headers = new HttpHeaders();

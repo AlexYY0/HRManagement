@@ -1,5 +1,6 @@
 package com.emperorws.hrmanagement.service;
 
+import com.emperorws.hrmanagement.logger.SystemServiceLog;
 import com.emperorws.hrmanagement.mapper.EmployeeMapper;
 import com.emperorws.hrmanagement.mapper.EmployeechangeMapper;
 import com.emperorws.hrmanagement.model.Employee;
@@ -23,18 +24,20 @@ public class EmployeechangeService {
     @Autowired
     EmployeeMapper employeeMapper;
 
-    public RespPageBean getEmployeechangeByPage(Integer page, Integer size, Employeechange employeechange, Date[] empchandata){
+    @SystemServiceLog(description="获取员工的人事调动信息")
+    public RespPageBean getEmployeechangeByPage(Integer page, Integer size, Employeechange employeechange, Date[] empchandate){
         if (page != null && size != null) {
             page = (page - 1) * size;
         }
-        List<Employeechange> data=employeechangeMapper.getEmployeechangeByPage(page,size,employeechange,empchandata);
-        Long total=employeechangeMapper.getTotal(employeechange,empchandata);
+        List<Employeechange> data=employeechangeMapper.getEmployeechangeByPage(page,size,employeechange,empchandate);
+        Long total=employeechangeMapper.getTotal(employeechange,empchandate);
         RespPageBean bean = new RespPageBean();
         bean.setData(data);
         bean.setTotal(total);
         return bean;
     }
 
+    @SystemServiceLog(description="添加员工的人事调动信息")
     public Integer addEmpChange(Employeechange employeechange){
         Employee emp=new Employee(employeechange.getWorkid(),employeechange.getAfterdepid());
         return (employeechangeMapper.insertSelective(employeechange))+(employeeMapper.updateByPrimaryKeySelective(emp));

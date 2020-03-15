@@ -58,8 +58,14 @@ public class Salaryinfo implements Serializable {
 
     private Double sums;
 
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
+    private Date salfirstday;
+
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
+    private Date salendday;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "Asia/Shanghai")
-    private Date payoffdata;
+    private Date payoffdate;
 
     private Employee employee;
 
@@ -273,12 +279,28 @@ public class Salaryinfo implements Serializable {
         this.sums = sums;
     }
 
-    public Date getPayoffdata() {
-        return payoffdata;
+    public Date getSalfirstday() {
+        return salfirstday;
     }
 
-    public void setPayoffdata(Date payoffdata) {
-        this.payoffdata = payoffdata;
+    public void setSalfirstday(Date salfirstday) {
+        this.salfirstday = salfirstday;
+    }
+
+    public Date getSaendday() {
+        return salendday;
+    }
+
+    public void setSaendday(Date salendday) {
+        this.salendday = salendday;
+    }
+
+    public Date getPayoffdate() {
+        return payoffdate;
+    }
+
+    public void setPayoffdate(Date payoffdate) {
+        this.payoffdate = payoffdate;
     }
 
     public Employee getEmployee(){

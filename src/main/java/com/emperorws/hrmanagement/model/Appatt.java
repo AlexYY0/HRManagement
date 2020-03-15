@@ -15,15 +15,15 @@ public class Appatt implements Serializable {
     private String reason;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "Asia/Shanghai")
-    private Date appbegindata;
+    private Date appbegindate;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "Asia/Shanghai")
-    private Date appenddata;
+    private Date appenddate;
 
     private Integer total;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "Asia/Shanghai")
-    private Date appdata;
+    private Date appdate;
 
     private Boolean issubmit;
 
@@ -65,20 +65,20 @@ public class Appatt implements Serializable {
         this.reason = reason == null ? null : reason.trim();
     }
 
-    public Date getAppbegindata() {
-        return appbegindata;
+    public Date getAppbegindate() {
+        return appbegindate;
     }
 
-    public void setAppbegindata(Date appbegindata) {
-        this.appbegindata = appbegindata;
+    public void setAppbegindate(Date appbegindate) {
+        this.appbegindate = appbegindate;
     }
 
-    public Date getAppenddata() {
-        return appenddata;
+    public Date getAppenddate() {
+        return appenddate;
     }
 
-    public void setAppenddata(Date appenddata) {
-        this.appenddata = appenddata;
+    public void setAppenddate(Date appenddate) {
+        this.appenddate = appenddate;
     }
 
     public Integer getTotal() {
@@ -89,12 +89,12 @@ public class Appatt implements Serializable {
         this.total = total;
     }
 
-    public Date getAppdata() {
-        return appdata;
+    public Date getAppdate() {
+        return appdate;
     }
 
-    public void setAppdata(Date appdata) {
-        this.appdata = appdata;
+    public void setAppdate(Date appdate) {
+        this.appdate = appdate;
     }
 
     public Boolean getIssubmit() {

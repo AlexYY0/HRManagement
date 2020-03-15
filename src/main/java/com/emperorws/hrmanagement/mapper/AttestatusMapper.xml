@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.AttestatusMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Attestatus">
+    <id column="atteStaId" jdbcType="INTEGER" property="attestaid" />
+    <result column="atteStaName" jdbcType="VARCHAR" property="attestaname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    atteStaId, atteStaName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from attendancestatus
+    where atteStaId = #{attestaid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from attendancestatus
+    where atteStaId = #{attestaid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Attestatus">
+    insert into attendancestatus (atteStaId, atteStaName)
+    values (#{attestaid,jdbcType=INTEGER}, #{attestaname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Attestatus">
+    insert into attendancestatus
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="attestaid != null">
+        atteStaId,
+      </if>
+      <if test="attestaname != null">
+        atteStaName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="attestaid != null">
+        #{attestaid,jdbcType=INTEGER},
+      </if>
+      <if test="attestaname != null">
+        #{attestaname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Attestatus">
+    update attendancestatus
+    <set>
+      <if test="attestaname != null">
+        atteStaName = #{attestaname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where atteStaId = #{attestaid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Attestatus">
+    update attendancestatus
+    set atteStaName = #{attestaname,jdbcType=VARCHAR}
+    where atteStaId = #{attestaid,jdbcType=INTEGER}
+  </update>
+</mapper>

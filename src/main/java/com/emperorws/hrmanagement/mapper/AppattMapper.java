@@ -32,7 +32,7 @@ public interface AppattMapper {
 
     Long checkManaApp(@Param("workid") Integer workid,@Param("leaderid") Integer leaderid);
 
-    List<Appatt> getTransactioninfoByPage(@Param("page") Integer page, @Param("size") Integer size, @Param("emp") Employee employee, Date[] appdata);
+    List<Appatt> getTransactioninfoByPage(@Param("page") Integer page, @Param("size") Integer size, @Param("emp") Employee employee, Date[] appdate);
 
-    Long getTransactioninfoTotal(@Param("emp") Employee employee, Date[] appdata);
+    Long getTransactioninfoTotal(@Param("emp") Employee employee, Date[] appdate);
 }

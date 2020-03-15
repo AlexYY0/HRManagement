@@ -20,7 +20,7 @@ public interface ContractinfoMapper {
 
     int updateByPrimaryKey(Contractinfo record);
 
-    List<Employeechange> getContractinfoByPage(@Param("page") Integer page, @Param("size") Integer size, @Param("con") Contractinfo contractinfo, @Param("signdata") Date[] signdata);
+    List<Employeechange> getContractinfoByPage(@Param("page") Integer page, @Param("size") Integer size, @Param("con") Contractinfo contractinfo, @Param("signdate") Date[] signdate);
 
-    Long getTotal(@Param("con") Contractinfo contractinfo, @Param("signdata") Date[] signdata);
+    Long getTotal(@Param("con") Contractinfo contractinfo, @Param("signdate") Date[] signdate);
 }

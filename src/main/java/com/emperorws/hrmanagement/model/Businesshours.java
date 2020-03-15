@@ -16,6 +16,12 @@ public class Businesshours implements Serializable {
     @JsonFormat(pattern = "HH:mm:ss",timezone = "Asia/Shanghai")
     private Date endtime;
 
+    @JsonFormat(pattern = "HH:mm:ss",timezone = "Asia/Shanghai")
+    private Date beginrest;
+
+    @JsonFormat(pattern = "HH:mm:ss",timezone = "Asia/Shanghai")
+    private Date endrest;
+
     public Integer getBusihoursid() {
         return busihoursid;
     }
@@ -46,5 +52,21 @@ public class Businesshours implements Serializable {
 
     public void setEndtime(Date endtime) {
         this.endtime = endtime;
+    }
+
+    public Date getBeginrest() {
+        return beginrest;
+    }
+
+    public void setBeginrest(Date beginrest) {
+        this.beginrest = beginrest;
+    }
+
+    public Date getEndrest() {
+        return endrest;
+    }
+
+    public void setEndrest(Date endrest) {
+        this.endrest = endrest;
     }
 }

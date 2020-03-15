@@ -1,5 +1,6 @@
 package com.emperorws.hrmanagement.controller;
 
+import com.emperorws.hrmanagement.logger.SystemControllerLog;
 import com.emperorws.hrmanagement.model.RespBean;
 import com.emperorws.hrmanagement.model.User;
 import com.emperorws.hrmanagement.service.UserService;
@@ -24,11 +25,13 @@ public class UserInfoController {
     UserService userService;
 
     @GetMapping("/info")
+    @SystemControllerLog(description="获取当前系统用户信息")
     public User getCurrentUser(Authentication authentication) {
         return ((User) authentication.getPrincipal());
     }
 
     @PutMapping("/info")
+    @SystemControllerLog(description="修改当前的系统用户信息")
     public RespBean updateUser(@RequestBody User user, Authentication authentication) {
         if (userService.updateUser(user) == 1) {
             SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user, authentication.getCredentials(), authentication.getAuthorities()));
@@ -38,6 +41,7 @@ public class UserInfoController {
     }
 
     @PutMapping("/password")
+    @SystemControllerLog(description="修改当前的系统用户密码信息")
     public RespBean updateUserPassword(@RequestBody Map<String, Object> info,Authentication authentication) {
         String oldpassword = (String) info.get("oldpassword");
         String password = (String) info.get("password");
@@ -49,16 +53,19 @@ public class UserInfoController {
     }
 
     @GetMapping("/check/username/{username}")
+    @SystemControllerLog(description="通过用户名获取系统用户信息")
     public Boolean getUserByUsername(@PathVariable String username){
         return userService.getUserByUsername(username);
     }
 
     @GetMapping("/check/password")
+    @SystemControllerLog(description="获取当前的系统用户密码信息")
     public Boolean getUserByPassword(String password,Integer userid){
         return userService.getUserByPassword(password,userid);
     }
 
     @GetMapping("/token")
+    @SystemControllerLog(description="获取上传文件到云端的令牌")
     public String getToken(){
         String accessKey = "HHpVv8wj2T-IGv8JrjZFArdSUy6QGMxuo10k7Hnd";
         String secretKey = "qoAkFOku7m6wouAwum45Ef-SiCTrOarj5QTgZQ3y";

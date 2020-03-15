@@ -20,7 +20,11 @@ public interface SalaryinfoMapper {
 
     int updateByPrimaryKey(Salaryinfo record);
 
-    List<Salaryinfo> getSalaryinfoByPage(@Param("page") Integer page, @Param("size") Integer size, @Param("emp") Employee employee, @Param("payoffdata") Date[] payoffdata);
+    List<Salaryinfo> getSalaryinfoByPage(@Param("page") Integer page, @Param("size") Integer size, @Param("emp") Employee employee, @Param("payoffdate") Date[] payoffdate);
 
-    Long getTotal(@Param("emp") Employee employee, @Param("payoffdata") Date[] payoffdata);
+    Long getTotal(@Param("emp") Employee employee, @Param("payoffdate") Date[] payoffdate);
+
+    Integer salarycheckAll(@Param("emps") List<Employee> employees, @Param("timerange") Date[] timerange,@Param("overtimesal") double overtimesal,@Param("businesssal") double businesssal);
+
+    Integer yearSalarycheckAll(@Param("emps") List<Employee> employees, @Param("timerange") Date[] timerange,@Param("n") Integer n);
 }

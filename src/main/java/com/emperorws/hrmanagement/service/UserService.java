@@ -1,5 +1,6 @@
 package com.emperorws.hrmanagement.service;
 
+import com.emperorws.hrmanagement.logger.SystemServiceLog;
 import com.emperorws.hrmanagement.mapper.UserMapper;
 import com.emperorws.hrmanagement.mapper.UserRoleMapper;
 import com.emperorws.hrmanagement.model.Employee;
@@ -29,6 +30,7 @@ public class UserService implements UserDetailsService {
     UserRoleMapper userRoleMapper;
 
     @Override
+    @SystemServiceLog(description="通过用户名获取用户信息")
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userMapper.loadUserByUsername(username);
         if (user == null) {
@@ -38,6 +40,12 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
+    @SystemServiceLog(description="通过用户ID获取用户信息")
+    public User getAllUserInfoByUserid(Integer userid){
+        return userMapper.getAllUserInfoByUserid(userid);
+    }
+
+    @SystemServiceLog(description="获取所有的系统用户信息")
     public RespPageBean getAllUsersByPage(Integer page, Integer size, Employee employee) {
         if (page != null && size != null) {
             page = (page - 1) * size;
@@ -50,11 +58,13 @@ public class UserService implements UserDetailsService {
         return bean;
     }
 
+    @SystemServiceLog(description="修改旧的系统用户信息")
     public Integer updateUser(User user) {
         return userMapper.updateByPrimaryKeySelective(user);
     }
 
     @Transactional
+    @SystemServiceLog(description="修改用户所具有的系统角色信息")
     public boolean updateUserRole(Integer userid, Integer[] roleids) {
         userRoleMapper.deleteByUserid(userid);
         if (roleids == null || roleids.length == 0) {
@@ -63,14 +73,17 @@ public class UserService implements UserDetailsService {
         return userRoleMapper.addRole(userid, roleids) == roleids.length;
     }
 
+    @SystemServiceLog(description="删除旧的系统用户信息")
     public Integer deleteUserById(Integer userid) {
         return userMapper.deleteByPrimaryKey(userid);
     }
 
+    @SystemServiceLog(description="获取除了当前用户以外的所有用户")
     public List<User> getAllUsersExceptCurrentUser() {
         return userMapper.getAllUsersExceptCurrentUser(UserUtils.getCurrentUser().getUserid());
     }
 
+    @SystemServiceLog(description="修改当前的系统用户密码信息")
     public boolean updateUserPassword(String oldpassword, String password, Integer userid){
         User user = userMapper.selectByPrimaryKey(userid);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -84,6 +97,7 @@ public class UserService implements UserDetailsService {
         return false;
     }
 
+    @SystemServiceLog(description="通过用户名获取系统用户信息")
     public Boolean getUserByUsername(String username){
         User result = userMapper.loadUserByUsername(username);
         if(result==null)
@@ -91,6 +105,7 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
+    @SystemServiceLog(description="获取当前的系统用户密码信息")
     public Boolean getUserByPassword(String password,Integer userid){
         User user = userMapper.selectByPrimaryKey(userid);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -100,6 +115,7 @@ public class UserService implements UserDetailsService {
             return false;
     }
 
+    @SystemServiceLog(description="查找某个系统用户信息")
     public Boolean getUserByWorkid(Integer workid){
         User result = userMapper.getUserByWorkid(workid);
         if(result==null)
@@ -107,6 +123,7 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
+    @SystemServiceLog(description="添加新的系统用户信息")
     public Integer addUser(User user){
         String username=user.getUsername();
         String password=user.getPassword();

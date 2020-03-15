@@ -6,10 +6,10 @@
     <result column="workId" jdbcType="INTEGER" property="workid" />
     <result column="category" jdbcType="CHAR" property="category" />
     <result column="reason" jdbcType="VARCHAR" property="reason" />
-    <result column="appBeginData" jdbcType="TIMESTAMP" property="appbegindata" />
-    <result column="appEndData" jdbcType="TIMESTAMP" property="appenddata" />
+    <result column="appBeginDate" jdbcType="TIMESTAMP" property="appbegindate" />
+    <result column="appEndDate" jdbcType="TIMESTAMP" property="appenddate" />
     <result column="total" jdbcType="INTEGER" property="total" />
-    <result column="appData" jdbcType="TIMESTAMP" property="appdata" />
+    <result column="appDate" jdbcType="TIMESTAMP" property="appdate" />
     <result column="isSubmit" jdbcType="BIT" property="issubmit" />
     <result column="isApprove" jdbcType="BIT" property="isapprove" />
   </resultMap>
@@ -25,7 +25,7 @@
     </association>
   </resultMap>
   <sql id="Base_Column_List">
-    aatId, workId, category, reason, appBeginData, appEndData, total, appData, isSubmit, 
+    aatId, workId, category, reason, appBeginDate, appEndDate, total, appDate, isSubmit,
     isApprove
   </sql>
   <select id="checkManaApp" resultType="java.lang.Long">
@@ -61,16 +61,16 @@
         and e.depId =#{emp.depid}
       </if>
     </if>
-    <if test="appdata !=null">
-      and a.appData between #{appdata[0]} and #{appdata[1]}
+    <if test="appdate !=null">
+      and a.appDate between #{appdate[0]} and #{appdate[1]}
     </if>
-    order by a.workid
+    order by a.appdate DESC
     <if test="page !=null and size!=null">
       limit #{page},#{size}
     </if>
   </select>
   <select id="getTransactioninfoTotal" resultType="java.lang.Long">
-    select count(*) from applyAttendanceTransaction a,employee e
+    select count(DISTINCT a.aatId) from applyAttendanceTransaction a,employee e
     <where>
       a.workId=e.workId
       <if test="emp!=null">
@@ -81,8 +81,8 @@
           and e.depId =#{emp.depid}
         </if>
       </if>
-      <if test="appdata !=null">
-        and a.appData between #{appdata[0]} and #{appdata[1]}
+      <if test="appdate !=null">
+        and a.appDate between #{appdate[0]} and #{appdate[1]}
       </if>
     </where>
   </select>
@@ -106,7 +106,7 @@
         and a.isApprove is NULL
       </otherwise>
     </choose>
-    order by a.aatId
+    order by a.appdate DESC
     <if test="page !=null and size!=null">
       limit #{page},#{size}
     </if>
@@ -143,7 +143,7 @@
         and a.isApprove is NULL
       </otherwise>
     </choose>
-    order by a.aatId
+    order by a.appdate DESC
     <if test="page !=null and size!=null">
       limit #{page},#{size}
     </if>
@@ -195,12 +195,12 @@
   </delete>
   <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Appatt">
     insert into applyattendancetransaction (aatId, workId, category, 
-      reason, appBeginData, appEndData, 
-      total, appData, isSubmit, 
+      reason, appBeginDate, appEndDate,
+      total, appDate, isSubmit,
       isApprove)
     values (#{aatid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{category,jdbcType=CHAR}, 
-      #{reason,jdbcType=VARCHAR}, #{appbegindata,jdbcType=TIMESTAMP}, #{appenddata,jdbcType=TIMESTAMP}, 
-      #{total,jdbcType=INTEGER}, #{appdata,jdbcType=TIMESTAMP}, #{issubmit,jdbcType=BIT}, 
+      #{reason,jdbcType=VARCHAR}, #{appbegindate,jdbcType=TIMESTAMP}, #{appenddate,jdbcType=TIMESTAMP},
+      #{total,jdbcType=INTEGER}, #{appdate,jdbcType=TIMESTAMP}, #{issubmit,jdbcType=BIT},
       #{isapprove,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Appatt">
@@ -218,17 +218,17 @@
       <if test="reason != null">
         reason,
       </if>
-      <if test="appbegindata != null">
-        appBeginData,
+      <if test="appbegindate != null">
+        appBeginDate,
       </if>
-      <if test="appenddata != null">
-        appEndData,
+      <if test="appenddate != null">
+        appEndDate,
       </if>
       <if test="total != null">
         total,
       </if>
-      <if test="appdata != null">
-        appData,
+      <if test="appdate != null">
+        appDate,
       </if>
       <if test="issubmit != null">
         isSubmit,
@@ -250,17 +250,17 @@
       <if test="reason != null">
         #{reason,jdbcType=VARCHAR},
       </if>
-      <if test="appbegindata != null">
-        #{appbegindata,jdbcType=TIMESTAMP},
+      <if test="appbegindate != null">
+        #{appbegindate,jdbcType=TIMESTAMP},
       </if>
-      <if test="appenddata != null">
-        #{appenddata,jdbcType=TIMESTAMP},
+      <if test="appenddate != null">
+        #{appenddate,jdbcType=TIMESTAMP},
       </if>
       <if test="total != null">
         #{total,jdbcType=INTEGER},
       </if>
-      <if test="appdata != null">
-        #{appdata,jdbcType=TIMESTAMP},
+      <if test="appdate != null">
+        #{appdate,jdbcType=TIMESTAMP},
       </if>
       <if test="issubmit != null">
         #{issubmit,jdbcType=BIT},
@@ -282,17 +282,17 @@
       <if test="reason != null">
         reason = #{reason,jdbcType=VARCHAR},
       </if>
-      <if test="appbegindata != null">
-        appBeginData = #{appbegindata,jdbcType=TIMESTAMP},
+      <if test="appbegindate != null">
+        appBeginDate = #{appbegindate,jdbcType=TIMESTAMP},
       </if>
-      <if test="appenddata != null">
-        appEndData = #{appenddata,jdbcType=TIMESTAMP},
+      <if test="appenddate != null">
+        appEndDate = #{appenddate,jdbcType=TIMESTAMP},
       </if>
       <if test="total != null">
         total = #{total,jdbcType=INTEGER},
       </if>
-      <if test="appdata != null">
-        appData = #{appdata,jdbcType=TIMESTAMP},
+      <if test="appdate != null">
+        appDate = #{appdate,jdbcType=TIMESTAMP},
       </if>
       <if test="issubmit != null">
         isSubmit = #{issubmit,jdbcType=BIT},
@@ -308,10 +308,10 @@
     set workId = #{workid,jdbcType=INTEGER},
       category = #{category,jdbcType=CHAR},
       reason = #{reason,jdbcType=VARCHAR},
-      appBeginData = #{appbegindata,jdbcType=TIMESTAMP},
-      appEndData = #{appenddata,jdbcType=TIMESTAMP},
+      appBeginDate = #{appbegindate,jdbcType=TIMESTAMP},
+      appEndDate = #{appenddate,jdbcType=TIMESTAMP},
       total = #{total,jdbcType=INTEGER},
-      appData = #{appdata,jdbcType=TIMESTAMP},
+      appDate = #{appdate,jdbcType=TIMESTAMP},
       isSubmit = #{issubmit,jdbcType=BIT},
       isApprove = #{isapprove,jdbcType=BIT}
     where aatId = #{aatid,jdbcType=INTEGER}

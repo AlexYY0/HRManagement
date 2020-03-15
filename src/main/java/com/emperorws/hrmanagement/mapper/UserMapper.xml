@@ -24,6 +24,9 @@
   <sql id="Base_Column_List">
     userId, workId, username, password, userface, enabled, userRemark
   </sql>
+  <select id="getAllUserInfoByUserid" resultMap="UserWithRoles">
+    select u.*,e.empName as empname from user u,employee e where e.workId=u.workId and u.userId=#{userid}
+  </select>
   <select id="getAllUsersExceptCurrentUser" resultMap="BaseResultMap">
     select * from user where userid !=#{userid};
   </select>

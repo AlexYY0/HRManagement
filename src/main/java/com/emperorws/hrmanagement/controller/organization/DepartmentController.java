@@ -1,5 +1,6 @@
 package com.emperorws.hrmanagement.controller.organization;
 
+import com.emperorws.hrmanagement.logger.SystemControllerLog;
 import com.emperorws.hrmanagement.model.Department;
 import com.emperorws.hrmanagement.model.RespBean;
 import com.emperorws.hrmanagement.service.DepartmentService;
@@ -21,16 +22,19 @@ public class DepartmentController {
     DepartmentService departmentService;
 
     @GetMapping("/")
+    @SystemControllerLog(description="获取所有的部门信息")
     public List<Department> getAllDepartments() {
         return departmentService.getAllDepartments();
     }
 
     @GetMapping("/employee")
+    @SystemControllerLog(description="获取员工的工号和姓名信息，方便提示")
     public List<Map<String,Object>> getWorkidAndEmpname(){
         return departmentService.getWorkidAndEmpname();
     }
 
     @PutMapping("/update")
+    @SystemControllerLog(description="更新部门信息")
     public RespBean updateDep(@RequestBody Department dep){
         Integer reslut=departmentService.updateDep(dep);
         dep.setLeadername(departmentService.getLeadernameByLeaderid(dep.getLeaderid()));
@@ -41,6 +45,7 @@ public class DepartmentController {
     }
 
     @PostMapping("/")
+    @SystemControllerLog(description="添加新的部门")
     public RespBean addDep(@RequestBody Department dep) {
         departmentService.addDep(dep);
         dep.setLeadername(departmentService.getLeadernameByLeaderid(dep.getLeaderid()));
@@ -51,6 +56,7 @@ public class DepartmentController {
     }
 
     @DeleteMapping("/{depid}")
+    @SystemControllerLog(description="删除旧的部门")
     public RespBean deleteDepById(@PathVariable Integer depid) {
         Department dep = new Department();
         dep.setDepid(depid);

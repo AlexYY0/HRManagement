@@ -19,7 +19,7 @@ public class Contractinfo implements Serializable {
     private String content;
 
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
-    private Date signdata;
+    private Date signdate;
 
     private Employee employee;
 
@@ -63,12 +63,12 @@ public class Contractinfo implements Serializable {
         this.content = content == null ? null : content.trim();
     }
 
-    public Date getSigndata() {
-        return signdata;
+    public Date getSigndate() {
+        return signdate;
     }
 
-    public void setSigndata(Date signdata) {
-        this.signdata = signdata;
+    public void setSigndate(Date signdate) {
+        this.signdate = signdate;
     }
 
     public Employee getEmployee() {

@@ -4,60 +4,29 @@
   <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Workingschedule">
     <id column="wsId" jdbcType="INTEGER" property="wsid" />
     <result column="workId" jdbcType="INTEGER" property="workid" />
-    <result column="firstOfWeek" jdbcType="DATE" property="firstofweek" />
-    <result column="sun" jdbcType="INTEGER" property="sun" />
-    <result column="mon" jdbcType="INTEGER" property="mon" />
-    <result column="tue" jdbcType="INTEGER" property="tue" />
-    <result column="wed" jdbcType="INTEGER" property="wed" />
-    <result column="thu" jdbcType="INTEGER" property="thu" />
-    <result column="fri" jdbcType="INTEGER" property="fri" />
-    <result column="sat" jdbcType="INTEGER" property="sat" />
+    <result column="today" jdbcType="DATE" property="today" />
+    <result column="todaySche" jdbcType="INTEGER" property="todaysche" />
   </resultMap>
   <resultMap id="AllWorkingscheduleInfo" type="com.emperorws.hrmanagement.model.Workingschedule" extends="BaseResultMap">
-    <association property="employee" javaType="com.emperorws.hrmanagement.model.Employee">
-      <id column="workid" property="workid"/>
-      <result column="empname" property="empname"/>
-    </association>
-    <association property="department" javaType="com.emperorws.hrmanagement.model.Department">
-      <id column="depid" property="depid"/>
-      <result column="depname" property="depname"/>
-    </association>
-    <association property="businesshours7" javaType="com.emperorws.hrmanagement.model.Businesshours">
-      <id column="busihoursid7" property="busihoursid"/>
-      <result column="busihoursname7" property="busihoursname"/>
-    </association>
-    <association property="businesshours1" javaType="com.emperorws.hrmanagement.model.Businesshours">
-      <id column="busihoursid1" property="busihoursid"/>
-      <result column="busihoursname1" property="busihoursname"/>
-    </association>
-    <association property="businesshours2" javaType="com.emperorws.hrmanagement.model.Businesshours">
-      <id column="busihoursid2" property="busihoursid"/>
-      <result column="busihoursname2" property="busihoursname"/>
-    </association>
-    <association property="businesshours3" javaType="com.emperorws.hrmanagement.model.Businesshours">
-      <id column="busihoursid3" property="busihoursid"/>
-      <result column="busihoursname3" property="busihoursname"/>
-    </association>
-    <association property="businesshours4" javaType="com.emperorws.hrmanagement.model.Businesshours">
-      <id column="busihoursid4" property="busihoursid"/>
-      <result column="busihoursname4" property="busihoursname"/>
-    </association>
-    <association property="businesshours5" javaType="com.emperorws.hrmanagement.model.Businesshours">
-      <id column="busihoursid5" property="busihoursid"/>
-      <result column="busihoursname5" property="busihoursname"/>
-    </association>
-    <association property="businesshours6" javaType="com.emperorws.hrmanagement.model.Businesshours">
-      <id column="busihoursid6" property="busihoursid"/>
-      <result column="busihoursname6" property="busihoursname"/>
+    <association property="businesshours" javaType="com.emperorws.hrmanagement.model.Businesshours">
+      <id column="busihoursid" property="busihoursid"/>
+      <result column="begintime" property="begintime"/>
+      <result column="endtime" property="endtime"/>
+      <result column="beginrest" property="beginrest"/>
+      <result column="endrest" property="endrest"/>
     </association>
   </resultMap>
   <sql id="Base_Column_List">
-    wsId, workId, firstOfWeek, sun, mon, tue, wed, thu, fri, sat
+    wsId, workId, today, todaySche
   </sql>
-  <select id="getWorkingscheduleByPage" resultMap="AllWorkingscheduleInfo">
-    select w.*,emp.empName as empname,d.depName as depname,b7.busiHoursName as busihoursname7,b1.busiHoursName as busihoursname1,b2.busiHoursName as busihoursname2,b3.busiHoursName as busihoursname3,b4.busiHoursName as busihoursname4,b5.busiHoursName as busihoursname5,b6.busiHoursName as busihoursname6
-    from employee emp,department d,workingSchedule w,businessHours b7,businessHours b1,businessHours b2,businessHours b3,businessHours b4,businessHours b5,businessHours b6
-    where w.workId=emp.workId and emp.depId=d.depId and w.sun=b7.busiHoursId and w.mon=b1.busiHoursId and w.tue=b2.busiHoursId and w.wed=b3.busiHoursId and w.thu=b4.busiHoursId and w.fri=b5.busiHoursId and w.sat=b6.busiHoursId
+  <select id="getWorkingscheduleByPage" resultType="java.util.HashMap">
+    SELECT
+    #{monthday[0]} as firstofmonth,#{monthday[1]} as lastofmonth,w.`workId` AS workid,emp.empName AS empname,d.depName AS depname,
+    <foreach collection="array" item="item" index="i" separator=",">
+      max(IF(w.today=DATE_ADD(#{monthday[0]},INTERVAL #{i} DAY),todaySche,0)) AS #{item}
+    </foreach>
+    FROM workingSchedule w,employee emp,department d
+    WHERE w.`workId`=emp.workId AND emp.depId=d.depId AND w.today BETWEEN #{monthday[0]} AND #{monthday[1]}
     <if test="emp!=null">
       <if test="emp.empname !=null and emp.empname!=''">
         and emp.empName like concat('%',#{emp.empname},'%')
@@ -66,16 +35,14 @@
         and emp.depId =#{emp.depid}
       </if>
     </if>
-    <if test="firstofweek!=null">
-      and w.firstOfWeek=#{firstofweek}
-    </if>
+    group by w.workId
     order by w.workId
     <if test="page !=null and size!=null">
       limit #{page},#{size}
     </if>
   </select>
   <select id="getTotal" resultType="java.lang.Long">
-    select count(*) from workingSchedule w,employee emp,department d
+    select count(DISTINCT w.workId) from workingSchedule w,employee emp,department d
     <where>
       emp.workId=w.workId AND emp.depId=d.depId
       <if test="emp!=null">
@@ -86,10 +53,15 @@
           and emp.depId =#{emp.depid}
         </if>
       </if>
-      <if test="firstofweek!=null">
-        and w.firstOfWeek=#{firstofweek}
+      <if test="monthday!=null">
+        and w.today BETWEEN #{monthday[0]} AND #{monthday[1]}
       </if>
     </where>
+  </select>
+  <select id="getAllWorkingscheduleByDate" resultMap="AllWorkingscheduleInfo">
+    SELECT w.*,b.beginTime AS begintime,b.endTime AS endtime,b.beginRest AS beginRest,b.endrest AS endrest
+    FROM workingSchedule w,businessHours b
+    WHERE w.todaySche=b.busiHoursId AND w.workId=#{workid} AND w.today BETWEEN #{daterange[0]} AND #{daterange[1]};
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -97,33 +69,31 @@
     from workingschedule
     where wsId = #{wsid,jdbcType=INTEGER}
   </select>
+  <delete id="deleteWorkingschedules" parameterType="java.util.List">
+    delete from workingSchedule
+    <where>
+      <foreach collection="wss" item="ws" separator="," open="(" close=")">
+        workingSchedule.workId=#{ws.workid,jdbcType=INTEGER} and workingSchedule.today between #{ws.firstofmonth} and #{ws.lastofmonth}
+      </foreach>
+    </where>
+  </delete>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from workingschedule
     where wsId = #{wsid,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteWorkingschedules" parameterType="java.util.List">
-    delete from workingschedule
-    where workingschedule.wsId in
-    <foreach collection="wss" item="ws" separator="," open="(" close=")">
-      #{ws.wsid,jdbcType=INTEGER}
+  <insert id="autoSchedule">
+    insert into workingSchedule(workId, today, todaySche)
+    <foreach collection="emps" item="emp" separator="union" close=";">
+      (select DISTINCT #{emp.workid},calendar.date,if(calendar.status=0 or calendar.status=0,2,1)
+      from calendar
+      where calendar.date between #{monthday[0]} and #{monthday[1]})
     </foreach>
-  </delete>
-  <insert id="autoSchedule" parameterType="com.emperorws.hrmanagement.model.Workingschedule">
-    insert into workingschedule (workId, firstOfWeek,
-      sun, mon, tue, wed, thu, fri, sat)
-      values
-      <foreach collection="emps" item="emp" separator="," close=";">
-        (#{emp.workid,jdbcType=INTEGER}, #{firstofweek},
-        1, 2, 2, 2, 2, 2, 1)
-      </foreach>
   </insert>
   <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Workingschedule">
-    insert into workingschedule (wsId, workId, firstOfWeek, 
-      sun, mon, tue, wed, 
-      thu, fri, sat)
-    values (#{wsid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{firstofweek,jdbcType=DATE}, 
-      #{sun,jdbcType=INTEGER}, #{mon,jdbcType=INTEGER}, #{tue,jdbcType=INTEGER}, #{wed,jdbcType=INTEGER}, 
-      #{thu,jdbcType=INTEGER}, #{fri,jdbcType=INTEGER}, #{sat,jdbcType=INTEGER})
+    insert into workingschedule (wsId, workId, today, 
+      todaySche)
+    values (#{wsid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{today,jdbcType=DATE}, 
+      #{todaysche,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Workingschedule">
     insert into workingschedule
@@ -134,29 +104,11 @@
       <if test="workid != null">
         workId,
       </if>
-      <if test="firstofweek != null">
-        firstOfWeek,
+      <if test="today != null">
+        today,
       </if>
-      <if test="sun != null">
-        sun,
-      </if>
-      <if test="mon != null">
-        mon,
-      </if>
-      <if test="tue != null">
-        tue,
-      </if>
-      <if test="wed != null">
-        wed,
-      </if>
-      <if test="thu != null">
-        thu,
-      </if>
-      <if test="fri != null">
-        fri,
-      </if>
-      <if test="sat != null">
-        sat,
+      <if test="todaysche != null">
+        todaySche,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -166,38 +118,34 @@
       <if test="workid != null">
         #{workid,jdbcType=INTEGER},
       </if>
-      <if test="firstofweek != null">
-        #{firstofweek,jdbcType=DATE},
+      <if test="today != null">
+        #{today,jdbcType=DATE},
       </if>
-      <if test="sun != null">
-        #{sun,jdbcType=INTEGER},
-      </if>
-      <if test="mon != null">
-        #{mon,jdbcType=INTEGER},
-      </if>
-      <if test="tue != null">
-        #{tue,jdbcType=INTEGER},
-      </if>
-      <if test="wed != null">
-        #{wed,jdbcType=INTEGER},
-      </if>
-      <if test="thu != null">
-        #{thu,jdbcType=INTEGER},
-      </if>
-      <if test="fri != null">
-        #{fri,jdbcType=INTEGER},
-      </if>
-      <if test="sat != null">
-        #{sat,jdbcType=INTEGER},
+      <if test="todaysche != null">
+        #{todaysche,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <update id="updateWorkingschedules" parameterType="java.util.List">
-    update workingschedule
-    where workingschedule.wsId in
-    <foreach collection="wss" item="ws" separator="," open="(" close=")">
-      #{ws.esid,jdbcType=INTEGER}
+  <update id="updateWorkingschedule" parameterType="java.util.List">
+    update workingSchedule
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="todaySche = case" suffix="end,">
+        <foreach collection="wss" item="ws">
+          <if test="ws.workid != null">
+            when workingSchedule.workId=#{ws.workid} and workingSchedule.today=#{ws.today} then #{ws.todaysche}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where workingSchedule.workId=#{workid} and
+    <foreach collection="wss" item="ws" separator="or" open="(" close=")">
+      workingSchedule.today=#{ws.today}
     </foreach>
+  </update>
+  <update id="updateWorkingscheduleSelf">
+    update workingSchedule
+    set todaySche = 1
+    where workingSchedule.workId=#{workid} and workingSchedule.today between #{daterange[0]} and #{daterange[1]}
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Workingschedule">
     update workingschedule
@@ -205,29 +153,11 @@
       <if test="workid != null">
         workId = #{workid,jdbcType=INTEGER},
       </if>
-      <if test="firstofweek != null">
-        firstOfWeek = #{firstofweek,jdbcType=DATE},
+      <if test="today != null">
+        today = #{today,jdbcType=DATE},
       </if>
-      <if test="sun != null">
-        sun = #{sun,jdbcType=INTEGER},
-      </if>
-      <if test="mon != null">
-        mon = #{mon,jdbcType=INTEGER},
-      </if>
-      <if test="tue != null">
-        tue = #{tue,jdbcType=INTEGER},
-      </if>
-      <if test="wed != null">
-        wed = #{wed,jdbcType=INTEGER},
-      </if>
-      <if test="thu != null">
-        thu = #{thu,jdbcType=INTEGER},
-      </if>
-      <if test="fri != null">
-        fri = #{fri,jdbcType=INTEGER},
-      </if>
-      <if test="sat != null">
-        sat = #{sat,jdbcType=INTEGER},
+      <if test="todaysche != null">
+        todaySche = #{todaysche,jdbcType=INTEGER},
       </if>
     </set>
     where wsId = #{wsid,jdbcType=INTEGER}
@@ -235,14 +165,8 @@
   <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Workingschedule">
     update workingschedule
     set workId = #{workid,jdbcType=INTEGER},
-      firstOfWeek = #{firstofweek,jdbcType=DATE},
-      sun = #{sun,jdbcType=INTEGER},
-      mon = #{mon,jdbcType=INTEGER},
-      tue = #{tue,jdbcType=INTEGER},
-      wed = #{wed,jdbcType=INTEGER},
-      thu = #{thu,jdbcType=INTEGER},
-      fri = #{fri,jdbcType=INTEGER},
-      sat = #{sat,jdbcType=INTEGER}
+      today = #{today,jdbcType=DATE},
+      todaySche = #{todaysche,jdbcType=INTEGER}
     where wsId = #{wsid,jdbcType=INTEGER}
   </update>
 </mapper>

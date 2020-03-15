@@ -1,5 +1,6 @@
 package com.emperorws.hrmanagement.controller.salary;
 
+import com.emperorws.hrmanagement.logger.SystemControllerLog;
 import com.emperorws.hrmanagement.model.*;
 import com.emperorws.hrmanagement.service.EmployeesalaryService;
 import com.emperorws.hrmanagement.service.SpeaddService;
@@ -29,17 +30,20 @@ public class EmployeesalaryController {
     SpeaddService speaddService;
 
     @GetMapping("/")
+    @SystemControllerLog(description="获取所有的员工薪资配置信息")
     public RespPageBean getEmployeesalaryByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, Employee employee) {
         return employeesalaryService.getEmployeesalaryByPage(page, size, employee);
     }
 
     @GetMapping("/find")
+    @SystemControllerLog(description="获取所有的员工工号和姓名信息，方便智能提示")
     public Boolean getEmpByWorkid(Integer workid){
         return employeesalaryService.getEmpSalByWorkid(workid);
     }
 
     @DeleteMapping("/{esid}")
-    public RespBean deleteSpeaddById(@PathVariable Integer esid){
+    @SystemControllerLog(description="删除员工的薪资配置信息")
+    public RespBean deleteEmployeesalaryById(@PathVariable Integer esid){
         if (employeesalaryService.deleteEmpSalById(esid) == 1) {
             return RespBean.ok("删除成功!");
         }
@@ -47,7 +51,8 @@ public class EmployeesalaryController {
     }
 
     @PostMapping("/")
-    public RespBean addSpeadd(@RequestBody Employeesalary employeesalary){
+    @SystemControllerLog(description="添加员工的薪资配置信息")
+    public RespBean addEmployeesalary(@RequestBody Employeesalary employeesalary){
         if (employeesalaryService.addEmpSal(employeesalary) == 1) {
             return RespBean.ok("添加成功!");
         }
@@ -55,7 +60,8 @@ public class EmployeesalaryController {
     }
 
     @PutMapping("/")
-    public RespBean updateSpeadd(@RequestBody Employeesalary employeesalary){
+    @SystemControllerLog(description="更新员工的薪资配置信息")
+    public RespBean updateEmployeesalary(@RequestBody Employeesalary employeesalary){
         if (employeesalaryService.updateEmpSal(employeesalary) == 1) {
             return RespBean.ok("更新成功!");
         }
@@ -63,7 +69,8 @@ public class EmployeesalaryController {
     }
 
     @PostMapping("/deleteempsals")
-    public RespBean deleteSpeadds(@RequestBody List<Employeesalary> employeesalary){
+    @SystemControllerLog(description="批量删除员工的薪资配置信息")
+    public RespBean deleteEmployeesalarys(@RequestBody List<Employeesalary> employeesalary){
         if(employeesalaryService.deleteEmpSals(employeesalary)==employeesalary.size()){
             return RespBean.ok("删除成功!");
         }
@@ -71,6 +78,7 @@ public class EmployeesalaryController {
     }
 
     @PostMapping("/import")
+    @SystemControllerLog(description="批量导入员工的薪资配置信息")
     public RespBean importData(MultipartFile file) throws IOException {
         List<Employeesalary> list = EmpSalPOIUtils.excel2Employeesalary(file, (List<Welfare>)welfareService.getAllWelfareByPage(null,null,null).getData(),(List<Speadd>) speaddService.getAllSpeaddByPage(null,null,null).getData());
         if (employeesalaryService.addEmpSals(list) == list.size()) {
@@ -80,6 +88,7 @@ public class EmployeesalaryController {
     }
 
     @PostMapping("/export")
+    @SystemControllerLog(description="批量导出员工的薪资配置信息")
     public ResponseEntity<byte[]> exportData(@RequestBody List<Employeesalary> list) {
         return EmpSalPOIUtils.employeesalary2Excel(list);
     }

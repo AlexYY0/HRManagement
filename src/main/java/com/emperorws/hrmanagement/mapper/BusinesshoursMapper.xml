@@ -6,9 +6,11 @@
     <result column="busiHoursName" jdbcType="VARCHAR" property="busihoursname" />
     <result column="beginTime" jdbcType="TIME" property="begintime" />
     <result column="endTime" jdbcType="TIME" property="endtime" />
+    <result column="beginRest" jdbcType="TIME" property="beginrest" />
+    <result column="endRest" jdbcType="TIME" property="endrest" />
   </resultMap>
   <sql id="Base_Column_List">
-    busiHoursId, busiHoursName, beginTime, endTime
+    busiHoursId, busiHoursName, beginTime, endTime, beginRest, endRest
   </sql>
   <select id="getAllBusinesshours" resultMap="BaseResultMap">
     select * from businessHours
@@ -20,10 +22,6 @@
     from businesshours
     where busiHoursId = #{busihoursid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from businesshours
-    where busiHoursId = #{busihoursid,jdbcType=INTEGER}
-  </delete>
   <delete id="deleteBusinesshours" parameterType="java.util.List">
     delete from businessHours
     where businessHours.busiHoursId in
@@ -31,11 +29,15 @@
       #{bh.busihoursid,jdbcType=INTEGER}
     </foreach>
   </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from businesshours
+    where busiHoursId = #{busihoursid,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Businesshours">
     insert into businesshours (busiHoursId, busiHoursName, beginTime, 
-      endTime)
+      endTime, beginRest, endRest)
     values (#{busihoursid,jdbcType=INTEGER}, #{busihoursname,jdbcType=VARCHAR}, #{begintime,jdbcType=TIME}, 
-      #{endtime,jdbcType=TIME})
+      #{endtime,jdbcType=TIME}, #{beginrest,jdbcType=TIME}, #{endrest,jdbcType=TIME})
   </insert>
   <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Businesshours">
     insert into businesshours
@@ -52,6 +54,12 @@
       <if test="endtime != null">
         endTime,
       </if>
+      <if test="beginrest != null">
+        beginRest,
+      </if>
+      <if test="endrest != null">
+        endRest,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="busihoursid != null">
@@ -65,6 +73,12 @@
       </if>
       <if test="endtime != null">
         #{endtime,jdbcType=TIME},
+      </if>
+      <if test="beginrest != null">
+        #{beginrest,jdbcType=TIME},
+      </if>
+      <if test="endrest != null">
+        #{endrest,jdbcType=TIME},
       </if>
     </trim>
   </insert>
@@ -80,6 +94,12 @@
       <if test="endtime != null">
         endTime = #{endtime,jdbcType=TIME},
       </if>
+      <if test="beginrest != null">
+        beginRest = #{beginrest,jdbcType=TIME},
+      </if>
+      <if test="endrest != null">
+        endRest = #{endrest,jdbcType=TIME},
+      </if>
     </set>
     where busiHoursId = #{busihoursid,jdbcType=INTEGER}
   </update>
@@ -87,7 +107,9 @@
     update businesshours
     set busiHoursName = #{busihoursname,jdbcType=VARCHAR},
       beginTime = #{begintime,jdbcType=TIME},
-      endTime = #{endtime,jdbcType=TIME}
+      endTime = #{endtime,jdbcType=TIME},
+      beginRest = #{beginrest,jdbcType=TIME},
+      endRest = #{endrest,jdbcType=TIME}
     where busiHoursId = #{busihoursid,jdbcType=INTEGER}
   </update>
 </mapper>

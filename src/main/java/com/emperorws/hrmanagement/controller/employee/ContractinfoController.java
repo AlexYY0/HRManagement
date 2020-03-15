@@ -1,10 +1,10 @@
 package com.emperorws.hrmanagement.controller.employee;
 
+import com.emperorws.hrmanagement.logger.SystemControllerLog;
 import com.emperorws.hrmanagement.model.Contractinfo;
 import com.emperorws.hrmanagement.model.RespBean;
 import com.emperorws.hrmanagement.model.RespPageBean;
 import com.emperorws.hrmanagement.service.ContractinfoService;
-import com.qiniu.util.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,11 +22,13 @@ public class ContractinfoController {
     ContractinfoService contractinfoService;
 
     @GetMapping("/")
-    public RespPageBean getContractinfoByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, Contractinfo contractinfo, Date[] signdata){
-        return contractinfoService.getContractinfoByPage(page,size,contractinfo,signdata);
+    @SystemControllerLog(description="获取员工的合同信息")
+    public RespPageBean getContractinfoByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, Contractinfo contractinfo, Date[] signdate){
+        return contractinfoService.getContractinfoByPage(page,size,contractinfo,signdate);
     }
 
     @PostMapping("/")
+    @SystemControllerLog(description="添加员工的合同信息")
     public RespBean addContractinfo(@RequestBody Contractinfo contractinfo) {
         if (contractinfoService.addContractinfo(contractinfo) == 1) {
             return RespBean.ok("添加成功!");

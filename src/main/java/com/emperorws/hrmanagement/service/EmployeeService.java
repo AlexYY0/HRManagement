@@ -1,16 +1,12 @@
 package com.emperorws.hrmanagement.service;
 
+import com.emperorws.hrmanagement.logger.SystemServiceLog;
 import com.emperorws.hrmanagement.mapper.EmployeeMapper;
 import com.emperorws.hrmanagement.model.Employee;
 import com.emperorws.hrmanagement.model.RespPageBean;
-import org.apache.ibatis.session.ExecutorType;
-import org.apache.ibatis.session.SqlSession;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +23,7 @@ public class EmployeeService {
 
     public final static Logger logger = LoggerFactory.getLogger(EmployeeService.class);
 
+    @SystemServiceLog(description="获取所有的员工信息")
     public RespPageBean getEmployeeByPage(Integer page, Integer size, Employee employee,String politic,String nation,String workstate) {
         if (page != null && size != null) {
             page = (page - 1) * size;
@@ -39,26 +36,32 @@ public class EmployeeService {
         return bean;
     }
 
+    @SystemServiceLog(description="添加新的员工信息和自动添加系统用户")
     public void addEmpAndUser(Employee employee){
         employeeMapper.addEmpAndUser(employee);
     }
 
+    @SystemServiceLog(description="自动获取新的员工工号")
     public Integer maxWorkID() {
         return employeeMapper.maxWorkID();
     }
 
+    @SystemServiceLog(description="删除员工信息")
     public Integer deleteEmpByEid(Integer workid) {
         return employeeMapper.deleteByPrimaryKey(workid);
     }
 
+    @SystemServiceLog(description="批量删除员工信息")
     public Integer deleteEmps(List<Employee> emps){
         return employeeMapper.deleteEmps(emps);
     }
 
+    @SystemServiceLog(description="更新员工信息")
     public Integer updateEmp(Employee employee) {
         return employeeMapper.updateByPrimaryKeySelective(employee);
     }
 
+    @SystemServiceLog(description="上传文件批量导入员工信息")
     public Integer addEmpAndUsers(List<Employee> list){
         Integer lastresult=0;
         for(int i=0;i<list.size();i++){

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.CalendarMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Calendar">
+    <id column="caleId" jdbcType="INTEGER" property="caleid" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    caleId, date, status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from calendar
+    where caleId = #{caleid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from calendar
+    where caleId = #{caleid,jdbcType=INTEGER}
+  </delete>
+  <insert id="addCalendars" parameterType="java.util.List">
+    insert into calendar (date, status) values
+    <foreach collection="calendars" item="calendar" separator=",">
+      (#{calendar.date,jdbcType=DATE},#{calendar.status,jdbcType=TINYINT})
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Calendar">
+    insert into calendar (caleId, date, status
+      )
+    values (#{caleid,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Calendar">
+    insert into calendar
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="caleid != null">
+        caleId,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="caleid != null">
+        #{caleid,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Calendar">
+    update calendar
+    <set>
+      <if test="date != null">
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where caleId = #{caleid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Calendar">
+    update calendar
+    set date = #{date,jdbcType=DATE},
+      status = #{status,jdbcType=TINYINT}
+    where caleId = #{caleid,jdbcType=INTEGER}
+  </update>
+</mapper>

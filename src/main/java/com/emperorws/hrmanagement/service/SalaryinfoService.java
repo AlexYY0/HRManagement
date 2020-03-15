@@ -1,5 +1,6 @@
 package com.emperorws.hrmanagement.service;
 
+import com.emperorws.hrmanagement.logger.SystemServiceLog;
 import com.emperorws.hrmanagement.mapper.SalaryinfoMapper;
 import com.emperorws.hrmanagement.model.Employee;
 import com.emperorws.hrmanagement.model.RespPageBean;
@@ -20,12 +21,13 @@ public class SalaryinfoService {
     @Autowired
     SalaryinfoMapper salaryinfoMapper;
 
-    public RespPageBean getSalaryinfoByPage(Integer page, Integer size, Employee employee, Date[] payoffdata) {
+    @SystemServiceLog(description="获取员工的历史薪资结算信息")
+    public RespPageBean getSalaryinfoByPage(Integer page, Integer size, Employee employee, Date[] payoffdate) {
         if (page != null && size != null) {
             page = (page - 1) * size;
         }
-        List<Salaryinfo> data = salaryinfoMapper.getSalaryinfoByPage(page, size, employee,payoffdata);
-        Long total = salaryinfoMapper.getTotal(employee,payoffdata);
+        List<Salaryinfo> data = salaryinfoMapper.getSalaryinfoByPage(page, size, employee,payoffdate);
+        Long total = salaryinfoMapper.getTotal(employee,payoffdate);
         RespPageBean bean = new RespPageBean();
         bean.setData(data);
         bean.setTotal(total);

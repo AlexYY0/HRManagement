@@ -11,7 +11,7 @@ public class Salaryadjustment implements Serializable {
     private Integer workid;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "Asia/Shanghai")
-    private Date sadata;
+    private Date sadate;
 
     private String saremark;
 
@@ -33,12 +33,12 @@ public class Salaryadjustment implements Serializable {
         this.workid = workid;
     }
 
-    public Date getSadata() {
-        return sadata;
+    public Date getSadate() {
+        return sadate;
     }
 
-    public void setSadata(Date sadata) {
-        this.sadata = sadata;
+    public void setSadate(Date sadate) {
+        this.sadate = sadate;
     }
 
     public String getSaremark() {

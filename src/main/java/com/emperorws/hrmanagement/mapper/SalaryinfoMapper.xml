@@ -28,7 +28,9 @@
     <result column="other" jdbcType="DOUBLE" property="other" />
     <result column="bonus" jdbcType="DOUBLE" property="bonus" />
     <result column="sums" jdbcType="DOUBLE" property="sums" />
-    <result column="payoffData" jdbcType="TIMESTAMP" property="payoffdata" />
+    <result column="salFirstDay" jdbcType="DATE" property="salfirstday" />
+    <result column="salendday" jdbcType="DATE" property="salendday" />
+    <result column="payoffDate" jdbcType="TIMESTAMP" property="payoffdate" />
   </resultMap>
   <resultMap id="AllSalaryInfo" type="com.emperorws.hrmanagement.model.Salaryinfo" extends="BaseResultMap">
     <association property="employee" javaType="com.emperorws.hrmanagement.model.Employee">
@@ -44,7 +46,7 @@
     siId, workId, basicSalary, absenteeism, overtime, busiTrip, endowment, medical, unemployment, 
     injury, maternity, addMedical, housing, enterpriseP, childEdu, conEdu, serMedical, 
     housingLoan, rental, supportOld, traffic, catering, communication, other, bonus, 
-    sums, payoffData
+    sums, salFirstDay, salendday, payoffDate
   </sql>
   <select id="getSalaryinfoByPage" resultMap="AllSalaryInfo">
     select s.*,d.depName as depname,emp.empName as empname
@@ -58,16 +60,16 @@
         and emp.depId =#{emp.depid}
       </if>
     </if>
-    <if test="payoffdata !=null">
-      and s.payoffData between #{payoffdata[0]} and #{payoffdata[1]}
+    <if test="payoffdate !=null">
+      and s.payoffDate between #{payoffdate[0]} and #{payoffdate[1]}
     </if>
-    order by s.workId
+    order by s.payoffdate DESC
     <if test="page !=null and size!=null">
       limit #{page},#{size}
     </if>
   </select>
   <select id="getTotal" resultType="java.lang.Long">
-    select count(*) from salaryInfo s,employee emp,department d
+    select count(DISTINCT s.siid) from salaryInfo s,employee emp,department d
     <where>
       emp.workId=s.workId AND emp.depId=d.depId
       <if test="emp!=null">
@@ -78,8 +80,8 @@
           and emp.depId =#{emp.depid}
         </if>
       </if>
-      <if test="payoffdata !=null">
-        and s.payoffData between #{payoffdata[0]} and #{payoffdata[1]}
+      <if test="payoffdate !=null">
+        and s.payoffDate between #{payoffdate[0]} and #{payoffdate[1]}
       </if>
     </where>
   </select>
@@ -93,6 +95,48 @@
     delete from salaryinfo
     where siId = #{siid,jdbcType=INTEGER}
   </delete>
+  <insert id="salarycheckAll">
+    INSERT INTO salaryInfo (workId,basicSalary,absenteeism,overtime,busiTrip,traffic,catering,communication,other,bonus,endowment,medical,unemployment,injury,maternity,addMedical,housing,enterpriseP,childEdu,conEdu,serMedical,housingLoan,rental,supportOld,sums,salFirstDay,salendday)
+    <foreach collection="emps" item="emp" separator="union" close=";">
+      SELECT #{emp.workid},(SELECT ROUND(basicSalary,3) FROM employeeSalary WHERE employeeSalary.`workId`=#{emp.workid}) AS basicsalary
+      ,(SELECT ROUND(basicsalary*((am.absentH+am.`leaveH`)/am.`totalH`),3) FROM attendanceLogOfMonth am WHERE am.`workId`=#{emp.workid} and am.firstDay=#{timerange[0]} and am.endDay=#{timerange[1]}) AS absenteeism
+      ,(SELECT ROUND(#{overtimesal}*am.overtimeH,3) FROM attendanceLogOfMonth am WHERE am.`workId`=#{emp.workid} and am.firstDay=#{timerange[0]} and am.endDay=#{timerange[1]}) AS overtime
+      ,(SELECT ROUND(#{businesssal}*am.businessH,3) FROM attendanceLogOfMonth am WHERE am.`workId`=#{emp.workid} and am.firstDay=#{timerange[0]} and am.endDay=#{timerange[1]}) AS busitrip
+      ,(SELECT ROUND(w.traffic,3) FROM employeeSalary es,welfare w WHERE es.welId=w.welId AND es.workId=#{emp.workid}) AS traffic
+      ,(SELECT ROUND(w.catering,3) FROM employeeSalary es,welfare w WHERE es.welId=w.welId AND es.workId=#{emp.workid}) AS catering
+      ,(SELECT ROUND(w.communication,3) FROM employeeSalary es,welfare w WHERE es.welId=w.welId AND es.workId=#{emp.workid}) AS communication
+      ,(SELECT ROUND(w.other,3) FROM employeeSalary es,welfare w WHERE es.welId=w.welId AND es.workId=#{emp.workid}) AS other
+      ,(SELECT ROUND(w.bonus,3) FROM employeeSalary es,welfare w WHERE es.welId=w.welId AND es.workId=#{emp.workid}) AS bonus
+      ,(SELECT ROUND((basicsalary-absenteeism+overtime+busitrip+traffic+catering+communication+other+bonus)*es.endowment*(t.tretPercent/100),3) FROM employeeSalary es,treatment t WHERE es.workId=#{emp.workid} AND t.tretName='养老保险') AS endowment
+      ,(SELECT ROUND((basicsalary-absenteeism+overtime+busitrip+traffic+catering+communication+other+bonus)*es.medical*(t.tretPercent/100),3) FROM employeeSalary es,treatment t WHERE es.workId=#{emp.workid} AND t.tretName='医疗保险') AS medical
+      ,(SELECT ROUND((basicsalary-absenteeism+overtime+busitrip+traffic+catering+communication+other+bonus)*es.unemployment*(t.tretPercent/100),3) FROM employeeSalary es,treatment t WHERE es.workId=#{emp.workid} AND t.tretName='失业保险') AS unemployment
+      ,(SELECT ROUND((basicsalary-absenteeism+overtime+busitrip+traffic+catering+communication+other+bonus)*es.injury*(t.tretPercent/100),3) FROM employeeSalary es,treatment t WHERE es.workId=#{emp.workid} AND t.tretName='工伤保险') AS injury
+      ,(SELECT ROUND((basicsalary-absenteeism+overtime+busitrip+traffic+catering+communication+other+bonus)*es.maternity*(t.tretPercent/100),3) FROM employeeSalary es,treatment t WHERE es.workId=#{emp.workid} AND t.tretName='生育保险') AS maternity
+      ,(SELECT ROUND((basicsalary-absenteeism+overtime+busitrip+traffic+catering+communication+other+bonus)*es.addMedical*(t.tretPercent/100),3) FROM employeeSalary es,treatment t WHERE es.workId=#{emp.workid} AND t.tretName='补充医疗保险') AS addmedical
+      ,(SELECT ROUND((basicsalary-absenteeism+overtime+busitrip+traffic+catering+communication+other+bonus)*es.housing*(t.tretPercent/100),3) FROM employeeSalary es,treatment t WHERE es.workId=#{emp.workid} AND t.tretName='住房公积金') AS housing
+      ,(SELECT ROUND((basicsalary-absenteeism+overtime+busitrip+traffic+catering+communication+other+bonus)*es.enterpriseP*(t.tretPercent/100),3) FROM employeeSalary es,treatment t WHERE es.workId=#{emp.workid} AND t.tretName='企业年金') AS enterprisep
+      ,(SELECT ROUND(sad.sadMoney,3) FROM specialAdditionalDeduction sad,employeeSalary es WHERE sad.sadId=es.childEdu AND es.workId=#{emp.workid}) AS childedu
+      ,(SELECT ROUND(sad.sadMoney,3) FROM specialAdditionalDeduction sad,employeeSalary es WHERE sad.sadId=es.conEdu AND es.workId=#{emp.workid}) AS conedu
+      ,(SELECT ROUND(sad.sadMoney,3) FROM specialAdditionalDeduction sad,employeeSalary es WHERE sad.sadId=es.serMedical AND es.workId=#{emp.workid}) AS sermedical
+      ,(SELECT ROUND(sad.sadMoney,3) FROM specialAdditionalDeduction sad,employeeSalary es WHERE sad.sadId=es.housingLoan AND es.workId=#{emp.workid}) AS housingloan
+      ,(SELECT ROUND(sad.sadMoney,3) FROM specialAdditionalDeduction sad,employeeSalary es WHERE sad.sadId=es.rental AND es.workId=#{emp.workid}) AS rental
+      ,(SELECT ROUND(sad.sadMoney,3) FROM specialAdditionalDeduction sad,employeeSalary es WHERE sad.sadId=es.supportOld AND es.workId=#{emp.workid}) AS supportold
+      ,(SELECT ROUND(((basicsalary-absenteeism+overtime+busitrip+traffic+catering+communication+other+bonus)-endowment-medical-unemployment-injury-maternity-addmedical-housing-enterprisep-
+      (IFNULL((SELECT (IF((basicsalary-absenteeism+overtime+busitrip+traffic+catering+communication+other+bonus-endowment-medical-unemployment-injury-maternity-addmedical-housing-enterprisep-childedu-conedu-sermedical-housingloan-rental-supportold-5000)<![CDATA[<]]>0,0,(basicsalary-absenteeism+overtime+busitrip+traffic+catering+communication+other+bonus-endowment-medical-unemployment-injury-maternity-addmedical-housing-enterprisep-childedu-conedu-sermedical-housingloan-rental-supportold-5000)))*(tr.trPercent/100)-tr.quiDeduction FROM taxRate tr WHERE (IF((basicsalary-absenteeism+overtime+busitrip+traffic+catering+communication+other+bonus-endowment-medical-unemployment-injury-maternity-addmedical-housing-enterprisep-childedu-conedu-sermedical-housingloan-rental-supportold-5000)<![CDATA[<]]>0,0,(basicsalary-absenteeism+overtime+busitrip+traffic+catering+communication+other+bonus-endowment-medical-unemployment-injury-maternity-addmedical-housing-enterprisep-childedu-conedu-sermedical-housingloan-rental-supportold-5000)))>tr.trMin AND ((IF((basicsalary-absenteeism+overtime+busitrip+traffic+catering+communication+other+bonus-endowment-medical-unemployment-injury-maternity-addmedical-housing-enterprisep-childedu-conedu-sermedical-housingloan-rental-supportold-5000)<![CDATA[ < ]]>0,0,(basicsalary-absenteeism+overtime+busitrip+traffic+catering+communication+other+bonus-endowment-medical-unemployment-injury-maternity-addmedical-housing-enterprisep-childedu-conedu-sermedical-housingloan-rental-supportold-5000)))<![CDATA[<=]]>tr.trMax OR tr.trMax IS NULL)),0))),3))
+        ,#{timerange[0]}
+        ,#{timerange[1]}
+    </foreach>
+  </insert>
+  <insert id="yearSalarycheckAll">
+    INSERT INTO salaryInfo (workId,basicSalary,absenteeism,overtime,busiTrip,traffic,catering,communication,other,bonus,endowment,medical,unemployment,injury,maternity,addMedical,housing,enterpriseP,childEdu,conEdu,serMedical,housingLoan,rental,supportOld,sums,salFirstDay,salendday)
+    <foreach collection="emps" item="emp" separator="union" close=";">
+      SELECT #{emp.workid},(SELECT ROUND(basicSalary,3) FROM employeeSalary WHERE employeeSalary.`workId`=#{emp.workid}) AS basicsalary
+      ,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+      ,(SELECT ROUND((basicsalary*#{n}-(IFNULL((SELECT (IF((basicsalary*#{n}-5000)<![CDATA[<]]>0,0,(basicsalary*#{n}-5000)))*(tr.trPercent/100)-tr.quiDeduction FROM taxRate tr WHERE (IF((basicsalary*#{n}-5000)<![CDATA[<]]>0,0,(basicsalary*#{n}-5000)))>tr.trMin AND ((IF((basicsalary*#{n}-5000)<![CDATA[ < ]]>0,0,(basicsalary*#{n}-5000)))<![CDATA[<=]]>tr.trMax OR tr.trMax IS NULL)),0))),3))
+      ,#{timerange[0]}
+      ,#{timerange[1]}
+    </foreach>
+  </insert>
   <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Salaryinfo">
     insert into salaryinfo (siId, workId, basicSalary, 
       absenteeism, overtime, busiTrip, 
@@ -102,8 +146,8 @@
       conEdu, serMedical, housingLoan, 
       rental, supportOld, traffic, 
       catering, communication, other, 
-      bonus, sums, payoffData
-      )
+      bonus, sums, salFirstDay, 
+      salendday, payoffDate)
     values (#{siid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{basicsalary,jdbcType=DOUBLE}, 
       #{absenteeism,jdbcType=DOUBLE}, #{overtime,jdbcType=DOUBLE}, #{busitrip,jdbcType=DOUBLE}, 
       #{endowment,jdbcType=DOUBLE}, #{medical,jdbcType=DOUBLE}, #{unemployment,jdbcType=DOUBLE}, 
@@ -112,8 +156,8 @@
       #{conedu,jdbcType=DOUBLE}, #{sermedical,jdbcType=DOUBLE}, #{housingloan,jdbcType=DOUBLE}, 
       #{rental,jdbcType=DOUBLE}, #{supportold,jdbcType=DOUBLE}, #{traffic,jdbcType=DOUBLE}, 
       #{catering,jdbcType=DOUBLE}, #{communication,jdbcType=DOUBLE}, #{other,jdbcType=DOUBLE}, 
-      #{bonus,jdbcType=DOUBLE}, #{sums,jdbcType=DOUBLE}, #{payoffdata,jdbcType=TIMESTAMP}
-      )
+      #{bonus,jdbcType=DOUBLE}, #{sums,jdbcType=DOUBLE}, #{salfirstday,jdbcType=DATE}, 
+      #{salendday,jdbcType=DATE}, #{payoffdate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Salaryinfo">
     insert into salaryinfo
@@ -196,8 +240,14 @@
       <if test="sums != null">
         sums,
       </if>
-      <if test="payoffdata != null">
-        payoffData,
+      <if test="salfirstday != null">
+        salFirstDay,
+      </if>
+      <if test="salendday != null">
+        salendday,
+      </if>
+      <if test="payoffdate != null">
+        payoffDate,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -279,8 +329,14 @@
       <if test="sums != null">
         #{sums,jdbcType=DOUBLE},
       </if>
-      <if test="payoffdata != null">
-        #{payoffdata,jdbcType=TIMESTAMP},
+      <if test="salfirstday != null">
+        #{salfirstday,jdbcType=DATE},
+      </if>
+      <if test="salendday != null">
+        #{salendday,jdbcType=DATE},
+      </if>
+      <if test="payoffdate != null">
+        #{payoffdate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -362,8 +418,14 @@
       <if test="sums != null">
         sums = #{sums,jdbcType=DOUBLE},
       </if>
-      <if test="payoffdata != null">
-        payoffData = #{payoffdata,jdbcType=TIMESTAMP},
+      <if test="salfirstday != null">
+        salFirstDay = #{salfirstday,jdbcType=DATE},
+      </if>
+      <if test="salendday != null">
+        salendday = #{salendday,jdbcType=DATE},
+      </if>
+      <if test="payoffdate != null">
+        payoffDate = #{payoffdate,jdbcType=TIMESTAMP},
       </if>
     </set>
     where siId = #{siid,jdbcType=INTEGER}
@@ -395,7 +457,9 @@
       other = #{other,jdbcType=DOUBLE},
       bonus = #{bonus,jdbcType=DOUBLE},
       sums = #{sums,jdbcType=DOUBLE},
-      payoffData = #{payoffdata,jdbcType=TIMESTAMP}
+      salFirstDay = #{salfirstday,jdbcType=DATE},
+      salendday = #{salendday,jdbcType=DATE},
+      payoffDate = #{payoffdate,jdbcType=TIMESTAMP}
     where siId = #{siid,jdbcType=INTEGER}
   </update>
 </mapper>

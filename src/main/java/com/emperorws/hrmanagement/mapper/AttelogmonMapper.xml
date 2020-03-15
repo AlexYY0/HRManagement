@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.AttelogmonMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Attelogmon">
+    <id column="atteLogMonId" jdbcType="INTEGER" property="attelogmonid" />
+    <result column="workId" jdbcType="INTEGER" property="workid" />
+    <result column="totalH" jdbcType="DOUBLE" property="totalh" />
+    <result column="normalH" jdbcType="DOUBLE" property="normalh" />
+    <result column="absentH" jdbcType="DOUBLE" property="absenth" />
+    <result column="leaveH" jdbcType="DOUBLE" property="leaveh" />
+    <result column="vacateH" jdbcType="DOUBLE" property="vacateh" />
+    <result column="businessH" jdbcType="DOUBLE" property="businessh" />
+    <result column="overtimeH" jdbcType="DOUBLE" property="overtimeh" />
+    <result column="firstDay" jdbcType="DATE" property="firstday" />
+    <result column="endDay" jdbcType="DATE" property="endday" />
+    <result column="calDate" jdbcType="TIMESTAMP" property="caldate" />
+  </resultMap>
+  <resultMap id="AllAttelogmonInfo" type="com.emperorws.hrmanagement.model.Attelogmon" extends="BaseResultMap">
+    <association property="employee" javaType="com.emperorws.hrmanagement.model.Employee">
+      <id column="workid" property="workid"/>
+      <result column="empname" property="empname"/>
+    </association>
+    <association property="department" javaType="com.emperorws.hrmanagement.model.Department">
+      <id column="depid" property="depid"/>
+      <result column="depname" property="depname"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    atteLogMonId, workId, totalH, normalH, absentH, leaveH, vacateH, businessH, overtimeH, 
+    firstDay, endDay, calDate
+  </sql>
+  <select id="getAttelogmonByPage" resultMap="AllAttelogmonInfo">
+    select a.*,d.depName as depname,emp.empName as empname
+    from attendanceLogOfMonth a,employee emp,department d
+    where a.workId=emp.workId and emp.depId=d.depId
+    <if test="emp!=null">
+      <if test="emp.empname !=null and emp.empname!=''">
+        and emp.empName like concat('%',#{emp.empname},'%')
+      </if>
+      <if test="emp.depid !=null and emp.depid!=''">
+        and emp.depId =#{emp.depid}
+      </if>
+    </if>
+    <if test="caldate !=null">
+      and a.firstDay = #{caldate[0]} and a.endDay = #{caldate[1]}
+    </if>
+    order by a.calDate DESC
+    <if test="page !=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(DISTINCT a.atteLogMonId) from attendanceLogOfMonth a,employee emp,department d
+    <where>
+      emp.workId=a.workId AND emp.depId=d.depId
+      <if test="emp!=null">
+        <if test="emp.empname !=null and emp.empname!=''">
+          and emp.empName like concat('%',#{emp.empname},'%')
+        </if>
+        <if test="emp.depid !=null">
+          and emp.depId =#{emp.depid}
+        </if>
+      </if>
+      <if test="caldate !=null">
+        and a.calDate between #{caldate[0]} and #{caldate[1]}
+      </if>
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from attendancelogofmonth
+    where atteLogMonId = #{attelogmonid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteAttelogmons" parameterType="java.util.List">
+    delete from attendancelogofmonth where attendancelogofmonth.atteLogMonId in
+    <foreach collection="attelogmons" item="attelogmon" separator="," open="(" close=")">
+      #{attelogmon.attelogmonid,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from attendancelogofmonth
+    where atteLogMonId = #{attelogmonid,jdbcType=INTEGER}
+  </delete>
+  <insert id="statisticsAll">
+    INSERT INTO attendanceLogOfMonth(`workId`,`totalH`,`normalH`,`leaveH`,`vacateH`,`businessH`,`overtimeH`,`absentH`,`firstDay`,`endDay`)
+    VALUES
+    <foreach collection="emps" item="emp" open=" " close=" " separator=",">
+      (#{emp.workid},IFNULL((SELECT ROUND(SUM(ad.`needHours`),3) AS totalH FROM attendanceLogOfDay ad WHERE ad.`workId`=#{emp.workid} AND ad.clockInDay BETWEEN #{monthday[0]} and #{monthday[1]}),0)
+      ,IFNULL((SELECT ROUND(SUM(ad.workingHours),3) AS normalH FROM attendanceLogOfDay ad WHERE ad.workId=#{emp.workid} AND ad.clockInDay BETWEEN #{monthday[0]} and #{monthday[1]}),0)
+      ,IFNULL((SELECT ROUND(SUM(aat.total),3) AS leaveH FROM applyAttendanceTransaction aat WHERE aat.workId=#{emp.workid} AND aat.category='请假' AND aat.appBeginDate BETWEEN #{monthday[0]} and #{monthday[1]}),0)
+      ,IFNULL((SELECT ROUND(SUM(aat.total),3) AS vacateH FROM applyAttendanceTransaction aat WHERE aat.workId=#{emp.workid} AND aat.category='调休' AND aat.appBeginDate BETWEEN #{monthday[0]} and #{monthday[1]}),0)
+      ,IFNULL((SELECT ROUND(SUM(aat.total),3) AS businessH FROM applyAttendanceTransaction aat WHERE aat.workId=#{emp.workid} AND aat.category='出差' AND aat.appBeginDate BETWEEN #{monthday[0]} and #{monthday[1]}),0)
+      ,IFNULL((SELECT ROUND(SUM(aat.total),3) AS overtimeH FROM applyAttendanceTransaction aat WHERE aat.workId=#{emp.workid} AND aat.category='加班' AND aat.appBeginDate BETWEEN #{monthday[0]} and #{monthday[1]}),0)
+      ,ROUND((totalH-normalH-leaveH-vacateH-businessH),3)
+      ,#{monthday[0]}
+      ,#{monthday[1]})
+    </foreach>
+  </insert>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Attelogmon">
+    insert into attendancelogofmonth (atteLogMonId, workId, totalH, 
+      normalH, absentH, leaveH, 
+      vacateH, businessH, overtimeH, 
+      firstDay, endDay, calDate
+      )
+    values (#{attelogmonid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{totalh,jdbcType=DOUBLE}, 
+      #{normalh,jdbcType=DOUBLE}, #{absenth,jdbcType=DOUBLE}, #{leaveh,jdbcType=DOUBLE}, 
+      #{vacateh,jdbcType=DOUBLE}, #{businessh,jdbcType=DOUBLE}, #{overtimeh,jdbcType=DOUBLE}, 
+      #{firstday,jdbcType=DATE}, #{endday,jdbcType=DATE}, #{caldate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Attelogmon">
+    insert into attendancelogofmonth
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="attelogmonid != null">
+        atteLogMonId,
+      </if>
+      <if test="workid != null">
+        workId,
+      </if>
+      <if test="totalh != null">
+        totalH,
+      </if>
+      <if test="normalh != null">
+        normalH,
+      </if>
+      <if test="absenth != null">
+        absentH,
+      </if>
+      <if test="leaveh != null">
+        leaveH,
+      </if>
+      <if test="vacateh != null">
+        vacateH,
+      </if>
+      <if test="businessh != null">
+        businessH,
+      </if>
+      <if test="overtimeh != null">
+        overtimeH,
+      </if>
+      <if test="firstday != null">
+        firstDay,
+      </if>
+      <if test="endday != null">
+        endDay,
+      </if>
+      <if test="caldate != null">
+        calDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="attelogmonid != null">
+        #{attelogmonid,jdbcType=INTEGER},
+      </if>
+      <if test="workid != null">
+        #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="totalh != null">
+        #{totalh,jdbcType=DOUBLE},
+      </if>
+      <if test="normalh != null">
+        #{normalh,jdbcType=DOUBLE},
+      </if>
+      <if test="absenth != null">
+        #{absenth,jdbcType=DOUBLE},
+      </if>
+      <if test="leaveh != null">
+        #{leaveh,jdbcType=DOUBLE},
+      </if>
+      <if test="vacateh != null">
+        #{vacateh,jdbcType=DOUBLE},
+      </if>
+      <if test="businessh != null">
+        #{businessh,jdbcType=DOUBLE},
+      </if>
+      <if test="overtimeh != null">
+        #{overtimeh,jdbcType=DOUBLE},
+      </if>
+      <if test="firstday != null">
+        #{firstday,jdbcType=DATE},
+      </if>
+      <if test="endday != null">
+        #{endday,jdbcType=DATE},
+      </if>
+      <if test="caldate != null">
+        #{caldate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Attelogmon">
+    update attendancelogofmonth
+    <set>
+      <if test="workid != null">
+        workId = #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="totalh != null">
+        totalH = #{totalh,jdbcType=DOUBLE},
+      </if>
+      <if test="normalh != null">
+        normalH = #{normalh,jdbcType=DOUBLE},
+      </if>
+      <if test="absenth != null">
+        absentH = #{absenth,jdbcType=DOUBLE},
+      </if>
+      <if test="leaveh != null">
+        leaveH = #{leaveh,jdbcType=DOUBLE},
+      </if>
+      <if test="vacateh != null">
+        vacateH = #{vacateh,jdbcType=DOUBLE},
+      </if>
+      <if test="businessh != null">
+        businessH = #{businessh,jdbcType=DOUBLE},
+      </if>
+      <if test="overtimeh != null">
+        overtimeH = #{overtimeh,jdbcType=DOUBLE},
+      </if>
+      <if test="firstday != null">
+        firstDay = #{firstday,jdbcType=DATE},
+      </if>
+      <if test="endday != null">
+        endDay = #{endday,jdbcType=DATE},
+      </if>
+      <if test="caldate != null">
+        calDate = #{caldate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where atteLogMonId = #{attelogmonid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Attelogmon">
+    update attendancelogofmonth
+    set workId = #{workid,jdbcType=INTEGER},
+      totalH = #{totalh,jdbcType=DOUBLE},
+      normalH = #{normalh,jdbcType=DOUBLE},
+      absentH = #{absenth,jdbcType=DOUBLE},
+      leaveH = #{leaveh,jdbcType=DOUBLE},
+      vacateH = #{vacateh,jdbcType=DOUBLE},
+      businessH = #{businessh,jdbcType=DOUBLE},
+      overtimeH = #{overtimeh,jdbcType=DOUBLE},
+      firstDay = #{firstday,jdbcType=DATE},
+      endDay = #{endday,jdbcType=DATE},
+      calDate = #{caldate,jdbcType=TIMESTAMP}
+    where atteLogMonId = #{attelogmonid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.AttelogdayMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Attelogday">
+    <id column="atteLogDayId" jdbcType="INTEGER" property="attelogdayid" />
+    <result column="workId" jdbcType="INTEGER" property="workid" />
+    <result column="clockInDay" jdbcType="DATE" property="clockinday" />
+    <result column="signInTime" jdbcType="TIME" property="signintime" />
+    <result column="signOutTime" jdbcType="TIME" property="signouttime" />
+    <result column="clockInFlag" jdbcType="INTEGER" property="clockinflag" />
+    <result column="needHours" jdbcType="DOUBLE" property="needhours" />
+    <result column="workingHours" jdbcType="DOUBLE" property="workinghours" />
+  </resultMap>
+  <resultMap id="AllAttelogdayInfo" type="com.emperorws.hrmanagement.model.Attelogday" extends="BaseResultMap">
+    <association property="employee" javaType="com.emperorws.hrmanagement.model.Employee">
+      <id column="workid" property="workid"/>
+      <result column="empname" property="empname"/>
+    </association>
+    <association property="department" javaType="com.emperorws.hrmanagement.model.Department">
+      <id column="depid" property="depid"/>
+      <result column="depname" property="depname"/>
+    </association>
+    <association property="attestatus" javaType="com.emperorws.hrmanagement.model.Attestatus">
+      <id column="attestaid" property="attestaid"/>
+      <result column="attestaname" property="attestaname"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    atteLogDayId, workId, clockInDay, signInTime, signOutTime, clockInFlag, needHours, 
+    workingHours
+  </sql>
+  <select id="getAttelogdayByPage" resultMap="AllAttelogdayInfo">
+    select a.*,d.depName as depname,emp.empName as empname,attes.atteStaName as attestaname
+    from attendanceLogOfDay a,employee emp,department d,attendanceStatus attes
+    where a.workId=emp.workId and emp.depId=d.depId and a.clockInFlag=attes.atteStaId
+    <if test="emp!=null">
+      <if test="emp.empname !=null and emp.empname!=''">
+        and emp.empName like concat('%',#{emp.empname},'%')
+      </if>
+      <if test="emp.depid !=null and emp.depid!=''">
+        and emp.depId =#{emp.depid}
+      </if>
+    </if>
+    <if test="clockinday !=null">
+      and a.clockInDay between #{clockinday[0]} and #{clockinday[1]}
+    </if>
+    order by a.clockInDay DESC
+    <if test="page !=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(DISTINCT a.atteLogDayId) from attendanceLogOfDay a,employee emp,department d
+    <where>
+      emp.workId=a.workId AND emp.depId=d.depId
+      <if test="emp!=null">
+        <if test="emp.empname !=null and emp.empname!=''">
+          and emp.empName like concat('%',#{emp.empname},'%')
+        </if>
+        <if test="emp.depid !=null">
+          and emp.depId =#{emp.depid}
+        </if>
+      </if>
+      <if test="clockinday !=null">
+        and a.clockInDay between #{clockinday[0]} and #{clockinday[1]}
+      </if>
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from attendancelogofday
+    where atteLogDayId = #{attelogdayid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteAttelogdays" parameterType="java.util.List">
+    delete from attendancelogofday where attendancelogofday.atteLogDayId in
+    <foreach collection="attelogdays" item="attelogday" separator="," open="(" close=")">
+      #{attelogday.attelogdayid,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from attendancelogofday
+    where atteLogDayId = #{attelogdayid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Attelogday">
+    insert into attendancelogofday (atteLogDayId, workId, clockInDay, 
+      signInTime, signOutTime, clockInFlag, 
+      needHours, workingHours)
+    values (#{attelogdayid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{clockinday,jdbcType=DATE}, 
+      #{signintime,jdbcType=TIME}, #{signouttime,jdbcType=TIME}, #{clockinflag,jdbcType=INTEGER}, 
+      #{needhours,jdbcType=DOUBLE}, #{workinghours,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Attelogday">
+    insert into attendancelogofday
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="attelogdayid != null">
+        atteLogDayId,
+      </if>
+      <if test="workid != null">
+        workId,
+      </if>
+      <if test="clockinday != null">
+        clockInDay,
+      </if>
+      <if test="signintime != null">
+        signInTime,
+      </if>
+      <if test="signouttime != null">
+        signOutTime,
+      </if>
+      <if test="clockinflag != null">
+        clockInFlag,
+      </if>
+      <if test="needhours != null">
+        needHours,
+      </if>
+      <if test="workinghours != null">
+        workingHours,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="attelogdayid != null">
+        #{attelogdayid,jdbcType=INTEGER},
+      </if>
+      <if test="workid != null">
+        #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="clockinday != null">
+        #{clockinday,jdbcType=DATE},
+      </if>
+      <if test="signintime != null">
+        #{signintime,jdbcType=TIME},
+      </if>
+      <if test="signouttime != null">
+        #{signouttime,jdbcType=TIME},
+      </if>
+      <if test="clockinflag != null">
+        #{clockinflag,jdbcType=INTEGER},
+      </if>
+      <if test="needhours != null">
+        #{needhours,jdbcType=DOUBLE},
+      </if>
+      <if test="workinghours != null">
+        #{workinghours,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Attelogday">
+    update attendancelogofday
+    <set>
+      <if test="workid != null">
+        workId = #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="clockinday != null">
+        clockInDay = #{clockinday,jdbcType=DATE},
+      </if>
+      <if test="signintime != null">
+        signInTime = #{signintime,jdbcType=TIME},
+      </if>
+      <if test="signouttime != null">
+        signOutTime = #{signouttime,jdbcType=TIME},
+      </if>
+      <if test="clockinflag != null">
+        clockInFlag = #{clockinflag,jdbcType=INTEGER},
+      </if>
+      <if test="needhours != null">
+        needHours = #{needhours,jdbcType=DOUBLE},
+      </if>
+      <if test="workinghours != null">
+        workingHours = #{workinghours,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where atteLogDayId = #{attelogdayid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Attelogday">
+    update attendancelogofday
+    set workId = #{workid,jdbcType=INTEGER},
+      clockInDay = #{clockinday,jdbcType=DATE},
+      signInTime = #{signintime,jdbcType=TIME},
+      signOutTime = #{signouttime,jdbcType=TIME},
+      clockInFlag = #{clockinflag,jdbcType=INTEGER},
+      needHours = #{needhours,jdbcType=DOUBLE},
+      workingHours = #{workinghours,jdbcType=DOUBLE}
+    where atteLogDayId = #{attelogdayid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,10 +1,10 @@
 package com.emperorws.hrmanagement.controller.attendance;
 
+import com.emperorws.hrmanagement.logger.SystemControllerLog;
 import com.emperorws.hrmanagement.model.Employee;
 import com.emperorws.hrmanagement.model.RespPageBean;
 import com.emperorws.hrmanagement.service.TransactioninfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +24,8 @@ public class TransactioninfoController {
     TransactioninfoService transactioninfoService;
 
     @GetMapping("/")
-    public RespPageBean getTransactioninfoByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, Employee employee, Date[] appdata){
-        return transactioninfoService.getTransactioninfoByPage(page, size, employee, appdata);
+    @SystemControllerLog(description="获取所有的考勤事务申请")
+    public RespPageBean getTransactioninfoByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, Employee employee, Date[] appdate){
+        return transactioninfoService.getTransactioninfoByPage(page, size, employee, appdate);
     }
 }

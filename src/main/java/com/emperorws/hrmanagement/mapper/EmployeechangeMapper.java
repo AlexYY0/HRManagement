@@ -19,7 +19,7 @@ public interface EmployeechangeMapper {
 
     int updateByPrimaryKey(Employeechange record);
 
-    List<Employeechange> getEmployeechangeByPage(@Param("page") Integer page, @Param("size") Integer size, @Param("empc") Employeechange employeechange, @Param("empchandata") Date[] empchandata);
+    List<Employeechange> getEmployeechangeByPage(@Param("page") Integer page, @Param("size") Integer size, @Param("empc") Employeechange employeechange, @Param("empchandate") Date[] empchandate);
 
-    Long getTotal(@Param("empc") Employeechange employeechange, @Param("empchandata") Date[] empchandata);
+    Long getTotal(@Param("empc") Employeechange employeechange, @Param("empchandate") Date[] empchandate);
 }

@@ -5,7 +5,7 @@
     <id column="empcId" jdbcType="INTEGER" property="empcid" />
     <result column="workId" jdbcType="INTEGER" property="workid" />
     <result column="afterDepId" jdbcType="INTEGER" property="afterdepid" />
-    <result column="empChanData" jdbcType="DATE" property="empchandata" />
+    <result column="empChanDate" jdbcType="DATE" property="empchandate" />
     <result column="empChanRemark" jdbcType="VARCHAR" property="empchanremark" />
   </resultMap>
   <resultMap id="AllEmployeechangeInfo" type="com.emperorws.hrmanagement.model.Employeechange" extends="BaseResultMap">
@@ -19,7 +19,7 @@
     </association>
   </resultMap>
   <sql id="Base_Column_List">
-    empcId, workId, afterDepId, empChanData, empChanRemark
+    empcId, workId, afterDepId, empChanDate, empChanRemark
   </sql>
   <select id="getEmployeechangeByPage" resultMap="AllEmployeechangeInfo">
     select ec.*,d.depId as depid,d.depName as depname,e.workId as workid,e.empName as empname
@@ -30,8 +30,8 @@
         and ec.workId=#{empc.workid}
       </if>
     </if>
-    <if test="empchandata !=null">
-      and ec.empChanData between #{empchandata[0]} and #{empchandata[1]}
+    <if test="empchandate !=null">
+      and ec.empChanDate between #{empchandate[0]} and #{empchandate[1]}
     </if>
     order by ec.empcid
     <if test="page !=null and size!=null">
@@ -46,8 +46,8 @@
           and ec.workId=#{empc.workid}
         </if>
       </if>
-      <if test="empchandata !=null">
-        and ec.empChanData between #{empchandata[0]} and #{empchandata[1]}
+      <if test="empchandate !=null">
+        and ec.empChanDate between #{empchandate[0]} and #{empchandate[1]}
       </if>
     </where>
   </select>
@@ -63,9 +63,9 @@
   </delete>
   <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Employeechange">
     insert into employeechange (empcId, workId, afterDepId, 
-      empChanData, empChanRemark)
+      empChanDate, empChanRemark)
     values (#{empcid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{afterdepid,jdbcType=INTEGER}, 
-      #{empchandata,jdbcType=DATE}, #{empchanremark,jdbcType=VARCHAR})
+      #{empchandate,jdbcType=DATE}, #{empchanremark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Employeechange">
     insert into employeechange
@@ -79,8 +79,8 @@
       <if test="afterdepid != null">
         afterDepId,
       </if>
-      <if test="empchandata != null">
-        empChanData,
+      <if test="empchandate != null">
+        empChanDate,
       </if>
       <if test="empchanremark != null">
         empChanRemark,
@@ -96,8 +96,8 @@
       <if test="afterdepid != null">
         #{afterdepid,jdbcType=INTEGER},
       </if>
-      <if test="empchandata != null">
-        #{empchandata,jdbcType=DATE},
+      <if test="empchandate != null">
+        #{empchandate,jdbcType=DATE},
       </if>
       <if test="empchanremark != null">
         #{empchanremark,jdbcType=VARCHAR},
@@ -113,8 +113,8 @@
       <if test="afterdepid != null">
         afterDepId = #{afterdepid,jdbcType=INTEGER},
       </if>
-      <if test="empchandata != null">
-        empChanData = #{empchandata,jdbcType=DATE},
+      <if test="empchandate != null">
+        empChanDate = #{empchandate,jdbcType=DATE},
       </if>
       <if test="empchanremark != null">
         empChanRemark = #{empchanremark,jdbcType=VARCHAR},
@@ -126,7 +126,7 @@
     update employeechange
     set workId = #{workid,jdbcType=INTEGER},
       afterDepId = #{afterdepid,jdbcType=INTEGER},
-      empChanData = #{empchandata,jdbcType=DATE},
+      empChanDate = #{empchandate,jdbcType=DATE},
       empChanRemark = #{empchanremark,jdbcType=VARCHAR}
     where empcId = #{empcid,jdbcType=INTEGER}
   </update>

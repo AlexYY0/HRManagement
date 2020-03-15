@@ -13,7 +13,7 @@ public class Employeechange implements Serializable {
     private Integer afterdepid;
 
     @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
-    private Date empchandata;
+    private Date empchandate;
 
     private String empchanremark;
 
@@ -45,12 +45,12 @@ public class Employeechange implements Serializable {
         this.afterdepid = afterdepid;
     }
 
-    public Date getEmpchandata() {
-        return empchandata;
+    public Date getEmpchandate() {
+        return empchandate;
     }
 
-    public void setEmpchandata(Date empchandata) {
-        this.empchandata = empchandata;
+    public void setEmpchandate(Date empchandate) {
+        this.empchandate = empchandate;
     }
 
     public String getEmpchanremark() {

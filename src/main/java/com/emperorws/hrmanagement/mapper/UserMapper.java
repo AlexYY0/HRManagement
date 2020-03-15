@@ -33,4 +33,6 @@ public interface UserMapper {
     List<User> getAllUsersExceptCurrentUser(Integer userid);
 
     Integer updateUserPassword(@Param("userid") Integer userid, @Param("encodePassword") String encodePassword);
+
+    User getAllUserInfoByUserid(Integer userid);
 }

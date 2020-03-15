@@ -1,5 +1,6 @@
 package com.emperorws.hrmanagement.controller.salary;
 
+import com.emperorws.hrmanagement.logger.SystemControllerLog;
 import com.emperorws.hrmanagement.model.Employee;
 import com.emperorws.hrmanagement.model.RespPageBean;
 import com.emperorws.hrmanagement.model.Salaryinfo;
@@ -24,11 +25,13 @@ public class SalaryinfoController {
     SalaryinfoService salaryinfoService;
 
     @GetMapping("/")
-    public RespPageBean getSalaryinfoByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, Employee employee, Date[] payoffdata) {
-        return salaryinfoService.getSalaryinfoByPage(page, size, employee, payoffdata);
+    @SystemControllerLog(description="获取员工的历史薪资结算信息")
+    public RespPageBean getSalaryinfoByPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, Employee employee, Date[] payoffdate) {
+        return salaryinfoService.getSalaryinfoByPage(page, size, employee, payoffdate);
     }
 
     @PostMapping("/export")
+    @SystemControllerLog(description="批量导出员工的历史薪资结算信息")
     public ResponseEntity<byte[]> exportData(@RequestBody List<Salaryinfo> list) {
         return SalInfoPOIUtils.salaryinfo2Excel(list);
     }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.SalaryschemeMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Salaryscheme">
+    <id column="ssId" jdbcType="INTEGER" property="ssid" />
+    <result column="ssName" jdbcType="VARCHAR" property="ssname" />
+    <result column="compMethod" jdbcType="VARCHAR" property="compmethod" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ssId, ssName, compMethod
+  </sql>
+  <select id="getAllSalaryscheme" resultMap="BaseResultMap">
+    select * from salaryScheme
+    order by salaryScheme.ssId;
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from salaryscheme
+    where ssId = #{ssid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteSalaryschemes" parameterType="java.util.List">
+    delete from salaryScheme
+    where salaryScheme.ssId in
+    <foreach collection="salsches" item="salsche" separator="," open="(" close=")">
+      #{salsche.ssid,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from salaryscheme
+    where ssId = #{ssid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Salaryscheme">
+    insert into salaryscheme (ssId, ssName, compMethod
+      )
+    values (#{ssid,jdbcType=INTEGER}, #{ssname,jdbcType=VARCHAR}, #{compmethod,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Salaryscheme">
+    insert into salaryscheme
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ssid != null">
+        ssId,
+      </if>
+      <if test="ssname != null">
+        ssName,
+      </if>
+      <if test="compmethod != null">
+        compMethod,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ssid != null">
+        #{ssid,jdbcType=INTEGER},
+      </if>
+      <if test="ssname != null">
+        #{ssname,jdbcType=VARCHAR},
+      </if>
+      <if test="compmethod != null">
+        #{compmethod,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.Salaryscheme">
+    update salaryscheme
+    <set>
+      <if test="ssname != null">
+        ssName = #{ssname,jdbcType=VARCHAR},
+      </if>
+      <if test="compmethod != null">
+        compMethod = #{compmethod,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ssId = #{ssid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Salaryscheme">
+    update salaryscheme
+    set ssName = #{ssname,jdbcType=VARCHAR},
+      compMethod = #{compmethod,jdbcType=VARCHAR}
+    where ssId = #{ssid,jdbcType=INTEGER}
+  </update>
+</mapper>

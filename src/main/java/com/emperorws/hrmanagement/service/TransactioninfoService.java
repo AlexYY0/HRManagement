@@ -1,5 +1,6 @@
 package com.emperorws.hrmanagement.service;
 
+import com.emperorws.hrmanagement.logger.SystemServiceLog;
 import com.emperorws.hrmanagement.mapper.AppattMapper;
 import com.emperorws.hrmanagement.model.Appatt;
 import com.emperorws.hrmanagement.model.Employee;
@@ -21,12 +22,13 @@ public class TransactioninfoService {
     @Autowired
     AppattMapper appattMapper;
 
-    public RespPageBean getTransactioninfoByPage(Integer page, Integer size, Employee employee, Date[] appdata) {
+    @SystemServiceLog(description="获取所有的考勤事务申请")
+    public RespPageBean getTransactioninfoByPage(Integer page, Integer size, Employee employee, Date[] appdate) {
         if (page != null && size != null) {
             page = (page - 1) * size;
         }
-        List<Appatt> data = appattMapper.getTransactioninfoByPage(page, size, employee, appdata);
-        Long total = appattMapper.getTransactioninfoTotal(employee, appdata);
+        List<Appatt> data = appattMapper.getTransactioninfoByPage(page, size, employee, appdate);
+        Long total = appattMapper.getTransactioninfoTotal(employee, appdate);
         RespPageBean bean = new RespPageBean();
         bean.setData(data);
         bean.setTotal(total);

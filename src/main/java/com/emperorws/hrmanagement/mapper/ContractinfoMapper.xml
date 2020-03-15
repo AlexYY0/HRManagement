@@ -7,7 +7,7 @@
     <result column="beginContract" jdbcType="DATE" property="begincontract" />
     <result column="endContract" jdbcType="DATE" property="endcontract" />
     <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="signData" jdbcType="DATE" property="signdata" />
+    <result column="signDate" jdbcType="DATE" property="signdate" />
   </resultMap>
   <resultMap id="AllContractinfoInfo" type="com.emperorws.hrmanagement.model.Contractinfo" extends="BaseResultMap">
     <association property="employee" javaType="com.emperorws.hrmanagement.model.Employee">
@@ -16,7 +16,7 @@
     </association>
   </resultMap>
   <sql id="Base_Column_List">
-    contId, workId, beginContract, endContract, content, signData
+    contId, workId, beginContract, endContract, content, signDate
   </sql>
   <select id="getContractinfoByPage" resultMap="AllContractinfoInfo">
     select c.*,e.workId as workid,e.empName as empname
@@ -27,8 +27,8 @@
         and c.workId=#{con.workid}
       </if>
     </if>
-    <if test="signdata !=null">
-      and c.signData between #{signdata[0]} and #{signdata[1]}
+    <if test="signdate !=null">
+      and c.signDate between #{signdate[0]} and #{signdate[1]}
     </if>
     order by c.contId
     <if test="page !=null and size!=null">
@@ -43,8 +43,8 @@
           and c.workId=#{con.workid}
         </if>
       </if>
-      <if test="signdata !=null">
-        and c.signData between #{signdata[0]} and #{signdata[1]}
+      <if test="signdate !=null">
+        and c.signDate between #{signdate[0]} and #{signdate[1]}
       </if>
     </where>
   </select>
@@ -60,10 +60,10 @@
   </delete>
   <insert id="insert" parameterType="com.emperorws.hrmanagement.model.Contractinfo">
     insert into contractinfo (contId, workId, beginContract, 
-      endContract, content, signData
+      endContract, content, signDate
       )
     values (#{contid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{begincontract,jdbcType=DATE}, 
-      #{endcontract,jdbcType=DATE}, #{content,jdbcType=VARCHAR}, #{signdata,jdbcType=DATE}
+      #{endcontract,jdbcType=DATE}, #{content,jdbcType=VARCHAR}, #{signdate,jdbcType=DATE}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Contractinfo">
@@ -84,8 +84,8 @@
       <if test="content != null">
         content,
       </if>
-      <if test="signdata != null">
-        signData,
+      <if test="signdate != null">
+        signDate,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -104,8 +104,8 @@
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
       </if>
-      <if test="signdata != null">
-        #{signdata,jdbcType=DATE},
+      <if test="signdate != null">
+        #{signdate,jdbcType=DATE},
       </if>
     </trim>
   </insert>
@@ -124,8 +124,8 @@
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
       </if>
-      <if test="signdata != null">
-        signData = #{signdata,jdbcType=DATE},
+      <if test="signdate != null">
+        signDate = #{signdate,jdbcType=DATE},
       </if>
     </set>
     where contId = #{contid,jdbcType=INTEGER}
@@ -136,7 +136,7 @@
       beginContract = #{begincontract,jdbcType=DATE},
       endContract = #{endcontract,jdbcType=DATE},
       content = #{content,jdbcType=VARCHAR},
-      signData = #{signdata,jdbcType=DATE}
+      signDate = #{signdate,jdbcType=DATE}
     where contId = #{contid,jdbcType=INTEGER}
   </update>
 </mapper>

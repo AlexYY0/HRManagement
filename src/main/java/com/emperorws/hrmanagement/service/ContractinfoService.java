@@ -1,5 +1,6 @@
 package com.emperorws.hrmanagement.service;
 
+import com.emperorws.hrmanagement.logger.SystemServiceLog;
 import com.emperorws.hrmanagement.mapper.ContractinfoMapper;
 import com.emperorws.hrmanagement.model.Contractinfo;
 import com.emperorws.hrmanagement.model.Employee;
@@ -21,18 +22,20 @@ public class ContractinfoService {
     @Autowired
     ContractinfoMapper contractinfoMapper;
 
-    public RespPageBean getContractinfoByPage(Integer page, Integer size, Contractinfo contractinfo, Date[] signdata){
+    @SystemServiceLog(description="获取员工的合同信息")
+    public RespPageBean getContractinfoByPage(Integer page, Integer size, Contractinfo contractinfo, Date[] signdate){
         if (page != null && size != null) {
             page = (page - 1) * size;
         }
-        List<Employeechange> data=contractinfoMapper.getContractinfoByPage(page,size,contractinfo,signdata);
-        Long total=contractinfoMapper.getTotal(contractinfo,signdata);
+        List<Employeechange> data=contractinfoMapper.getContractinfoByPage(page,size,contractinfo,signdate);
+        Long total=contractinfoMapper.getTotal(contractinfo,signdate);
         RespPageBean bean = new RespPageBean();
         bean.setData(data);
         bean.setTotal(total);
         return bean;
     }
 
+    @SystemServiceLog(description="添加员工的合同信息")
     public Integer addContractinfo(Contractinfo contractinfo){
         return contractinfoMapper.insertSelective(contractinfo);
     }

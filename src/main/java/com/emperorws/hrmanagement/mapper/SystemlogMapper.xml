@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emperorws.hrmanagement.mapper.SystemlogMapper">
+  <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.Systemlog">
+    <id column="sysLogId" jdbcType="INTEGER" property="syslogid" />
+    <result column="workId" jdbcType="INTEGER" property="workid" />
+    <result column="broswer" jdbcType="VARCHAR" property="broswer" />
+    <result column="version" jdbcType="VARCHAR" property="version" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="logTime" jdbcType="TIMESTAMP" property="logtime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.emperorws.hrmanagement.model.SystemlogWithBLOBs">
+    <result column="logContent" jdbcType="LONGVARCHAR" property="logcontent" />
+    <result column="description" jdbcType="LONGVARCHAR" property="description" />
+  </resultMap>
+  <resultMap id="AllSystemlogInfo" type="com.emperorws.hrmanagement.model.SystemlogWithBLOBs" extends="ResultMapWithBLOBs">
+    <association property="employee" javaType="com.emperorws.hrmanagement.model.Employee">
+      <id column="workid" property="workid"/>
+      <result column="empname" property="empname"/>
+    </association>
+    <association property="department" javaType="com.emperorws.hrmanagement.model.Department">
+      <id column="depid" property="depid"/>
+      <result column="depname" property="depname"/>
+      <result column="leadername" property="leadername"/>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    sysLogId, workId, broswer, version, ip, logTime
+  </sql>
+  <sql id="Blob_Column_List">
+    logContent, description
+  </sql>
+  <select id="getSystemlogByPage" resultMap="AllSystemlogInfo">
+    select s.*,e.empName as empname,d.depName as depname
+    from systemLog s,employee e,department d
+    where e.workId=s.workId and e.depId=d.depId
+    <if test="emp!=null">
+      <if test="emp.empname !=null and emp.empname!=''">
+        and e.empName like concat('%',#{emp.empname},'%')
+      </if>
+      <if test="emp.depid !=null and emp.depid!=''">
+        and e.depId =#{emp.depid}
+      </if>
+    </if>
+    <if test="logtime!=null">
+      and s.logTime between #{logtime[0]} and #{logtime[1]}
+    </if>
+    order by s.logTime DESC
+    <if test="page !=null and size!=null">
+      limit #{page},#{size}
+    </if>
+  </select>
+  <select id="getTotal" resultType="java.lang.Long">
+    select count(DISTINCT  s.sysLogId) from systemLog s,employee e,department d
+    <where>
+      <if test="emp!=null">
+        <if test="emp.empname !=null and emp.empname!=''">
+          and e.empName like concat('%',#{emp.empname},'%')
+        </if>
+        <if test="emp.depid !=null and emp.depid!=''">
+          and e.depId =#{emp.depid}
+        </if>
+      </if>
+      <if test="logtime!=null">
+        and s.logTime between #{logtime[0]} and #{logtime[1]}
+      </if>
+    </where>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from systemlog
+    where sysLogId = #{syslogid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteSystemlogs" parameterType="java.util.List">
+    delete from systemLog
+    where systemLog.sysLogId in
+    <foreach collection="systemlogs" item="systemlog" separator="," open="(" close=")">
+      #{systemlog.syslogid,jdbcType=INTEGER}
+    </foreach>
+  </delete>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from systemlog
+    where sysLogId = #{syslogid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.emperorws.hrmanagement.model.SystemlogWithBLOBs">
+    insert into systemlog (sysLogId, workId, broswer, 
+      version, ip, logTime, 
+      logContent, description)
+    values (#{syslogid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{broswer,jdbcType=VARCHAR}, 
+      #{version,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, #{logtime,jdbcType=TIMESTAMP}, 
+      #{logcontent,jdbcType=LONGVARCHAR}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.SystemlogWithBLOBs">
+    insert into systemlog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="syslogid != null">
+        sysLogId,
+      </if>
+      <if test="workid != null">
+        workId,
+      </if>
+      <if test="broswer != null">
+        broswer,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="logtime != null">
+        logTime,
+      </if>
+      <if test="logcontent != null">
+        logContent,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="syslogid != null">
+        #{syslogid,jdbcType=INTEGER},
+      </if>
+      <if test="workid != null">
+        #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="broswer != null">
+        #{broswer,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="logtime != null">
+        #{logtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logcontent != null">
+        #{logcontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.SystemlogWithBLOBs">
+    update systemlog
+    <set>
+      <if test="workid != null">
+        workId = #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="broswer != null">
+        broswer = #{broswer,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="logtime != null">
+        logTime = #{logtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logcontent != null">
+        logContent = #{logcontent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where sysLogId = #{syslogid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.emperorws.hrmanagement.model.SystemlogWithBLOBs">
+    update systemlog
+    set workId = #{workid,jdbcType=INTEGER},
+      broswer = #{broswer,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      logTime = #{logtime,jdbcType=TIMESTAMP},
+      logContent = #{logcontent,jdbcType=LONGVARCHAR},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where sysLogId = #{syslogid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.Systemlog">
+    update systemlog
+    set workId = #{workid,jdbcType=INTEGER},
+      broswer = #{broswer,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      logTime = #{logtime,jdbcType=TIMESTAMP}
+    where sysLogId = #{syslogid,jdbcType=INTEGER}
+  </update>
+</mapper>
