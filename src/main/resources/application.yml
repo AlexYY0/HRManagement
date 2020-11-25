@@ -2,7 +2,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
-    password: xsmnt147258
+    password: root
     url: jdbc:mysql://localhost:3306/hrmanagement?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
     driver-class-name: com.mysql.cj.jdbc.Driver
   main:
@@ -37,8 +37,8 @@ fastdfs:
   nginx:
     host: http://192.168.91.128/
 wx:
-  appid: wx33198436ed5c5a59
-  secret: 7e1281f364e664d5a97a816dfdca7b31
+  appid: 你的微信appid
+  secret: 你的微信secret
   longitude: 106.427846
   latitude: 29.820011
 token:
