@@ -14,6 +14,14 @@
 7. Spring Cache
 8. 七牛云云存储
 9. JWT
+### 前端
+1. Vue
+2. ElementUI
+3. axios
+4. vue-router
+5. Vuex
+6. vue-cli4
+7. AntV的G2 Plot数据可视化
 ### 主要实现的功能
 1. 简单的增删查改
 2. 简单的Excel导入导出
@@ -23,11 +31,12 @@
 6. 基于RabbitMQ简单的实现了系统的高并发功能、接口的幂等性以及消息的可靠性传递
 7. 简单的面向切面的编程用于记录系统日志
 
+### 后端项目地址[HRManagement](https://github.com/AlexYY0/HRManagement)
 ### 前端项目地址[hrmanagement-f](https://github.com/AlexYY0/hrmanagement-f)
 ### 配套微信小程序地址[HRManagementWX](https://github.com/AlexYY0/HRManagementWX)
 
 ### 快速部署
-1. clone 项目到本地 `https://github.com/AlexYY0/HRManagement.git`
+1. clone 后端项目到本地 `https://github.com/AlexYY0/HRManagement.git`
 2. 导入数据库脚本
 3. 提前准备好 Redis，在 项目的 application.properties 文件中，将 Redis 配置改为自己的
 4. 提前准备好 RabbitMQ，在项目的 application.properties 文件中将 RabbitMQ 的配置改为自己的（**注意，RabbitMQ 需要分别修改 mailserver 和 vhrserver 的配置文件**）
