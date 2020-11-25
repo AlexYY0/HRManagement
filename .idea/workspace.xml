@@ -9,8 +9,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7ed7b95-185d-4665-89c6-d634e82e681a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -390,7 +389,7 @@
       <workItem from="1598681947722" duration="331000" />
       <workItem from="1599565936988" duration="1766000" />
       <workItem from="1600881576676" duration="70000" />
-      <workItem from="1606316956416" duration="3009000" />
+      <workItem from="1606316956416" duration="3201000" />
     </task>
     <task id="LOCAL-00001" summary="IDEA创建SpringBoort项目的模板，方便大家。">
       <created>1580544967197</created>
@@ -504,7 +503,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606317509074</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="项目介绍完成。">
+      <created>1606320016807</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1606320016807</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -524,17 +530,18 @@
     <MESSAGE value="HRManagement排班系统开发完成。" />
     <MESSAGE value="HRManagement除微信小程序打卡功能，基本完成。" />
     <MESSAGE value="HRManagement的微信小程序打卡功能，基本完成。" />
-    <option name="LAST_COMMIT_MESSAGE" value="HRManagement的微信小程序打卡功能，基本完成。" />
+    <MESSAGE value="项目介绍完成。" />
+    <option name="LAST_COMMIT_MESSAGE" value="项目介绍完成。" />
   </component>
   <component name="WindowStateProjectService">
     <state x="449" y="138" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1598680909222">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="449" y="138" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824@0.0.1536.824" timestamp="1598680909222" />
-    <state x="302" y="0" key="CommitChangelistDialog2" timestamp="1606317506359">
+    <state x="302" y="0" key="CommitChangelistDialog2" timestamp="1606320015575">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="302" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1606317506359" />
+    <state x="302" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1606320015575" />
     <state x="549" y="153" key="FileChooserDialogImpl" timestamp="1606317292858">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -595,6 +602,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="262" y="28" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1598682161311" />
+    <state x="361" y="141" key="Vcs.Push.Dialog.v2" timestamp="1606320043114">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1606320043114" />
     <state x="527" y="256" key="cloudConfig.PluginsDialog" timestamp="1598681890487">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
