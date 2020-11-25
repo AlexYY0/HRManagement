@@ -15,7 +15,13 @@ public class Workingschedule implements Serializable {
 
     private Integer todaysche;
 
+    private String longitude;
+
+    private String latitude;
+
     private Businesshours businesshours;
+
+    private Attelogday attelogday;
 
     public Workingschedule(){
     }
@@ -64,5 +70,29 @@ public class Workingschedule implements Serializable {
 
     public void setBusinesshours(Businesshours businesshours){
         this.businesshours=businesshours;
+    }
+
+    public Attelogday getAttelogday() {
+        return this.attelogday;
+    }
+
+    public void setAttelogday(Attelogday attelogday) {
+        this.attelogday = attelogday;
+    }
+
+    public String getLongitude() {
+        return this.longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return this.latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 }

@@ -9,6 +9,7 @@ import com.emperorws.hrmanagement.model.Workingschedule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -91,12 +92,14 @@ public class AppattService {
             int tophalf=begintime.compareTo(workingschedules.get(0).getBusinesshours().getBeginrest());
             int upperhalf=workingschedules.get(0).getBusinesshours().getEndrest().compareTo(endtime);
             if((tophalf==-1||tophalf==0)&&(upperhalf==-1||upperhalf==0)){
-                long tophalfh=(workingschedules.get(0).getBusinesshours().getBeginrest().getTime()-begintime.getTime())/(1000*60*60);
-                long upperh=(endtime.getTime()-workingschedules.get(0).getBusinesshours().getEndrest().getTime())/(1000*60*60);
-                return (double) tophalfh+upperh;
+                double tophalfh=(workingschedules.get(0).getBusinesshours().getBeginrest().getTime()-begintime.getTime())/(3600000d);
+                double upperh=(endtime.getTime()-workingschedules.get(0).getBusinesshours().getEndrest().getTime())/(3600000d);
+                BigDecimal all=new BigDecimal(tophalfh+upperh);
+                return all.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
             }else{
-                long all=(endtime.getTime()-begintime.getTime())/(1000*60*60);
-                return (double) all;
+                double tot=(endtime.getTime()-begintime.getTime())/(3600000d);
+                BigDecimal all=new BigDecimal(tot);
+                return all.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
             }
         }
         for(Workingschedule ws : workingschedules){
@@ -115,27 +118,32 @@ public class AppattService {
             if(ws.getToday().equals(begindate)&&ws.getTodaysche()!=1){
                 int tophalf=begintime.compareTo(ws.getBusinesshours().getBeginrest());
                 if(tophalf==-1||tophalf==0){
-                    long tophalfh=(ws.getBusinesshours().getBeginrest().getTime()-begintime.getTime())/(1000*60*60);
-                    long upperh=(ws.getBusinesshours().getEndtime().getTime()-ws.getBusinesshours().getEndrest().getTime())/(1000*60*60);
-                    total+=(double)tophalfh+(double)upperh;
+                    double tophalfh=(ws.getBusinesshours().getBeginrest().getTime()-begintime.getTime())/(3600000d);
+                    double upperh=(ws.getBusinesshours().getEndtime().getTime()-ws.getBusinesshours().getEndrest().getTime())/(3600000d);
+                    BigDecimal all=new BigDecimal(tophalfh+upperh);
+                    total+=all.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
                 }else{
-                    long upperh=(ws.getBusinesshours().getEndtime().getTime()-begintime.getTime())/(1000*60*60);
-                    total+=(double)upperh;
+                    double upperh=(ws.getBusinesshours().getEndtime().getTime()-begintime.getTime())/(3600000d);
+                    BigDecimal all=new BigDecimal(upperh);
+                    total+=all.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
                 }
             }else if(ws.getToday().equals(enddate)&&ws.getTodaysche()!=1){
                 int upperhalf=endtime.compareTo(ws.getBusinesshours().getBeginrest());
                 if(upperhalf==-1||upperhalf==0){
-                    long tophalfh=(endtime.getTime()-ws.getBusinesshours().getBegintime().getTime())/(1000*60*60);
-                    total+=(double)tophalfh;
+                    double tophalfh=(endtime.getTime()-ws.getBusinesshours().getBegintime().getTime())/(3600000d);
+                    BigDecimal all=new BigDecimal(tophalfh);
+                    total+=all.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
                 }else{
-                    long tophalfh=(ws.getBusinesshours().getBeginrest().getTime()-ws.getBusinesshours().getBegintime().getTime())/(1000*60*60);
-                    long upperh=(endtime.getTime()-ws.getBusinesshours().getEndrest().getTime())/(1000*60*60);
-                    total+=(double)tophalfh+(double)upperh;
+                    double tophalfh=(ws.getBusinesshours().getBeginrest().getTime()-ws.getBusinesshours().getBegintime().getTime())/(3600000d);
+                    double upperh=(endtime.getTime()-ws.getBusinesshours().getEndrest().getTime())/(3600000d);
+                    BigDecimal all=new BigDecimal(tophalfh+upperh);
+                    total+=all.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
                 }
             }else if(ws.getTodaysche()!=1){
-                long tophalfh=(ws.getBusinesshours().getBeginrest().getTime()-ws.getBusinesshours().getBegintime().getTime())/(1000*60*60);
-                long upperh=(ws.getBusinesshours().getEndtime().getTime()-ws.getBusinesshours().getEndrest().getTime())/(1000*60*60);
-                total+=(double)tophalfh+(double)upperh;
+                double tophalfh=(ws.getBusinesshours().getBeginrest().getTime()-ws.getBusinesshours().getBegintime().getTime())/(3600000d);
+                double upperh=(ws.getBusinesshours().getEndtime().getTime()-ws.getBusinesshours().getEndrest().getTime())/(3600000d);
+                BigDecimal all=new BigDecimal(tophalfh+upperh);
+                total+=all.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
             }
         }
         return total;

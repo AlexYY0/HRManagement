@@ -45,7 +45,6 @@ public class Department implements Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(depname);
     }
 

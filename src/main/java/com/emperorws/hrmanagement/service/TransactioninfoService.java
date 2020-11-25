@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: EmperorWS
@@ -33,5 +34,10 @@ public class TransactioninfoService {
         bean.setData(data);
         bean.setTotal(total);
         return bean;
+    }
+
+    @SystemServiceLog(description="获取今日的考勤事务申请数据，用于前端数据可视化")
+    public List<Map<String,Object>> getAppattVisual(){
+        return appattMapper.getAppattVisual();
     }
 }

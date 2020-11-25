@@ -9,6 +9,9 @@
   <sql id="Base_Column_List">
     caleId, date, status
   </sql>
+  <select id="getHolidays" resultType="java.lang.Integer">
+    select status from calendar where calendar.date between #{daterange[0]} and #{daterange[1]} order by calendar.date
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

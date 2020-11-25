@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.emperorws.hrmanagement.model.User">
     <id column="userId" jdbcType="INTEGER" property="userid" />
     <result column="workId" jdbcType="INTEGER" property="workid" />
+    <result column="openId" jdbcType="VARCHAR" property="openid" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="userface" jdbcType="VARCHAR" property="userface" />
@@ -22,8 +23,19 @@
     </collection>
   </resultMap>
   <sql id="Base_Column_List">
-    userId, workId, username, password, userface, enabled, userRemark
+    userId, workId, openId, username, password, userface, enabled, userRemark
   </sql>
+  <select id="findUserByUsername" resultMap="BaseResultMap">
+    select * from user where username=#{username}
+  </select>
+  <select id="isBind" parameterType="java.lang.String" resultMap="UserWithRoles">
+    select u.*,e.empName as empname from user u,employee e where u.openid=#{openid} and e.workId=u.workId
+  </select>
+  <select id="findUserWithRoleByOpenid" resultMap="UserWithRoles">
+    select u.*,r.roleid as roleid,r.enname as renname,r.zhname as rzhname,e.empName as empname
+    from user u,employee e,role r,user_role ur
+    where u.openid=#{openid} and ur.userId=u.userId and ur.roleId=r.roleId and u.workId=e.workId
+  </select>
   <select id="getAllUserInfoByUserid" resultMap="UserWithRoles">
     select u.*,e.empName as empname from user u,employee e where e.workId=u.workId and u.userId=#{userid}
   </select>
@@ -47,11 +59,11 @@
   <select id="getTotal" resultType="java.lang.Long">
     select count(*) from user
     <where>
-        <if test="emp!=null">
-            <if test="emp.empname !=null and emp.empname!=''">
-                and e.empName like concat('%',#{emp.empname},'%')
-            </if>
+      <if test="emp!=null">
+        <if test="emp.empname !=null and emp.empname!=''">
+          and e.empName like concat('%',#{emp.empname},'%')
         </if>
+      </if>
     </where>
   </select>
   <select id="getUserRolesById" resultType="com.emperorws.hrmanagement.model.Role">
@@ -74,12 +86,12 @@
     where userId = #{userid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.emperorws.hrmanagement.model.User">
-    insert into user (userId, workId, username, 
-      password, userface, enabled,
-      userRemark)
-    values (#{userid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{userface,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT},
-      #{userremark,jdbcType=VARCHAR})
+    insert into user (userId, workId, openId, 
+      username, password, userface, 
+      enabled, userRemark)
+    values (#{userid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{openid,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{userface,jdbcType=VARCHAR}, 
+      #{enabled,jdbcType=BIT}, #{userremark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.User">
     insert into user
@@ -89,6 +101,9 @@
       </if>
       <if test="workid != null">
         workId,
+      </if>
+      <if test="openid != null">
+        openId,
       </if>
       <if test="username != null">
         username,
@@ -113,6 +128,9 @@
       <if test="workid != null">
         #{workid,jdbcType=INTEGER},
       </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
       </if>
@@ -130,11 +148,24 @@
       </if>
     </trim>
   </insert>
+  <update id="updateUserPassword">
+    update user
+    set password=#{encodePassword}
+    where userid=#{userid}
+  </update>
+  <update id="bind">
+    update user
+    set openid=#{openid}
+    where userid=#{userid}
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.emperorws.hrmanagement.model.User">
     update user
     <set>
       <if test="workid != null">
         workId = #{workid,jdbcType=INTEGER},
+      </if>
+      <if test="openid != null">
+        openId = #{openid,jdbcType=VARCHAR},
       </if>
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
@@ -154,12 +185,10 @@
     </set>
     where userId = #{userid,jdbcType=INTEGER}
   </update>
-  <update id="updateUserPassword">
-        update user set password = #{encodePassword} where userId=#{userid};
-    </update>
   <update id="updateByPrimaryKey" parameterType="com.emperorws.hrmanagement.model.User">
     update user
     set workId = #{workid,jdbcType=INTEGER},
+      openId = #{openid,jdbcType=VARCHAR},
       username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       userface = #{userface,jdbcType=VARCHAR},

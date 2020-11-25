@@ -33,11 +33,15 @@ public interface WorkingscheduleMapper {
 
     Integer updateWorkingschedule(@Param("wss") List<Workingschedule> workingschedules, @Param("workid") Integer workid);
 
-    Integer deleteWorkingschedules(@Param("wss") List<Map<String,Object>> workingschedules);
+    Integer deleteWorkingschedules(@Param("wss") List<Map<String,Object>> workingschedules,@Param("daterange") Date[] daterange);
 
     Integer autoSchedule(@Param("emps") List<Employee> employees, @Param("monthday") Date[] monthday);
 
     List<Workingschedule> getAllWorkingscheduleByDate(@Param("workid") Integer workid,@Param("daterange") Date[] daterange);
 
     Integer updateWorkingscheduleSelf(@Param("workid") Integer workid,@Param("daterange") Date[] daterange);
+
+    Workingschedule getTodayAtten(@Param("openid") String openid,@Param("today") Date today);
+
+    List<Workingschedule> findAllNeedWork();
 }

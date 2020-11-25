@@ -4,6 +4,7 @@ import com.emperorws.hrmanagement.model.Employee;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface EmployeeMapper {
     int deleteByPrimaryKey(Integer workid);
@@ -29,4 +30,6 @@ public interface EmployeeMapper {
     Employee getEmployeeById(Integer workid);
 
     void addEmpAndUser(Employee record);
+
+    List<Map<String,Object>> getEmpstaVisual();
 }

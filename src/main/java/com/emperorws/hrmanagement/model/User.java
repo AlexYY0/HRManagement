@@ -8,11 +8,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class User implements UserDetails {
     private Integer userid;
 
     private Integer workid;
+
+    private String openid;
 
     private String username;
 
@@ -42,6 +45,14 @@ public class User implements UserDetails {
 
     public void setWorkid(Integer workid) {
         this.workid = workid;
+    }
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid == null ? null : openid.trim();
     }
 
     public String getUsername() {
@@ -97,6 +108,11 @@ public class User implements UserDetails {
     }
 
     @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    @Override
     public boolean isAccountNonExpired() {
         return true;
     }
@@ -112,11 +128,6 @@ public class User implements UserDetails {
     }
 
     @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>(roles.size());
@@ -124,5 +135,18 @@ public class User implements UserDetails {
             authorities.add(new SimpleGrantedAuthority(role.getEnname()));
         }
         return authorities;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User that = (User) o;
+        return Objects.equals(username, that.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username);
     }
 }

@@ -4,6 +4,7 @@ package com.emperorws.hrmanagement.mapper;
 import com.emperorws.hrmanagement.model.Calendar;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface CalendarMapper {
@@ -20,4 +21,6 @@ public interface CalendarMapper {
     int updateByPrimaryKey(Calendar record);
 
     Integer addCalendars(@Param("calendars") List<Calendar> calendars);
+
+    List<Integer> getHolidays(@Param("daterange")Date[] daterange);
 }

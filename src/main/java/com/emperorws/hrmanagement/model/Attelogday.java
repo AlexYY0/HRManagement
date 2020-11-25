@@ -31,6 +31,8 @@ public class Attelogday implements Serializable {
 
     private Attestatus attestatus;
 
+    private Businesshours businesshours;
+
     public Integer getAttelogdayid() {
         return attelogdayid;
     }
@@ -117,5 +119,13 @@ public class Attelogday implements Serializable {
 
     public void setAttestatus(Attestatus attestatus){
         this.attestatus=attestatus;
+    }
+
+    public Businesshours getBusinesshours() {
+        return this.businesshours;
+    }
+
+    public void setBusinesshours(Businesshours businesshours) {
+        this.businesshours = businesshours;
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: EmperorWS
@@ -64,5 +65,10 @@ public class EmployeesalaryService {
     @SystemServiceLog(description="批量导入员工的薪资配置信息")
     public Integer addEmpSals(List<Employeesalary> list){
         return employeesalaryMapper.addEmpSals(list);
+    }
+
+    @SystemServiceLog(description="获取员工的薪资水平状况，用于前端数据可视化")
+    public List<Map<String,Object>> getEmpsalVisual(){
+        return employeesalaryMapper.getEmpsalVisual();
     }
 }

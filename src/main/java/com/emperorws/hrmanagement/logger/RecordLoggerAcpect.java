@@ -19,6 +19,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
@@ -85,9 +87,12 @@ public class RecordLoggerAcpect {
             log.info("【注解：Before】浏览器类型 : " + browser.getName());
             log.info("【注解：Before】浏览器类型和版本 : " + version.getVersion());
         }catch (Exception e){
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
             //记录本地异常日志
             log.error("==前置通知异常==");
-            log.error("异常信息：{}",e.getMessage());
+            log.error("异常信息：{}",sw.toString());
         }
     }
 
@@ -120,23 +125,26 @@ public class RecordLoggerAcpect {
             systemlogWithBLOBs.setVersion(version.getVersion());
             systemlogWithBLOBs.setIp(request.getRemoteAddr());
             systemlogWithBLOBs.setLogcontent(logcontent);
-            systemlogWithBLOBs.setDescription(getControllerMethodDescription(joinPoint));
+            systemlogWithBLOBs.setDescription(getServiceMethodDescription(joinPoint));
             systemlogService.addSystemlog(systemlogWithBLOBs);
             // 记录下请求内容
             log.info("【注解：AfterThrowing】操作人ID ："+user.getUserid());
+            log.info("【注解：AfterThrowing】操作描述:" + getServiceMethodDescription(joinPoint));
             log.info("【注解：AfterThrowing】浏览器输入的网址=URL : " + request.getRequestURL().toString());
             log.info("【注解：AfterThrowing】HTTP_METHOD : " + request.getMethod());
             log.info("【注解：AfterThrowing】IP : " + request.getRemoteAddr());
             log.info("【注解：AfterThrowing】异常代码:" + e.getClass().getName());
             log.info("【注解：AfterThrowing】异常信息:" + e.getMessage());
             log.info("【注解：AfterThrowing】异常方法:" + (joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName() + "()"));
-            log.info("【注解：AfterThrowing】操作描述:" + getServiceMethodDescription(joinPoint));
             log.info("【注解：AfterThrowing】浏览器类型 : " + browser.getName());
             log.info("【注解：AfterThrowing】浏览器类型和版本 : " + version.getVersion());
         }catch (Exception ex){
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ex.printStackTrace(pw);
             //记录本地异常日志
             log.error("==异常通知异常==");
-            log.error("异常信息:{}", ex.getMessage());
+            log.error("异常信息:{}", sw.toString());
         }
     }
 

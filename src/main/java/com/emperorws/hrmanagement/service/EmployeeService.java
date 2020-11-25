@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: EmperorWS
@@ -70,5 +71,10 @@ public class EmployeeService {
             lastresult=lastresult+(emp.getResult()+emp.getResult2());
         }
         return lastresult;
+    }
+
+    @SystemServiceLog(description="获取员工的任职状态，用于前端数据可视化")
+    public List<Map<String,Object>> getEmpstaVisual(){
+        return employeeMapper.getEmpstaVisual();
     }
 }

@@ -10,15 +10,25 @@
   <resultMap id="AllWorkingscheduleInfo" type="com.emperorws.hrmanagement.model.Workingschedule" extends="BaseResultMap">
     <association property="businesshours" javaType="com.emperorws.hrmanagement.model.Businesshours">
       <id column="busihoursid" property="busihoursid"/>
+      <result column="busihoursname" property="busihoursname"/>
       <result column="begintime" property="begintime"/>
       <result column="endtime" property="endtime"/>
       <result column="beginrest" property="beginrest"/>
       <result column="endrest" property="endrest"/>
     </association>
+    <association property="attelogday" javaType="com.emperorws.hrmanagement.model.Attelogday">
+      <id column="attelogdayid" property="attelogdayid"/>
+      <result column="clockinflag" property="clockinflag"/>
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     wsId, workId, today, todaySche
   </sql>
+  <select id="getTodayAtten" resultMap="AllWorkingscheduleInfo">
+    select w.*,b.beginTime as begintime,b.endTime as endtime,b.busiHoursName as busihoursname,a.clockInFlag as clockinflag
+    from workingSchedule w,businessHours b,user u,attendanceLogOfDay a
+    where u.openId=#{openid} and u.workId=w.workId and w.today=#{today} and w.todaySche=b.busiHoursId and a.workId=u.workId and a.clockInDay=#{today}
+  </select>
   <select id="getWorkingscheduleByPage" resultType="java.util.HashMap">
     SELECT
     #{monthday[0]} as firstofmonth,#{monthday[1]} as lastofmonth,w.`workId` AS workid,emp.empName AS empname,d.depName AS depname,
@@ -58,6 +68,11 @@
       </if>
     </where>
   </select>
+  <select id="findAllNeedWork" resultMap="BaseResultMap">
+    select *
+    from workingSchedule w
+    where w.todaySche!=1 and w.today=CURRENT_DATE
+  </select>
   <select id="getAllWorkingscheduleByDate" resultMap="AllWorkingscheduleInfo">
     SELECT w.*,b.beginTime AS begintime,b.endTime AS endtime,b.beginRest AS beginRest,b.endrest AS endrest
     FROM workingSchedule w,businessHours b
@@ -72,8 +87,9 @@
   <delete id="deleteWorkingschedules" parameterType="java.util.List">
     delete from workingSchedule
     <where>
+      workingSchedule.today between #{daterange[0]} and #{daterange[1]} and workingSchedule.workId in
       <foreach collection="wss" item="ws" separator="," open="(" close=")">
-        workingSchedule.workId=#{ws.workid,jdbcType=INTEGER} and workingSchedule.today between #{ws.firstofmonth} and #{ws.lastofmonth}
+        #{ws.workid,jdbcType=INTEGER}
       </foreach>
     </where>
   </delete>
@@ -84,7 +100,7 @@
   <insert id="autoSchedule">
     insert into workingSchedule(workId, today, todaySche)
     <foreach collection="emps" item="emp" separator="union" close=";">
-      (select DISTINCT #{emp.workid},calendar.date,if(calendar.status=0 or calendar.status=0,2,1)
+      (select DISTINCT #{emp.workid},calendar.date,if(calendar.status=0 or calendar.status=2,2,1)
       from calendar
       where calendar.date between #{monthday[0]} and #{monthday[1]})
     </foreach>

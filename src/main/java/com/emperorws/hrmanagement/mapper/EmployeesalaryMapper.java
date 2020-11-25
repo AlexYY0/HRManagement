@@ -5,6 +5,7 @@ import com.emperorws.hrmanagement.model.Employeesalary;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface EmployeesalaryMapper {
     int deleteByPrimaryKey(Integer esId);
@@ -28,4 +29,6 @@ public interface EmployeesalaryMapper {
     Integer addEmpSals(@Param("list") List<Employeesalary> list);
 
     Integer deleteEmpSals(@Param("empsals") List<Employeesalary> empsals);
+
+    List<Map<String,Object>> getEmpsalVisual();
 }

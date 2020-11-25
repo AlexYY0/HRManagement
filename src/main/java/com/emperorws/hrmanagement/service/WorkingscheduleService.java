@@ -86,14 +86,15 @@ public class WorkingscheduleService {
 
     @SystemServiceLog(description="批量删除员工的排班信息")
     public Boolean deleteWorkingschedules(List<Map<String,Object>> workingschedules) throws ParseException {
-        if(workingschedules==null){
+        if(workingschedules.size()==0){
             return false;
         }
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        //Date firstofmonth=df.parse((String) workingschedules.get(0).get("firstofmonth"));
-        //Date lastofmonth=df.parse((String) workingschedules.get(0).get("lastofmonth"));
+        Date firstofmonth=df.parse((String) workingschedules.get(0).get("firstofmonth"));
+        Date lastofmonth=df.parse((String) workingschedules.get(0).get("lastofmonth"));
+        Date[] daterange={firstofmonth,lastofmonth};
         Integer day=Integer.parseInt(((String) workingschedules.get(0).get("lastofmonth")).substring(8,10));
-        Integer result=workingscheduleMapper.deleteWorkingschedules(workingschedules);
+        Integer result=workingscheduleMapper.deleteWorkingschedules(workingschedules,daterange);
         if(result==day*workingschedules.size())
             return true;
         else

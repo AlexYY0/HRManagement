@@ -1,151 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="GROUP_BY_SEVERITY" value="true" />
+    <option name="ANALYZE_TEST_SOURCES" value="false" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="d7ed7b95-185d-4665-89c6-d634e82e681a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/attendance/AttelogdayController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/attendance/AttelogmonController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/SalarycheckController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/SalaryschemeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/system/SystemlogController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/work/CalendarController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/logger/RecordLoggerAcpect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/logger/SystemControllerLog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/logger/SystemServiceLog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AttelogdayMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AttelogdayMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AttelogmonMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AttelogmonMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AttestatusMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/CalendarMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/CalendarMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SalaryschemeMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SalaryschemeMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SystemlogMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SystemlogMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Attelogday.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Attelogmon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Attestatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Calendar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Salaryscheme.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Systemlog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/SystemlogWithBLOBs.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/AttelogdayService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/AttelogmonService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/CalendarService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/SalarycheckService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/SalaryschemeService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/SystemlogService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/AttelogmonPOIUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HRManagement.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/JwtAuthenticationTokenFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/WechatAuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/WechatAuthenticationManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/WechatAuthenticationToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/handler/WechatSuccessHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/WechatAPI/WechatAPIController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/config/DelayMsgConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/config/MsgCheck.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/config/MsgConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/config/RabbitConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/config/ScheduleTaskConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/exception/BasicException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/exception/ExceptionEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/exception/NotLoginException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/exception/ParamException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/exception/TaskException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/ConstantEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/RabbitMQConstants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/WXSessionModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Wxuser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/WechatAPIService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/rabbitmq/ClockinReceiver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/rabbitmq/ClockinSender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/HttpClientUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/RedisUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/app.164eca64.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/chunk-326bc5a8.2a828832.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/chunk-3fb7d821.ad4a1ff1.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/chunk-72507ef2.34e1ea1b.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/chunk-7dc4a9a2.82dd7458.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/chunk-d203d38c.12fdc49e.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/chunk-e83db30a.100992ca.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/chunk-vendors.2d74a5eb.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/element-icons.535877f5.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/element-icons.732389de.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/fa-brands-400.067595ad.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/fa-brands-400.57dcda6f.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/fa-brands-400.9ec698d1.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/fa-brands-400.b564da88.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/fa-solid-900.55eb2a60.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/fa-solid-900.75f38a15.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/fa-solid-900.89e02bae.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/fa-solid-900.cdfec5cf.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/fa-brands-400.9d67fa14.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/fa-solid-900.0724bb8b.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/app.fb5e00fe.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/app.fb5e00fe.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-2d0d3658.3ff41647.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-2d0d3658.3ff41647.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-2d21f0fa.ba18c228.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-2d21f0fa.ba18c228.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-2d237c54.d7f85efc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-2d237c54.d7f85efc.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-326bc5a8.0a32d092.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-326bc5a8.0a32d092.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-3bc33c57.385ef764.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-3bc33c57.385ef764.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-3fb7d821.722d2ed0.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-3fb7d821.722d2ed0.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-5647d5ed.8d2d4a93.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-5647d5ed.8d2d4a93.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-72507ef2.40502e9c.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-72507ef2.40502e9c.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-7dc4a9a2.4fe0f9ba.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-7dc4a9a2.4fe0f9ba.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-d203d38c.d6a3d897.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-d203d38c.d6a3d897.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-e83db30a.bfde396d.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-e83db30a.bfde396d.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-vendors.8d4bc23a.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-vendors.8d4bc23a.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HRManagement.sql" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/MultiSecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/UserInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/UserInfoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/attendance/AppattController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/attendance/AppattController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/attendance/TransactioninfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/attendance/TransactioninfoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/attendance/TransactionmanagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/attendance/TransactionmanagementController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/attendance/workingschedule/BusinesshoursController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/attendance/workingschedule/BusinesshoursController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/attendance/workingschedule/WorkingscheduleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/attendance/workingschedule/WorkingscheduleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/employee/ContractinfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/employee/ContractinfoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/employee/EmpBasicController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/employee/EmpBasicController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/employee/EmployeechangeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/employee/EmployeechangeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/organization/DepartmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/organization/DepartmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/EmployeesalaryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/EmployeesalaryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/SalaryadjustmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/SalaryadjustmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/SalaryinfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/SalaryinfoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/SpeaddController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/SpeaddController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/TaxrateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/TaxrateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/TreatmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/TreatmentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/WelfareController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/salary/WelfareController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/system/PermissionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/system/PermissionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/system/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/system/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/converter/DateConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/converter/DateConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/work/CalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/work/WorkbenchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/logger/RecordLoggerAcpect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/logger/RecordLoggerAcpect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AppattMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AppattMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AppattMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AppattMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/BusinesshoursMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/BusinesshoursMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/ContractinfoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/ContractinfoMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/ContractinfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/ContractinfoMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeechangeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeechangeMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeechangeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeechangeMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SalaryadjustmentMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SalaryadjustmentMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SalaryadjustmentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SalaryadjustmentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SalaryinfoMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SalaryinfoMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SalaryinfoMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/SalaryinfoMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AttelogdayMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AttelogdayMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AttelogdayMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AttelogdayMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/CalendarMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/CalendarMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/CalendarMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/CalendarMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeeMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeeMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeesalaryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeesalaryMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeesalaryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeesalaryMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/WorkingscheduleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/WorkingscheduleMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/WorkingscheduleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/WorkingscheduleMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Appatt.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Appatt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Businesshours.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Businesshours.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Contractinfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Contractinfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Employeechange.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Employeechange.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Salaryadjustment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Salaryadjustment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Salaryinfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Salaryinfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Attelogday.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Attelogday.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Department.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Workingschedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Workingschedule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/AppattService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/AppattService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/BusinesshoursService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/BusinesshoursService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/ContractinfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/ContractinfoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/DepartmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/DepartmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/AttelogdayService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/AttelogdayService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/CalendarService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/CalendarService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/EmployeeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/EmployeechangeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/EmployeechangeService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/EmployeesalaryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/EmployeesalaryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/PermissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/PermissionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/RoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/SalaryadjustmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/SalaryadjustmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/SalaryinfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/SalaryinfoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/SpeaddService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/SpeaddService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/TaxrateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/TaxrateService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/TransactioninfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/TransactioninfoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/TransactionmanagementService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/TransactionmanagementService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/TreatmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/TreatmentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/WelfareService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/WelfareService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/WorkingscheduleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/WorkingscheduleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/EmpPOIUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/EmpPOIUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/EmpSalPOIUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/EmpSalPOIUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/SalInfoPOIUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/SalInfoPOIUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/UserUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/UserUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <option name="HIDDEN_KINDS">
-      <set />
-    </option>
-    <expand>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - hrmanagement@localhost" type="feb32156:DbDataSourceImpl" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - hrmanagement@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - hrmanagement@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="hrmanagement: schema" type="76f4a085:MysqlImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - hrmanagement@localhost" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="hrmanagement: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-    </expand>
-    <select />
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="testRunner" value="GRADLE" />
@@ -165,9 +145,13 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Users\EmperorWS\.m2\wrapper\dists\apache-maven-3.6.3-bin\1iopthnavndlasol9gbrbg6bf2\apache-maven-3.6.3" />
+      </MavenGeneralSettings>
+    </option>
     <option name="importingSettings">
       <MavenImportingSettings>
-        <option name="importAutomatically" value="true" />
         <option name="vmOptionsForImporter" value="-Xmx768m" />
       </MavenImportingSettings>
     </option>
@@ -178,14 +162,14 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="MyBatisLogPluginindexNum" value="157" />
+    <property name="MyBatis LogindexNum" value="1058" />
+    <property name="MyBatisLogPluginindexNum" value="503" />
     <property name="MyBatisLogPluginparameters" value="Parameters:" />
     <property name="MyBatisLogPluginpreparing" value="Preparing:" />
     <property name="MyBatisLogPluginrunning" value="true" />
@@ -196,11 +180,12 @@
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="android.sdk.path" value="D:/AndroidIDE" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../vhr/vhr" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -212,7 +197,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="com.sjhy.plugin.ui.TypeMapperSetting" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
@@ -226,6 +211,17 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.HrManagementApplication">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="mybatis-generator" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -264,18 +260,7 @@
       <item itemvalue="Spring Boot.HrManagementApplication" />
     </list>
   </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
-  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -363,7 +348,159 @@
       <workItem from="1584117403118" duration="32406000" />
       <workItem from="1584190155898" duration="5835000" />
       <workItem from="1584238368465" duration="1852000" />
-      <workItem from="1584240473264" duration="26860000" />
+      <workItem from="1584240473264" duration="28279000" />
+      <workItem from="1584334588903" duration="3304000" />
+      <workItem from="1584412498898" duration="13993000" />
+      <workItem from="1584463599625" duration="9362000" />
+      <workItem from="1584521988990" duration="9092000" />
+      <workItem from="1584535249653" duration="597000" />
+      <workItem from="1584549097410" duration="44712000" />
+      <workItem from="1584635532240" duration="19096000" />
+      <workItem from="1584686224777" duration="3085000" />
+      <workItem from="1584696450186" duration="5003000" />
+      <workItem from="1584722385756" duration="6506000" />
+      <workItem from="1584762208493" duration="741000" />
+      <workItem from="1584771806490" duration="11102000" />
+      <workItem from="1584811556251" duration="12546000" />
+      <workItem from="1584932416108" duration="10381000" />
+      <workItem from="1585118871116" duration="107000" />
+      <workItem from="1585119005904" duration="3014000" />
+      <workItem from="1585143462609" duration="141000" />
+      <workItem from="1585221052484" duration="3881000" />
+      <workItem from="1585358852021" duration="1825000" />
+      <workItem from="1585390179521" duration="1797000" />
+      <workItem from="1585463580755" duration="13134000" />
+      <workItem from="1585540736725" duration="8908000" />
+      <workItem from="1585622122843" duration="15273000" />
+      <workItem from="1585708915045" duration="832000" />
+      <workItem from="1585710937399" duration="162000" />
+      <workItem from="1585976783565" duration="27953000" />
+      <workItem from="1586076376786" duration="7184000" />
+      <workItem from="1586144798752" duration="21208000" />
+      <workItem from="1586234123295" duration="6840000" />
+      <workItem from="1586311647893" duration="10263000" />
+      <workItem from="1586395523596" duration="6745000" />
+      <workItem from="1586485389087" duration="3964000" />
+      <workItem from="1586492826696" duration="39000" />
+      <workItem from="1586492903421" duration="2075000" />
+      <workItem from="1586513773178" duration="683000" />
+      <workItem from="1586668772559" duration="2417000" />
+      <workItem from="1586741266171" duration="16458000" />
+      <workItem from="1586777071518" duration="1058000" />
+      <workItem from="1586829216553" duration="9065000" />
+      <workItem from="1587087949516" duration="405000" />
+      <workItem from="1587088376917" duration="1128000" />
+      <workItem from="1587089531252" duration="754000" />
+      <workItem from="1587090309704" duration="1356000" />
+      <workItem from="1587091686778" duration="2134000" />
+      <workItem from="1587093855739" duration="320000" />
+      <workItem from="1587283359043" duration="421000" />
+      <workItem from="1587284369571" duration="31000" />
+      <workItem from="1587296884927" duration="204000" />
+      <workItem from="1587297319888" duration="46000" />
+      <workItem from="1587297408396" duration="62000" />
+      <workItem from="1587297546027" duration="494000" />
+      <workItem from="1587298112869" duration="132000" />
+      <workItem from="1587298273952" duration="114000" />
+      <workItem from="1587298415903" duration="62000" />
+      <workItem from="1587298499193" duration="165000" />
+      <workItem from="1587298694959" duration="505000" />
+      <workItem from="1587299404587" duration="71000" />
+      <workItem from="1587299499659" duration="203000" />
+      <workItem from="1587518900294" duration="1271000" />
+      <workItem from="1587551367359" duration="46000" />
+      <workItem from="1587624959759" duration="685000" />
+      <workItem from="1587778043052" duration="613000" />
+      <workItem from="1587968784251" duration="186000" />
+      <workItem from="1589869431656" duration="4472000" />
+      <workItem from="1590223830698" duration="1785000" />
+      <workItem from="1590225884041" duration="223000" />
+      <workItem from="1590226138444" duration="172000" />
+      <workItem from="1590226679735" duration="121000" />
+      <workItem from="1590226829922" duration="878000" />
+      <workItem from="1590227841382" duration="30000" />
+      <workItem from="1590228114119" duration="168000" />
+      <workItem from="1590229118457" duration="85000" />
+      <workItem from="1592208348658" duration="600000" />
+      <workItem from="1593651549818" duration="869000" />
+      <workItem from="1593652500574" duration="681000" />
+      <workItem from="1593676609720" duration="439000" />
+      <workItem from="1593677072064" duration="377000" />
+      <workItem from="1593677481654" duration="1170000" />
+      <workItem from="1593678687277" duration="175000" />
+      <workItem from="1593678914168" duration="92000" />
+      <workItem from="1593679038972" duration="323000" />
+      <workItem from="1593679406047" duration="475000" />
+      <workItem from="1593679912880" duration="2034000" />
+      <workItem from="1593681977053" duration="1402000" />
+      <workItem from="1593737583877" duration="1407000" />
+      <workItem from="1593746773598" duration="1508000" />
+      <workItem from="1593829768585" duration="375000" />
+      <workItem from="1593830172486" duration="1083000" />
+      <workItem from="1593831640594" duration="365000" />
+      <workItem from="1593832030849" duration="935000" />
+      <workItem from="1593834021330" duration="980000" />
+      <workItem from="1593997846587" duration="357000" />
+      <workItem from="1593998226513" duration="3331000" />
+      <workItem from="1594083727930" duration="631000" />
+      <workItem from="1594170262290" duration="1379000" />
+      <workItem from="1594175738368" duration="3614000" />
+      <workItem from="1594189034029" duration="1445000" />
+      <workItem from="1594256511261" duration="2542000" />
+      <workItem from="1594272047234" duration="2247000" />
+      <workItem from="1594343584305" duration="3034000" />
+      <workItem from="1594350941829" duration="724000" />
+      <workItem from="1594360073491" duration="647000" />
+      <workItem from="1594441428356" duration="1195000" />
+      <workItem from="1594523528956" duration="598000" />
+      <workItem from="1594602084938" duration="1899000" />
+      <workItem from="1594631848688" duration="2231000" />
+      <workItem from="1594689005348" duration="211000" />
+      <workItem from="1594689333829" duration="648000" />
+      <workItem from="1594691602274" duration="479000" />
+      <workItem from="1594692136361" duration="598000" />
+      <workItem from="1594693972133" duration="681000" />
+      <workItem from="1594696338967" duration="318000" />
+      <workItem from="1594696850447" duration="1002000" />
+      <workItem from="1594707801405" duration="1439000" />
+      <workItem from="1594774297784" duration="3273000" />
+      <workItem from="1594789960535" duration="9720000" />
+      <workItem from="1594812905089" duration="1189000" />
+      <workItem from="1594814143761" duration="4090000" />
+      <workItem from="1594828185567" duration="2641000" />
+      <workItem from="1594859308440" duration="193000" />
+      <workItem from="1595164599115" duration="1561000" />
+      <workItem from="1595168501857" duration="4046000" />
+      <workItem from="1595226409927" duration="4454000" />
+      <workItem from="1595254714528" duration="602000" />
+      <workItem from="1595300715835" duration="11978000" />
+      <workItem from="1595482442608" duration="7282000" />
+      <workItem from="1595555865997" duration="625000" />
+      <workItem from="1595580201140" duration="1215000" />
+      <workItem from="1595585155877" duration="1290000" />
+      <workItem from="1595755885944" duration="4014000" />
+      <workItem from="1595816485819" duration="66000" />
+      <workItem from="1595829985226" duration="1016000" />
+      <workItem from="1595904933230" duration="5461000" />
+      <workItem from="1596007269094" duration="29000" />
+      <workItem from="1596090857854" duration="920000" />
+      <workItem from="1596424010662" duration="1658000" />
+      <workItem from="1596425837531" duration="284000" />
+      <workItem from="1596426211086" duration="129000" />
+      <workItem from="1596502818260" duration="1347000" />
+      <workItem from="1596505475269" duration="1215000" />
+      <workItem from="1596511534550" duration="2928000" />
+      <workItem from="1596551936344" duration="1250000" />
+      <workItem from="1596638383725" duration="1356000" />
+      <workItem from="1597493942915" duration="517000" />
+      <workItem from="1598680741330" duration="16000" />
+      <workItem from="1598680845050" duration="372000" />
+      <workItem from="1598681352976" duration="276000" />
+      <workItem from="1598681657430" duration="257000" />
+      <workItem from="1598681947722" duration="331000" />
+      <workItem from="1599565936988" duration="1766000" />
+      <workItem from="1600881576676" duration="70000" />
+      <workItem from="1606316956416" duration="302000" />
     </task>
     <task id="LOCAL-00001" summary="IDEA创建SpringBoort项目的模板，方便大家。">
       <created>1580544967197</created>
@@ -463,11 +600,18 @@
       <option name="project" value="LOCAL" />
       <updated>1583660153473</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="HRManagement除微信小程序打卡功能，基本完成。">
+      <created>1584268599707</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1584268599707</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -481,141 +625,78 @@
     <MESSAGE value="HRManagement登录验证码，个人资料信息修改开发完成。" />
     <MESSAGE value="HRManagement员工请假等申请开发完成。" />
     <MESSAGE value="HRManagement排班系统开发完成。" />
-    <option name="LAST_COMMIT_MESSAGE" value="HRManagement排班系统开发完成。" />
+    <MESSAGE value="HRManagement除微信小程序打卡功能，基本完成。" />
+    <option name="LAST_COMMIT_MESSAGE" value="HRManagement除微信小程序打卡功能，基本完成。" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="361" y="71" key="#Notifications" timestamp="1580541613160">
+    <state x="449" y="138" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1598680909222">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="71" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1580541613160" />
-    <state x="361" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581584879555">
+    <state x="449" y="138" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824@0.0.1536.824" timestamp="1598680909222" />
+    <state x="549" y="153" key="FileChooserDialogImpl" timestamp="1598682237814">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1581584879555" />
-    <state x="574" y="121" key="#com.intellij.ide.util.MemberChooser" timestamp="1583310634300">
+    <state x="549" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1598682237814" />
+    <state width="1492" height="424" key="GridCell.Tab.0.bottom" timestamp="1599584013629">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="121" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1583310634300" />
-    <state x="499" y="187" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1584246745830">
+    <state width="1492" height="424" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599584013629" />
+    <state width="1492" height="424" key="GridCell.Tab.0.center" timestamp="1599584013629">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="187" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1584246745830" />
-    <state x="282" y="337" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1584195584277">
+    <state width="1492" height="424" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1599584013629" />
+    <state width="1492" height="424" key="GridCell.Tab.0.left" timestamp="1599584013629">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="282" y="337" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1584195584277" />
-    <state x="513" y="270" width="510" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1584246754459">
+    <state width="1492" height="424" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1599584013629" />
+    <state width="1492" height="424" key="GridCell.Tab.0.right" timestamp="1599584013629">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="513" y="270" width="510" height="292" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1584246754459" />
-    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1584248045624">
+    <state width="1492" height="424" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1599584013629" />
+    <state width="1492" height="424" key="GridCell.Tab.1.bottom" timestamp="1599584013630">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="158" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1584248045624" />
-    <state x="499" y="167" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog" timestamp="1581520961020">
+    <state width="1492" height="424" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599584013630" />
+    <state width="1492" height="424" key="GridCell.Tab.1.center" timestamp="1599584013630">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="167" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1536.824@0.0.1536.824" timestamp="1581520961020" />
-    <state x="257" y="6" key="CommitChangelistDialog2" timestamp="1583660152158">
+    <state width="1492" height="424" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1599584013630" />
+    <state width="1492" height="424" key="GridCell.Tab.1.left" timestamp="1599584013629">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="257" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1583660152158" />
-    <state x="549" y="153" key="FileChooserDialogImpl" timestamp="1584244811818">
+    <state width="1492" height="424" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1599584013629" />
+    <state width="1492" height="424" key="GridCell.Tab.1.right" timestamp="1599584013630">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1584244811818" />
-    <state x="619" y="303" key="Github.ShareDialog" timestamp="1581842240335">
+    <state width="1492" height="424" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1599584013630" />
+    <state width="1492" height="424" key="GridCell.Tab.2.bottom" timestamp="1599584013630">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="619" y="303" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1581842240335" />
-    <state width="1537" height="189" key="GridCell.Tab.0.bottom" timestamp="1584268508002">
+    <state width="1492" height="424" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1599584013630" />
+    <state width="1492" height="424" key="GridCell.Tab.2.center" timestamp="1599584013630">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="189" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584268508002" />
-    <state width="1537" height="189" key="GridCell.Tab.0.center" timestamp="1584268508001">
+    <state width="1492" height="424" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1599584013630" />
+    <state width="1492" height="424" key="GridCell.Tab.2.left" timestamp="1599584013630">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="189" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1584268508001" />
-    <state width="1537" height="189" key="GridCell.Tab.0.left" timestamp="1584268508001">
+    <state width="1492" height="424" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1599584013630" />
+    <state width="1492" height="424" key="GridCell.Tab.2.right" timestamp="1599584013630">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="189" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1584268508001" />
-    <state width="1537" height="189" key="GridCell.Tab.0.right" timestamp="1584268508001">
+    <state width="1492" height="424" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1599584013630" />
+    <state x="262" y="28" key="SettingsEditor" timestamp="1598682161311">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="189" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1584268508001" />
-    <state width="1537" height="189" key="GridCell.Tab.1.bottom" timestamp="1584268508002">
+    <state x="262" y="28" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1598682161311" />
+    <state x="527" y="256" key="cloudConfig.PluginsDialog" timestamp="1598681890487">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="189" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584268508002" />
-    <state width="1537" height="189" key="GridCell.Tab.1.center" timestamp="1584268508002">
+    <state x="527" y="256" key="cloudConfig.PluginsDialog/0.0.1536.824@0.0.1536.824" timestamp="1598681890487" />
+    <state x="469" y="128" width="598" height="568" key="find.popup" timestamp="1606317221527">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1537" height="189" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1584268508002" />
-    <state width="1537" height="189" key="GridCell.Tab.1.left" timestamp="1584268508002">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1537" height="189" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1584268508002" />
-    <state width="1537" height="189" key="GridCell.Tab.1.right" timestamp="1584268508002">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1537" height="189" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1584268508002" />
-    <state width="1537" height="217" key="GridCell.Tab.2.bottom" timestamp="1584264716491">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1537" height="217" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1584264716491" />
-    <state width="1537" height="217" key="GridCell.Tab.2.center" timestamp="1584264716491">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1537" height="217" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1584264716491" />
-    <state width="1537" height="217" key="GridCell.Tab.2.left" timestamp="1584264716491">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1537" height="217" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1584264716491" />
-    <state width="1537" height="217" key="GridCell.Tab.2.right" timestamp="1584264716491">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1537" height="217" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1584264716491" />
-    <state width="212" height="477" key="HiddenNamespacesPopup" timestamp="1581580951992">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="212" height="477" key="HiddenNamespacesPopup/0.0.1536.824@0.0.1536.824" timestamp="1581580951992" />
-    <state x="408" y="109" key="NewModule_or_Project.wizard" timestamp="1582168815826">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="408" y="109" key="NewModule_or_Project.wizard/0.0.1536.824@0.0.1536.824" timestamp="1582168815826" />
-    <state x="249" y="0" key="SettingsEditor" timestamp="1584246503803">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1584246503803" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1583223093678">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1583223093678" />
-    <state x="449" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1584240476185">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="449" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1584240476185" />
-    <state x="485" y="306" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1581518691558">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="485" y="306" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1536.824@0.0.1536.824" timestamp="1581518691558" />
-    <state x="188" y="49" key="com.intellij.javaee.MapExternalResourceDialog" timestamp="1581584940399">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="188" y="49" key="com.intellij.javaee.MapExternalResourceDialog/0.0.1536.824@0.0.1536.824" timestamp="1581584940399" />
-    <state x="447" y="145" width="782" height="600" key="find.popup" timestamp="1584263343926">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="447" y="145" width="782" height="600" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1584263343926" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1584262760712">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1584262760712" />
-    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup" timestamp="1584187805431">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1584187805431" />
+    <state x="469" y="128" width="598" height="568" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1606317221527" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

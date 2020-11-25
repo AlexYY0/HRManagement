@@ -67,9 +67,9 @@ public class UserInfoController {
     @GetMapping("/token")
     @SystemControllerLog(description="获取上传文件到云端的令牌")
     public String getToken(){
-        String accessKey = "HHpVv8wj2T-IGv8JrjZFArdSUy6QGMxuo10k7Hnd";
-        String secretKey = "qoAkFOku7m6wouAwum45Ef-SiCTrOarj5QTgZQ3y";
-        String bucket = "emperorws";
+        String accessKey = "你的七牛云accessKey";
+        String secretKey = "你的七牛云secretKey";
+        String bucket = "你的七牛云bucketName";
         Auth auth = Auth.create(accessKey, secretKey);
         String upToken = auth.uploadToken(bucket);
         return upToken;

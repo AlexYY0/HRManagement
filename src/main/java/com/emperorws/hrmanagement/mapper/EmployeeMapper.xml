@@ -94,6 +94,37 @@
       #{workstate,mode=IN,jdbcType=CHAR}, #{school,mode=IN,jdbcType=VARCHAR}, #{specialty,mode=IN,jdbcType=VARCHAR},
       #{hdegree,mode=IN,jdbcType=CHAR},#{result,mode=OUT,jdbcType=INTEGER},#{result2,mode=OUT,jdbcType=INTEGER})
   </select>
+  <select id="getEmpstaVisual" resultType="java.util.HashMap">
+    SELECT
+    '在职' AS '状态',
+    COUNT(CASE WHEN e.`workState`='在职' THEN 1 ELSE NULL END) AS '人数'
+    FROM employee e
+    UNION ALL
+    SELECT
+    '实习' AS '状态',
+    COUNT(CASE WHEN e.`workState`='实习' THEN 1 ELSE NULL END) AS '人数'
+    FROM employee e
+    UNION ALL
+    SELECT
+    '兼职' AS '状态',
+    COUNT(CASE WHEN e.`workState`='兼职' THEN 1 ELSE NULL END) AS '人数'
+    FROM employee e
+    UNION ALL
+    SELECT
+    '离职' AS '状态',
+    COUNT(CASE WHEN e.`workState`='离职' THEN 1 ELSE NULL END) AS '人数'
+    FROM employee e
+    UNION ALL
+    SELECT
+    '退休' AS '状态',
+    COUNT(CASE WHEN e.`workState`='退休' THEN 1 ELSE NULL END) AS '人数'
+    FROM employee e
+    UNION ALL
+    SELECT
+    '其他' AS '状态',
+    COUNT(CASE WHEN e.`workState`='其他' THEN 1 ELSE NULL END) AS '人数'
+    FROM employee e
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

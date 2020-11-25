@@ -29,6 +29,9 @@
     atteLogDayId, workId, clockInDay, signInTime, signOutTime, clockInFlag, needHours, 
     workingHours
   </sql>
+  <select id="selectByOpenidAndDay" resultMap="BaseResultMap">
+    select a.* from attendanceLogOfDay a,user u where u.openId=#{openid} and u.workId=a.workId and a.clockInDay=#{today}
+  </select>
   <select id="getAttelogdayByPage" resultMap="AllAttelogdayInfo">
     select a.*,d.depName as depname,emp.empName as empname,attes.atteStaName as attestaname
     from attendanceLogOfDay a,employee emp,department d,attendanceStatus attes
@@ -66,6 +69,61 @@
       </if>
     </where>
   </select>
+  <select id="getClockinVisual" resultType="java.util.HashMap">
+    SELECT
+    '缺勤' AS type,
+    COUNT(CASE WHEN a.clockInFlag=0 THEN 1 ELSE NULL END) AS value
+    FROM attendancelogofday a
+    WHERE a.`clockInDay`=CURRENT_DATE
+    UNION ALL
+    SELECT
+    '未签到/早退' AS type,
+    COUNT(CASE WHEN a.clockInFlag=1 THEN 1 ELSE NULL END) AS value
+    FROM attendancelogofday a
+    WHERE a.`clockInDay`=CURRENT_DATE
+    UNION ALL
+    SELECT
+    '未签到/正常签退' AS type,
+    COUNT(CASE WHEN a.clockInFlag=2 THEN 1 ELSE NULL END) AS value
+    FROM attendancelogofday a
+    WHERE a.`clockInDay`=CURRENT_DATE
+    UNION ALL
+    SELECT
+    '迟到/未签退' AS type,
+    COUNT(CASE WHEN a.clockInFlag=10 THEN 1 ELSE NULL END) AS value
+    FROM attendancelogofday a
+    WHERE a.`clockInDay`=CURRENT_DATE
+    UNION ALL
+    SELECT
+    '迟到/早退' AS type,
+    COUNT(CASE WHEN a.clockInFlag=11 THEN 1 ELSE NULL END) AS value
+    FROM attendancelogofday a
+    WHERE a.`clockInDay`=CURRENT_DATE
+    UNION ALL
+    SELECT
+    '迟到' AS type,
+    COUNT(CASE WHEN a.clockInFlag=12 THEN 1 ELSE NULL END) AS value
+    FROM attendancelogofday a
+    WHERE a.`clockInDay`=CURRENT_DATE
+    UNION ALL
+    SELECT
+    '未签退' AS type,
+    COUNT(CASE WHEN a.clockInFlag=20 THEN 1 ELSE NULL END) AS value
+    FROM attendancelogofday a
+    WHERE a.`clockInDay`=CURRENT_DATE
+    UNION ALL
+    SELECT
+    '早退' AS type,
+    COUNT(CASE WHEN a.clockInFlag=21 THEN 1 ELSE NULL END) AS value
+    FROM attendancelogofday a
+    WHERE a.`clockInDay`=CURRENT_DATE
+    UNION ALL
+    SELECT
+    '正常' AS type,
+    COUNT(CASE WHEN a.clockInFlag=22 THEN 1 ELSE NULL END) AS value
+    FROM attendancelogofday a
+    WHERE a.`clockInDay`=CURRENT_DATE
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -89,6 +147,16 @@
     values (#{attelogdayid,jdbcType=INTEGER}, #{workid,jdbcType=INTEGER}, #{clockinday,jdbcType=DATE}, 
       #{signintime,jdbcType=TIME}, #{signouttime,jdbcType=TIME}, #{clockinflag,jdbcType=INTEGER}, 
       #{needhours,jdbcType=DOUBLE}, #{workinghours,jdbcType=DOUBLE})
+  </insert>
+  <insert id="autoExecCreatDate" parameterType="java.util.List">
+    INSERT INTO attendanceLogOfDay (workId,clockInDay,needHours)
+    values
+    <foreach collection="workingschedules" item="workingschedule" open=" " close=" " separator=",">
+      (#{workingschedule.workid},CURRENT_DATE,
+      (SELECT IF(b.beginRest='00:00:00' AND b.endRest='00:00:00',TIMESTAMPDIFF(HOUR,b.beginTime,b.endTime),TIMESTAMPDIFF(HOUR,b.beginTime,b.beginRest)+TIMESTAMPDIFF(HOUR,b.endRest,b.endTime))
+      FROM businessHours b
+      WHERE #{workingschedule.todaysche}=b.busiHoursId))
+    </foreach>
   </insert>
   <insert id="insertSelective" parameterType="com.emperorws.hrmanagement.model.Attelogday">
     insert into attendancelogofday

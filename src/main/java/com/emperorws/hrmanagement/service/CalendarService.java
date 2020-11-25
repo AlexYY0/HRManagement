@@ -6,6 +6,7 @@ import com.emperorws.hrmanagement.model.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,5 +22,10 @@ public class CalendarService {
     @SystemServiceLog(description="插入新的节假日表数据")
     public Integer addCalendars(List<Calendar> calendars){
         return calendarMapper.addCalendars(calendars);
+    }
+
+    @SystemServiceLog(description="获取节假日数据，用于前端显示")
+    public List<Integer> getHolidays(Date[] daterange){
+        return calendarMapper.getHolidays(daterange);
     }
 }

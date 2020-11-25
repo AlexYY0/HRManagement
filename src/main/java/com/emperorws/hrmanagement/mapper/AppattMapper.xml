@@ -169,6 +169,31 @@
       </otherwise>
     </choose>
   </select>
+  <select id="getAppattVisual" resultType="java.util.HashMap">
+    SELECT
+    '出差' AS type,
+    COUNT(CASE WHEN a.`category`='出差' THEN 1 ELSE NULL END) AS '人数'
+    FROM applyattendancetransaction a
+    WHERE CURRENT_DATE BETWEEN DATE_FORMAT(a.`appBeginDate`,'%Y-%m-%d') AND DATE_FORMAT(a.`appEndDate`,'%Y-%m-%d') AND a.`isApprove`=1
+    UNION ALL
+    SELECT
+    '加班' AS type,
+    COUNT(CASE WHEN a.`category`='加班' THEN 1 ELSE NULL END) AS '人数'
+    FROM applyattendancetransaction a
+    WHERE CURRENT_DATE BETWEEN DATE_FORMAT(a.`appBeginDate`,'%Y-%m-%d') AND DATE_FORMAT(a.`appEndDate`,'%Y-%m-%d') AND a.`isApprove`=1
+    UNION ALL
+    SELECT
+    '调休' AS type,
+    COUNT(CASE WHEN a.`category`='调休' THEN 1 ELSE NULL END) AS '人数'
+    FROM applyattendancetransaction a
+    WHERE CURRENT_DATE BETWEEN DATE_FORMAT(a.`appBeginDate`,'%Y-%m-%d') AND DATE_FORMAT(a.`appEndDate`,'%Y-%m-%d') AND a.`isApprove`=1
+    UNION ALL
+    SELECT
+    '请假' AS type,
+    COUNT(CASE WHEN a.`category`='请假' THEN 1 ELSE NULL END) AS '人数'
+    FROM applyattendancetransaction a
+    WHERE CURRENT_DATE BETWEEN DATE_FORMAT(a.`appBeginDate`,'%Y-%m-%d') AND DATE_FORMAT(a.`appEndDate`,'%Y-%m-%d') AND a.`isApprove`=1
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

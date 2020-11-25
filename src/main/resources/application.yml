@@ -1,0 +1,45 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: xsmnt147258
+    url: jdbc:mysql://localhost:3306/hrmanagement?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  main:
+    allow-bean-definition-overriding: true
+  rabbitmq:
+    username: guest
+    password: guest
+    host: 127.0.0.1
+    #消息confirm确认
+    #publisher-confirm-type: correlated
+    publisher-confirms: true
+    publisher-returns: true
+    listener:
+      simple:
+        acknowledge-mode: manual
+        prefetch: 100
+  redis:
+    host: 127.0.0.1
+    database: 0
+    port: 6379
+    password:
+  cache:
+    cache-names: permissions_cache
+server:
+  port: 8081
+  compression:
+    enabled: true
+logging:
+  level:
+    com.emperorws.hrmanagement.mapper: debug
+fastdfs:
+  nginx:
+    host: http://192.168.91.128/
+wx:
+  appid: wx33198436ed5c5a59
+  secret: 7e1281f364e664d5a97a816dfdca7b31
+  longitude: 106.427846
+  latitude: 29.820011
+token:
+  expirationMilliSeconds: 7200000 # 单位ms(毫秒)

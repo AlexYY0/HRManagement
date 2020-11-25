@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface AppattMapper {
     int deleteByPrimaryKey(@Param("aatid") Integer aatid,@Param("workid") Integer workid);
@@ -35,4 +36,6 @@ public interface AppattMapper {
     List<Appatt> getTransactioninfoByPage(@Param("page") Integer page, @Param("size") Integer size, @Param("emp") Employee employee, Date[] appdate);
 
     Long getTransactioninfoTotal(@Param("emp") Employee employee, Date[] appdate);
+
+    List<Map<String,Object>> getAppattVisual();
 }

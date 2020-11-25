@@ -135,4 +135,9 @@ public class UserService implements UserDetailsService {
         user.setPassword(encode);
         return userMapper.insert(user);
     }
+
+    @SystemServiceLog(description="t通过OpenID找到系统用户信息")
+    public User findUserWithRoleByOpenid(String openid){
+        return userMapper.findUserWithRoleByOpenid(openid);
+    }
 }

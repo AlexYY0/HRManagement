@@ -35,4 +35,12 @@ public interface UserMapper {
     Integer updateUserPassword(@Param("userid") Integer userid, @Param("encodePassword") String encodePassword);
 
     User getAllUserInfoByUserid(Integer userid);
+
+    User isBind(@Param("openid") String openid);
+
+    User findUserByUsername(@Param("username") String username);
+
+    Integer bind(@Param("userid") Integer userid,@Param("openid") String openid);
+
+    User findUserWithRoleByOpenid(@Param("openid") String openid);
 }
