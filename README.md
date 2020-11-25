@@ -38,7 +38,7 @@
 ### 快速部署
 1. clone 后端项目到本地 `https://github.com/AlexYY0/HRManagement.git`
 2. 导入数据库脚本
-3. 提前准备好 Redis，在 项目的 application.yml 文件中，将 Redis 配置改为自己的
+3. 提前准备好 Redis，在 项目的 application.yml123 文件中，将 Redis 配置改为自己的
 4. 提前准备好 RabbitMQ，在项目的 application.yml 文件中将 RabbitMQ 的配置改为自己的
 5. 在 IntelliJ IDEA 中打开 HRManagement 项目，启动 HrManagementApplication
 
