@@ -9,118 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d7ed7b95-185d-4665-89c6-d634e82e681a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/HRManagement.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/JwtAuthenticationTokenFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/WechatAuthenticationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/WechatAuthenticationManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/WechatAuthenticationToken.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/handler/WechatSuccessHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/WechatAPI/WechatAPIController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/config/DelayMsgConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/config/MsgCheck.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/config/MsgConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/config/RabbitConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/config/ScheduleTaskConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/exception/BasicException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/exception/ExceptionEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/exception/NotLoginException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/exception/ParamException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/exception/TaskException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/ConstantEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/RabbitMQConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/WXSessionModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Wxuser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/WechatAPIService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/rabbitmq/ClockinReceiver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/rabbitmq/ClockinSender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/HttpClientUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/RedisUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/app.164eca64.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/chunk-326bc5a8.2a828832.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/chunk-3fb7d821.ad4a1ff1.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/chunk-72507ef2.34e1ea1b.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/chunk-7dc4a9a2.82dd7458.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/chunk-d203d38c.12fdc49e.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/chunk-e83db30a.100992ca.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/css/chunk-vendors.2d74a5eb.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/element-icons.535877f5.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/element-icons.732389de.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/fa-brands-400.067595ad.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/fa-brands-400.57dcda6f.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/fa-brands-400.9ec698d1.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/fa-brands-400.b564da88.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/fa-solid-900.55eb2a60.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/fa-solid-900.75f38a15.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/fa-solid-900.89e02bae.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/fonts/fa-solid-900.cdfec5cf.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/fa-brands-400.9d67fa14.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/fa-solid-900.0724bb8b.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/app.fb5e00fe.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/app.fb5e00fe.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-2d0d3658.3ff41647.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-2d0d3658.3ff41647.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-2d21f0fa.ba18c228.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-2d21f0fa.ba18c228.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-2d237c54.d7f85efc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-2d237c54.d7f85efc.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-326bc5a8.0a32d092.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-326bc5a8.0a32d092.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-3bc33c57.385ef764.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-3bc33c57.385ef764.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-3fb7d821.722d2ed0.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-3fb7d821.722d2ed0.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-5647d5ed.8d2d4a93.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-5647d5ed.8d2d4a93.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-72507ef2.40502e9c.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-72507ef2.40502e9c.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-7dc4a9a2.4fe0f9ba.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-7dc4a9a2.4fe0f9ba.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-d203d38c.d6a3d897.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-d203d38c.d6a3d897.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-e83db30a.bfde396d.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-e83db30a.bfde396d.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-vendors.8d4bc23a.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/chunk-vendors.8d4bc23a.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/config/MultiSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/UserInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/UserInfoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/work/CalendarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/controller/work/WorkbenchController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/logger/RecordLoggerAcpect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/logger/RecordLoggerAcpect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AppattMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AppattMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AppattMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AppattMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AttelogdayMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AttelogdayMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AttelogdayMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/AttelogdayMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/CalendarMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/CalendarMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/CalendarMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/CalendarMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeeMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeeMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeesalaryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeesalaryMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeesalaryMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/EmployeesalaryMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/UserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/WorkingscheduleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/WorkingscheduleMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/WorkingscheduleMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/mapper/WorkingscheduleMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Attelogday.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Attelogday.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Department.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Workingschedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/model/Workingschedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/AppattService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/AppattService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/AttelogdayService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/AttelogdayService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/CalendarService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/CalendarService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/EmployeeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/EmployeesalaryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/EmployeesalaryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/PermissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/PermissionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/TransactioninfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/TransactioninfoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/WorkingscheduleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/service/WorkingscheduleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/UserUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/emperorws/hrmanagement/utils/UserUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -500,7 +390,7 @@
       <workItem from="1598681947722" duration="331000" />
       <workItem from="1599565936988" duration="1766000" />
       <workItem from="1600881576676" duration="70000" />
-      <workItem from="1606316956416" duration="302000" />
+      <workItem from="1606316956416" duration="3009000" />
     </task>
     <task id="LOCAL-00001" summary="IDEA创建SpringBoort项目的模板，方便大家。">
       <created>1580544967197</created>
@@ -607,7 +497,14 @@
       <option name="project" value="LOCAL" />
       <updated>1584268599707</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="HRManagement的微信小程序打卡功能，基本完成。">
+      <created>1606317509074</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1606317509074</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -626,17 +523,26 @@
     <MESSAGE value="HRManagement员工请假等申请开发完成。" />
     <MESSAGE value="HRManagement排班系统开发完成。" />
     <MESSAGE value="HRManagement除微信小程序打卡功能，基本完成。" />
-    <option name="LAST_COMMIT_MESSAGE" value="HRManagement除微信小程序打卡功能，基本完成。" />
+    <MESSAGE value="HRManagement的微信小程序打卡功能，基本完成。" />
+    <option name="LAST_COMMIT_MESSAGE" value="HRManagement的微信小程序打卡功能，基本完成。" />
   </component>
   <component name="WindowStateProjectService">
     <state x="449" y="138" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1598680909222">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="449" y="138" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824@0.0.1536.824" timestamp="1598680909222" />
-    <state x="549" y="153" key="FileChooserDialogImpl" timestamp="1598682237814">
+    <state x="302" y="0" key="CommitChangelistDialog2" timestamp="1606317506359">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1598682237814" />
+    <state x="302" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1606317506359" />
+    <state x="549" y="153" key="FileChooserDialogImpl" timestamp="1606317292858">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1606317292858" />
+    <state x="621" y="312" key="Github.ShareDialog" timestamp="1606317401504">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="621" y="312" key="Github.ShareDialog/0.0.1536.824@0.0.1536.824" timestamp="1606317401504" />
     <state width="1492" height="424" key="GridCell.Tab.0.bottom" timestamp="1599584013629">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
